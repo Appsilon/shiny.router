@@ -2,14 +2,23 @@
 % Please edit documentation in R/router.R
 \name{router_ui}
 \alias{router_ui}
-\title{Creates an output for router. This configures client side.}
+\title{Creates an output for router. This configures client side.
+Call it in your UI Shiny code. In this output ui is going to be rendered
+according to current routing.}
 \usage{
 router_ui()
 }
 \value{
-Shiny tags that configure router and build reactive input _location.
+Shiny tags that configure router and build reactive but hidden input _location.
 }
 \description{
 Creates an output for router. This configures client side.
+Call it in your UI Shiny code. In this output ui is going to be rendered
+according to current routing.
+}
+\examples{
+ui <- shinyUI(fluidPage(
+  router_ui()
+))
 }
 
