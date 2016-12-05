@@ -16,12 +16,16 @@ Now it's possible to recreate a state of your app, by providing a specific URL, 
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
-[Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
+<!--
+TODO [Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
+-->
 
 Source code
 -----------
 
-This library source code can be found on Appsilon's Github: <br> <https://github.com/Appsilon/shinyrouter>
+This library source code can be found on [Appsilon Data Science's](http://appsilondatascience.com) Github: <br> <https://github.com/Appsilon/shinyrouter>
+
+<a href="http://appsilondatascience.com">![Appsilon Data Science](https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png)</a>
 
 How to install?
 ---------------
@@ -76,3 +80,10 @@ Future enhacements
 -   URL params handling
 -   CRAN release
 -   Maybe? Utilise <https://shiny.rstudio.com/articles/client-data.html> instead of Page.js
+
+Appsilon Data Science
+=====================
+
+We Provide End to End Data Science Solutions
+
+<a href="http://appsilondatascience.com">![Appsilon Data Science](https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png)</a>
