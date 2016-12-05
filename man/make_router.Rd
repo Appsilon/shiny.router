@@ -2,7 +2,7 @@
 % Please edit documentation in R/router.R
 \name{make_router}
 \alias{make_router}
-\title{Creates router.}
+\title{Creates router. Returned callback needs to be called within Shiny server code.}
 \usage{
 make_router(default, ...)
 }
@@ -15,7 +15,7 @@ make_router(default, ...)
 Shiny router callback that should be run in server code with Shiny input and output lists.
 }
 \description{
-Creates router.
+Creates router. Returned callback needs to be called within Shiny server code.
 }
 \examples{
 router <- make_router(

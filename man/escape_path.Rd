@@ -2,7 +2,7 @@
 % Please edit documentation in R/router.R
 \name{escape_path}
 \alias{escape_path}
-\title{Escapes routing path from not safe characters.}
+\title{Internal function that escapes routing path from not safe characters.}
 \usage{
 escape_path(path)
 }
@@ -13,6 +13,6 @@ escape_path(path)
 String with escaped characters.
 }
 \description{
-Escapes routing path from not safe characters.
+Internal function that escapes routing path from not safe characters.
 }
 

@@ -7,7 +7,7 @@ HIDDEN_ROUTE_INPUT <- '_location'
   shiny::addResourcePath('shinyrouter', system.file('www', package = 'shinyrouter', mustWork = TRUE))
 }
 
-#' Escapes routing path from not safe characters.
+#' Internal function that escapes routing path from not safe characters.
 #'
 #' @param path A path.
 #' @return String with escaped characters.
@@ -17,7 +17,7 @@ escape_path <- function(path) {
   clean_path
 }
 
-#' Validates that path is defined in routes.
+#' Internal function that validates that path is defined in routes.
 #'
 #' @param routes A routes (list).
 #' @param path A path.
@@ -79,7 +79,7 @@ create_router_callback <- function(root, routes) {
   }
 }
 
-#' Creates router.
+#' Creates router. Returned callback needs to be called within Shiny server code.
 #'
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... All other routes defined with shinyrouter::route function.
@@ -97,8 +97,14 @@ make_router <- function(default, ...) {
 }
 
 #' Creates an output for router. This configures client side.
+#' Call it in your UI Shiny code. In this output ui is going to be rendered
+#' according to current routing.
 #'
 #' @return Shiny tags that configure router and build reactive but hidden input _location.
+#' @examples
+#' ui <- shinyUI(fluidPage(
+#'   router_ui()
+#' ))
 #' @export
 router_ui <- function() {
   shiny::tagList(

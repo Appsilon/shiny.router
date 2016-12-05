@@ -2,6 +2,12 @@ library(shiny)
 library(semanticui)
 library(shinyrouter)
 
+# Hint: semanticui
+#
+# Div classes in the UI of this applications are created for semanticui package.
+# Thanks to that we get nice looking interface in our application.
+# Read more: https://github.com/Appsilon/semanticui
+
 menu <- (
   div(class = "ui vertical menu",
     div(class = "item",
