@@ -70,7 +70,7 @@ shinyApp(ui, server)
 
 Troubleshooting
 -----------------
-When developing this library we are alwast using most recent dependencies versions. So please make sure to update your R environment dependencies as well. But in case this library still doesn't work for you try to apply below suggestions:
+When developing this library we are using latest dependencies versions. So please make sure to update your R environment dependencies as well. But in case this library still doesn't work for you try to apply below suggestions:
 1. Up-to-date R language environment
 2. Installing specific dependent libraries versions
 --* magrittr
