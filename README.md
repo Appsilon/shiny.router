@@ -6,9 +6,6 @@ shinyrouter
 
 A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
 
- 
--
-
 Now it's possible to recreate a state of your app, by providing a specific URL, like
 
     make_router(
