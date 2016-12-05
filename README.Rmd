@@ -1,7 +1,7 @@
 ---
 output:
-  html_document:
-    keep_md: yes
+  md_document:
+    variant: markdown_github
 ---
 
 <link href="http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata" rel="stylesheet" type="text/css">
@@ -10,9 +10,9 @@ output:
 shinyrouter
 ===========
 
-A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
----------------
+<div class="subheader">A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</div>
 
+<div class="section level2">
 Now it's possible to recreate a state of your app, by providing a specific URL, like 
 ```
 make_router(
@@ -20,10 +20,13 @@ make_router(
   route("<your_app_url>/other", otherPageShinyUI)
 )
 ```
+
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
 [Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
+
+</div>
 
 How to install? {.darkslide}
 ---------------
