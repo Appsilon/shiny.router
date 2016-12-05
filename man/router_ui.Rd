@@ -7,7 +7,7 @@
 router_ui()
 }
 \value{
-Shiny tags that configure router and build reactive input _location.
+Shiny tags that configure router and build reactive but hidden input _location.
 }
 \description{
 Creates an output for router. This configures client side.
