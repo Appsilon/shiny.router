@@ -4,12 +4,16 @@ output:
     keep_md: yes
 ---
 
-<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata" rel="stylesheet" type="text/css">
 <link href='docs/style.css' rel='stylesheet' type='text/css'>
 
 shinyrouter
 ===========
-<h2>A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</h2>
+<div class="subheader">A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</div>
+
+&nbsp;
+-
+
 Now it's possible to recreate a state of your app, by providing a specific URL, like 
 ```
 make_router(
