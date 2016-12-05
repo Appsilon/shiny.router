@@ -1,19 +1,12 @@
----
-output:
-  html_document:
-    keep_md: yes
----
-
 <link href="http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata" rel="stylesheet" type="text/css">
 <link href='docs/style.css' rel='stylesheet' type='text/css'>
 
 shinyrouter
 ===========
+
 <div class="subheader">A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</div>
 
-&nbsp;
--
-
+<div class="section level2">
 Now it's possible to recreate a state of your app, by providing a specific URL, like 
 ```
 make_router(
@@ -26,7 +19,9 @@ TODO We would like to have a nice graphic explaning routing mechanism
 -->
 [Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
 
-Source code
+</div>
+
+Source code {.darkslide}
 -----------
 This library source code can be found on Appsilon's Github:
 <br>
@@ -46,7 +41,7 @@ To install [previous version](https://github.com/Appsilon/shinyrouter/CHANGELOG.
 devtools::install_github("Appsilon/shinyrouter", ref = "0.1.0")
 ```
 
-Example
+Example {.firebrick}
 -------
 All the exmaples can be found in /examples directory.
 Here's the basic usage:
@@ -89,7 +84,7 @@ install.packages("shinyjs", version='0.8')
 One of our examples uses one of our others libraries, so please make to install it as well, when running that example.
 Repository: [Semantic UI](https://github.com/Appsilon/semanticui)
 
-Future enhacements
+Future enhacements {.darkorange}
 ------------------
 * URL params handling
 * CRAN release
