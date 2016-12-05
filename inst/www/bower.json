@@ -1,0 +1,22 @@
+{
+  "name": "shinyrouter",
+  "authors": [
+    "Filip Stachura <filip@appsilon.pl>"
+  ],
+  "description": "shinyrouter html dependencies.",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "http://appsilon.github.io/shinyrouter",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "page": "visionmedia/page.js#^1.7.1"
+  }
+}

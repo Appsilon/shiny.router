@@ -4,7 +4,7 @@ HIDDEN_ROUTE_INPUT <- '_location'
 .onLoad <- function(libname, pkgname) {
   # Adds inst/www directory for loading static resources from server.
   # We need to add that to get all javascript code from client app.
-  shiny::addResourcePath('shinyrouter', system.file('www', package = 'shinyrouter', mustWork = TRUE))
+  shiny::addResourcePath('shinyrouter', system.file('www/bower_components/page/', package = 'shinyrouter', mustWork = TRUE))
 }
 
 escape_path <- function(path) {
