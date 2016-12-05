@@ -5,26 +5,7 @@ output:
 ---
 
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-
-<style>
-body {
-  background: oldlace;
-  font-family: "Lato", sans-serif;
-}
-h1 {
-  text-align: center;
-  font-size: 80px;
-  font-weight: 300;
-  margin: 1em 0;
-}
-.main-container {
-  max-width: 100%;
-  padding: 0;
-}
-.custom {
-  background-color: rgb(52, 52, 52);
-}
-</style>
+<link href='docs/style.css' rel='stylesheet' type='text/css'>
 
 shinyrouter
 ===========
