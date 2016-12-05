@@ -1,6 +1,30 @@
+
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+<style>
+body {
+  background: oldlace;
+  font-family: "Lato", sans-serif;
+}
+h1 {
+  text-align: center;
+  font-size: 80px;
+  font-weight: 300;
+  margin: 1em 0;
+}
+.main-container {
+  max-width: 100%;
+  padding: 0;
+}
+.custom {
+  background-color: rgb(52, 52, 52);
+}
+</style>
+
 shinyrouter
 ===========
-A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps. Now it's possible to recreate a state of your app, by providing a specific URL, like 
+<h2>A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</h2>
+Now it's possible to recreate a state of your app, by providing a specific URL, like 
 ```
 make_router(
   route("<your_app_url>/main",  mainPageShinyUI),
@@ -20,8 +44,7 @@ At the moment it's possible to install this library through [devtools](https://g
 devtools::install_github("Appsilon/shinyrouter")
 ```
 
-## [Previous versions](https://github.com/Appsilon/shinyrouter/CHANGELOG.md)
-To install previous version please you can run:
+To install [previous version](https://github.com/Appsilon/shinyrouter/CHANGELOG.md) please you can run:
 ```
 devtools::install_github("Appsilon/shinyrouter", ref = "v0.1.0")
 ```

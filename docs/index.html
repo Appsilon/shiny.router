@@ -142,9 +142,9 @@ h1 {
 <div id="shinyrouter" class="section level1">
 <h1>shinyrouter</h1>
 <h2>
-A minimalistic router for your Shiny apps.
+A minimalistic router for your <a href="https://shiny.rstudio.com/">Shiny</a> apps.
 </h2>
-<p>Now it’s possible to recreate a state of your Shiny app, by providing a specific URL, like</p>
+<p>Now it’s possible to recreate a state of your app, by providing a specific URL, like</p>
 <pre><code>make_router(
   route(&quot;&lt;your_app_url&gt;/main&quot;,  mainPageShinyUI),
   route(&quot;&lt;your_app_url&gt;/other&quot;, otherPageShinyUI)
@@ -152,11 +152,32 @@ A minimalistic router for your Shiny apps.
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
-<div id="how-to-install" class="section level2 custom">
+<p><a href="http://appsilondatascience.com/demos/shinyrouter">Live demo can be found here</a></p>
+<div id="how-to-install" class="section level2">
 <h2>How to install?</h2>
+<p><strong>Note! This library is currently in its infancy. Api might change in the future.</strong> At the moment it’s possible to install this library through <a href="https://github.com/hadley/devtools">devtools</a>.</p>
+<pre><code>devtools::install_github(&quot;Appsilon/shinyrouter&quot;)</code></pre>
+<p>To install <a href="https://github.com/Appsilon/shinyrouter/CHANGELOG.md">previous version</a> please you can run:</p>
+<pre><code>devtools::install_github(&quot;Appsilon/shinyrouter&quot;, ref = &quot;v0.1.0&quot;)</code></pre>
 </div>
 <div id="example" class="section level2">
 <h2>Example</h2>
+<p>All the exmaples can be found in /examples directory. Here’s the basic usage:</p>
+<pre><code>router &lt;- make_router(
+  route(&quot;/&quot;, root_page),
+  route(&quot;/other&quot;, other_page)
+)
+
+ui &lt;- shinyUI(semanticPage(
+  title = &quot;Router demo&quot;,
+  router_ui()
+))
+
+server &lt;- shinyServer(function(input, output) {
+  router(input, output)
+})
+
+shinyApp(ui, server)</code></pre>
 </div>
 <div id="trouble-shoutting" class="section level2">
 <h2>Trouble shoutting</h2>
