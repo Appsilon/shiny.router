@@ -14,5 +14,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Basic path routing mechanism
 - Documentation
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.1.0
+[Unreleased]: https://github.com/Appsilon/shinyrouter/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/Appsilon/shinyrouter/compare/12b021ae1eb9cbadbd4fde3d1ea54a2fd35e3098...0.1.0

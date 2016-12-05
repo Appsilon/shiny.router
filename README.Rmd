@@ -43,7 +43,7 @@ At the moment it's possible to install this library through [devtools](https://g
 devtools::install_github("Appsilon/shinyrouter")
 ```
 
-To install [previous version](https://github.com/Appsilon/shinyrouter/CHANGELOG.md) please you can run:
+To install [previous version](https://github.com/Appsilon/shinyrouter/blob/master/CHANGELOG.md) please you can run:
 ```
 devtools::install_github("Appsilon/shinyrouter", ref = "0.1.0")
 ```
