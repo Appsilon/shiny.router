@@ -60,19 +60,15 @@ All the exmaples can be found in /examples directory. Here's the basic usage:
 Troubleshooting
 ---------------
 
-When developing this library we are using latest dependencies versions. So please make sure to update your R environment dependencies as well. But in case this library still doesn't work for you try to apply below suggestions: 1. Up-to-date R language environment 2. Installing specific dependent libraries versions --\* magrittr
+When developing this library we are using latest dependencies versions. So please make sure to update your R environment dependencies as well. But in case this library still doesn't work for you try to apply below suggestions:
 
-    install.packages("magrittr", version='1.5')
+1.  Up-to-date R language environment
+2.  Installing specific dependent libraries versions
+    -   magrittr `install.packages("magrittr", version='1.5')`
+    -   shiny `install.packages("shiny", version='0.14.2.9001')`
+    -   shinyjs `install.packages("shinyjs", version='0.8')`
 
---\* shiny
-
-    install.packages("shiny", version='0.14.2.9001')
-
---\* shinyjs
-
-    install.packages("shinyjs", version='0.8')
-
-1.  Missing semanticui dependency One of our examples uses one of our others libraries, so please make to install it as well, when running that example. Repository: [Semantic UI](https://github.com/Appsilon/semanticui)
+3.  Missing semanticui dependency One of our examples uses one of our others libraries, so please make to install it as well, when running that example. Repository: [Semantic UI](https://github.com/Appsilon/semanticui)
 
 Future enhacements
 ------------------

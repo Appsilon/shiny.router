@@ -33,6 +33,9 @@ h2, .subheader {
   width: 50%;
   max-width: 940px;
 }
+.section.level2 * * {
+  width: 100%;
+}
 .darkslide {
   background-color: #343434;
   color: darkorange;
