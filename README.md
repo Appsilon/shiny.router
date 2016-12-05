@@ -4,10 +4,9 @@
 
 shinyrouter
 ===========
-<div class="subheader">A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</div>
 
-&nbsp;
--
+A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
+---------------
 
 Now it's possible to recreate a state of your app, by providing a specific URL, like 
 ```
@@ -21,7 +20,7 @@ TODO We would like to have a nice graphic explaning routing mechanism
 -->
 [Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
 
-How to install?
+How to install? {.darkslide}
 ---------------
 **Note! This library is currently in its infancy. Api might change in the future.**
 At the moment it's possible to install this library through [devtools](https://github.com/hadley/devtools).
@@ -34,7 +33,7 @@ To install [previous version](https://github.com/Appsilon/shinyrouter/CHANGELOG.
 devtools::install_github("Appsilon/shinyrouter", ref = "v0.1.0")
 ```
 
-Example
+Example 
 -------
 All the exmaples can be found in /examples directory.
 Here's the basic usage:
@@ -56,13 +55,13 @@ server <- shinyServer(function(input, output) {
 shinyApp(ui, server)
 ```
 
-Trouble shoutting
+Trouble shoutting {.firebrick}
 -----------------
 
 How to contribute?
 ------------------
 
-Future enhacements
+Future enhacements {.darkorange}
 ------------------
 
 <!--

@@ -25,10 +25,23 @@ h2, .subheader {
 }
 .section.level2 {
   text-align: center;
+  padding: 1em 0;
 }
 .section.level2 * {
   text-align: left;
   margin: 1em auto;
   width: 50%;
   max-width: 940px;
+}
+.darkslide {
+  background-color: #343434;
+  color: darkorange;
+}
+.firebrick {
+  background-color: firebrick;
+  color: white;
+}
+.darkorange {
+  background-color: darkorange;
+  color: #343434;
 }
