@@ -9,7 +9,7 @@ Description: shinyrouter is a minimalistic router for your Shiny apps.
     and easily share urls to pages within your Shiny apps.
 Encoding: UTF-8
 LazyData: true
-License: file LICENSE
+License: MIT + file LICENSE
 Imports:
     magrittr,
     shiny,
