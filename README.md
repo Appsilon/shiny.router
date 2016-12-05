@@ -1,6 +1,6 @@
 shinyrouter
 ===========
-A minimalistic router for your Shiny apps. Now it's possible to recreate a state of your Shiny app, by providing a specific URL, like 
+A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps. Now it's possible to recreate a state of your app, by providing a specific URL, like 
 ```
 make_router(
   route("<your_app_url>/main",  mainPageShinyUI),
@@ -10,19 +10,49 @@ make_router(
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
+[Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
 
 How to install?
 ---------------
+**Note! This library is currently in its infancy. Api might change in the future.**
+At the moment it's possible to install this library through [devtools](https://github.com/hadley/devtools).
+```
+devtools::install_github("Appsilon/shinyrouter")
+```
+
+## [Previous versions](https://github.com/Appsilon/shinyrouter/CHANGELOG.md)
+To install previous version please you can run:
+```
+devtools::install_github("Appsilon/shinyrouter", ref = "v0.1.0")
+```
 
 Example
 -------
+All the exmaples can be found in /examples directory.
+Here's the basic usage:
+```
+router <- make_router(
+  route("/", root_page),
+  route("/other", other_page)
+)
+
+ui <- shinyUI(semanticPage(
+  title = "Router demo",
+  router_ui()
+))
+
+server <- shinyServer(function(input, output) {
+  router(input, output)
+})
+
+shinyApp(ui, server)
+```
 
 Trouble shoutting
 -----------------
 
 How to contribute?
 ------------------
-
 
 Future enhacements
 ------------------
