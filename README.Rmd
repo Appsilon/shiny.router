@@ -17,15 +17,22 @@ make_router(
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
-[Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
+
+<!--
+TODO [Live demo can be found here](http://appsilondatascience.com/demos/shinyrouter)
+-->
+
 
 </div>
 
 Source code {.darkslide}
 -----------
-This library source code can be found on Appsilon's Github:
+
+This library source code can be found on [Appsilon Data Science's](http://appsilondatascience.com) Github:
 <br>
 [https://github.com/Appsilon/shinyrouter](https://github.com/Appsilon/shinyrouter)
+
+<div class="logo"><a href="http://appsilondatascience.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a></div>
 
 How to install?
 ---------------
@@ -85,3 +92,11 @@ Future enhacements {.darkorange}
 * URL params handling
 * CRAN release
 * Maybe? Utilise https://shiny.rstudio.com/articles/client-data.html instead of Page.js
+ 
+Appsilon Data Science {.footer}
+=====================
+
+<div class="subheader"> We Provide End to End Data Science Solutions </div>
+
+<div class="logo"><a href="http://appsilondatascience.com">![Appsilon Data Science](https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png)</a></div>
+
