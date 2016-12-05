@@ -2,14 +2,25 @@
 % Please edit documentation in R/router.R
 \name{make_router}
 \alias{make_router}
-\title{Creates router.}
+\title{Creates router. Returned callback needs to be called within Shiny server code.}
 \usage{
 make_router(default, ...)
+}
+\arguments{
+\item{default}{Main route to which all invalid routes should redirect.}
+
+\item{...}{All other routes defined with shinyrouter::route function.}
 }
 \value{
 Shiny router callback that should be run in server code with Shiny input and output lists.
 }
 \description{
-Creates router.
+Creates router. Returned callback needs to be called within Shiny server code.
+}
+\examples{
+router <- make_router(
+  route("/", root_page),
+  route("/other", other_page)
+)
 }
 

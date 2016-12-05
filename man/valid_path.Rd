@@ -2,7 +2,7 @@
 % Please edit documentation in R/router.R
 \name{valid_path}
 \alias{valid_path}
-\title{Validates that path is defined in routes.}
+\title{Internal function that validates that path is defined in routes.}
 \usage{
 valid_path(routes, path)
 }
@@ -15,6 +15,6 @@ valid_path(routes, path)
 Boolean value indicating if path is defined.
 }
 \description{
-Validates that path is defined in routes.
+Internal function that validates that path is defined in routes.
 }
 
