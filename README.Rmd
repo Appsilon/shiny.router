@@ -35,7 +35,7 @@ This library source code can be found on Appsilon's Github:
 How to install?
 ---------------
 **Note! This library is still in its infancy. Api might change in the future.**
-<br>
+
 At the moment it's possible to install this library through [devtools](https://github.com/hadley/devtools).
 ```
 devtools::install_github("Appsilon/shinyrouter")
