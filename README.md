@@ -25,7 +25,7 @@ Source code
 
 This library source code can be found on [Appsilon Data Science's](http://appsilondatascience.com) Github: <br> <https://github.com/Appsilon/shinyrouter>
 
-<a href="http://appsilondatascience.com">![Appsilon Data Science](https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png)</a>
+<a href="http://appsilondatascience.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a>
 
 How to install?
 ---------------
