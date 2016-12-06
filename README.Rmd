@@ -102,7 +102,6 @@ Appsilon Data Science {.footer}
 document.write('<div class="subheader"> We Provide End-to-End Data Science Solutions </div>  <div class="logo"><a href="http://appsilondatascience.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png" /></a></div>');
 </script>
 
-
 Get in touch [dev@appsilondatascience.com](dev@appsilondatascience.com)
 
 <script>
