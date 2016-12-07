@@ -12,10 +12,14 @@ h1 {
 .footer h1 {
   font-size: 50px;
 }
+.footer a {
+  color: white;
+  text-decoration: underline;
+}
 .section.footer img {
-  width: 200px !important;
+  width: 150px !important;
   margin: 1em;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 h2, .subheader {
   font-size: 22px;
@@ -55,6 +59,7 @@ h2, .subheader {
 .footer {
   background-color: #343434;
   color: white;
+  padding-bottom: 2em;
 }
 .darkslide a {
   color: white;
