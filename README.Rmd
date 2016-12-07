@@ -79,11 +79,17 @@ However, if you encounter any problems, try the following:
 1. Up-to-date R language environment
 2. Installing specific dependent libraries versions
     * magrittr 
-    ` install.packages("magrittr", version='1.5') `
+    ```
+    install.packages("magrittr", version='1.5') 
+    ```
     * shiny
-    ` install.packages("shiny", version='0.14.2.9001') `
+    ```
+    install.packages("shiny", version='0.14.2.9001')
+    ```
     * shinyjs
-    ` install.packages("shinyjs", version='0.8') `
+    ```
+    install.packages("shinyjs", version='0.8')
+    ```
 
 3. Missing semanticui dependency - one of our examples uses one of our others libraries, so please install it as well, when running that example.
 Repository: [semanticui](https://github.com/Appsilon/semanticui)

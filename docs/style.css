@@ -46,6 +46,13 @@ h2, .subheader {
   width: 50%;
   max-width: 940px;
 }
+@media (max-width: 1440px) {
+  .section.level2 * {
+    width:75%;
+  }
+}
+
+
 .section.level1.footer * {
   text-align: center;
 }
