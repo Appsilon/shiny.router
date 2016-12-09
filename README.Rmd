@@ -1,4 +1,4 @@
-<link href="http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lato:300,700,300italic|Inconsolata" rel="stylesheet" type="text/css">
 <link href='docs/style.css' rel='stylesheet' type='text/css'>
 
 shinyrouter
@@ -18,8 +18,7 @@ make_router(
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
 
-[Live demo can be found here.](http://demo.appsilondatascience.com/shinyrouter/)
-
+[Live demo can be found here](http://demo.appsilondatascience.com/shinyrouter/) and a simple tutorial article is available on [Appsilon Data Science blog](http://blog.appsilondatascience.com/rstats/2016/12/08/shinyrouter.html).
 
 </div>
 
@@ -70,7 +69,14 @@ server <- shinyServer(function(input, output) {
 shinyApp(ui, server)
 ```
 
-Troubleshooting
+How to contribute?
+-----------------
+If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.<br>
+
+**Changes in documentation**<br>
+Both this project's documentation page and **README.md** are generated with Rmarkdown, so if there is need to update them, then please add changes to **README.Rmd** file and run **build_readme.R** script.
+
+Troubleshooting {.darkorange}
 -----------------
 We used the latest versions of dependencies for this library, so please update your R environment before installation.
 
@@ -94,7 +100,7 @@ However, if you encounter any problems, try the following:
 3. Missing semanticui dependency - one of our examples uses one of our others libraries, so please install it as well, when running that example.
 Repository: [semanticui](https://github.com/Appsilon/semanticui)
 
-Future enhacements {.darkorange}
+Future enhacements
 ------------------
 * URL params handling
 * CRAN release

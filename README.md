@@ -1,5 +1,5 @@
 
-<link href="http://fonts.googleapis.com/css?family=Lato:300,300italic|Inconsolata" rel="stylesheet" type="text/css"> <link href='docs/style.css' rel='stylesheet' type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Lato:300,700,300italic|Inconsolata" rel="stylesheet" type="text/css"> <link href='docs/style.css' rel='stylesheet' type='text/css'>
 
 shinyrouter
 ===========
@@ -16,7 +16,7 @@ Now it's possible to recreate a state of your app, by providing a specific URL, 
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
-[Live demo can be found here.](http://demo.appsilondatascience.com/shinyrouter/)
+[Live demo can be found here](http://demo.appsilondatascience.com/shinyrouter/) and a simple tutorial article is available on [Appsilon Data Science blog](http://blog.appsilondatascience.com/rstats/2016/12/08/shinyrouter.html).
 
 Source code
 -----------
@@ -59,6 +59,13 @@ Visit /examples directory for some complete samples. Here's the basic usage:
     })
 
     shinyApp(ui, server)
+
+How to contribute?
+------------------
+
+If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.<br>
+
+**Changes in documentation**<br> Both this project's documentation page and **README.md** are generated with Rmarkdown, so if there is need to update them, then please add changes to **README.Rmd** file and run **build\_readme.R** script.
 
 Troubleshooting
 ---------------
