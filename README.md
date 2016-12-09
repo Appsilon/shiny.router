@@ -65,7 +65,9 @@ How to contribute?
 
 If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.<br>
 
-**Changes in documentation**<br> Both this project's documentation page and **README.md** are generated with Rmarkdown, so if there is need to update them, then please add changes to **README.Rmd** file and run **build\_readme.R** script.
+**Changes in documentation**
+
+Both repository **README.md** file and an official project documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file and run a **build\_readme.R** script to compile it.
 
 Troubleshooting
 ---------------
