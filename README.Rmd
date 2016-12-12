@@ -18,7 +18,9 @@ make_router(
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
 
-[Live demo can be found here.](http://demo.appsilondatascience.com/shinyrouter/)
+<p style="text-align: center; font-size: x-large;">
+[Live demo](http://demo.appsilondatascience.com/shinyrouter/)
+</p>
 
 
 </div>
