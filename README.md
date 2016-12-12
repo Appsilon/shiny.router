@@ -16,7 +16,9 @@ Now it's possible to recreate a state of your app, by providing a specific URL, 
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
-[Live demo can be found here.](http://demo.appsilondatascience.com/shinyrouter/)
+<p style="text-align: center; font-size: x-large;">
+[Live demo](http://demo.appsilondatascience.com/shinyrouter/)
+</p>
 
 Source code
 -----------
