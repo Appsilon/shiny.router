@@ -19,7 +19,7 @@ TODO We would like to have a nice graphic explaning routing mechanism
 -->
 
 <p style="text-align: center; font-size: x-large;">
-[Live demo](http://demo.appsilondatascience.com/shinyrouter/)
+<a href="http://demo.appsilondatascience.com/shinyrouter/">Live demo</a>
 </p>
 
 

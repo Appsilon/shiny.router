@@ -17,7 +17,7 @@ Now it's possible to recreate a state of your app, by providing a specific URL, 
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
 <p style="text-align: center; font-size: x-large;">
-[Live demo](http://demo.appsilondatascience.com/shinyrouter/)
+<a href="http://demo.appsilondatascience.com/shinyrouter/">Live demo</a>
 </p>
 
 Source code
