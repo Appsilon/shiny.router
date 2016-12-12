@@ -18,7 +18,7 @@ make_router(
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
 
-[Live demo can be found here](http://demo.appsilondatascience.com/shinyrouter/) and a simple tutorial article is available on [Appsilon Data Science blog](http://blog.appsilondatascience.com/rstats/2016/12/08/shinyrouter.html).
+[Live demo can be found here](http://demo.appsilondatascience.com/shinyrouter/) and a basic tutorial article is available on [Appsilon Data Science blog](http://blog.appsilondatascience.com/rstats/2016/12/08/shinyrouter.html).
 
 </div>
 
@@ -75,7 +75,7 @@ If you want to contribute to this project please submit a regular PR, once you'r
 
 **Changes in documentation**
 
-Both repository **README.md** file and an official project documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file  and run a **build_readme.R** script to compile it.
+Both repository **README.md** file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file  and run a **build_readme.R** script to compile it.
 
 Troubleshooting {.darkorange}
 -----------------
