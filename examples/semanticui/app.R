@@ -1,6 +1,6 @@
 library(shiny)
-library(semanticui)
-library(shinyrouter)
+library(shiny.semantic)
+library(shiny.router)
 
 # Hint: semanticui
 #

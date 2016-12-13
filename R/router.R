@@ -4,7 +4,7 @@ HIDDEN_ROUTE_INPUT <- '_location'
 .onLoad <- function(libname, pkgname) {
   # Adds inst/www directory for loading static resources from server.
   # We need to add that to get all javascript code from client app.
-  shiny::addResourcePath('shinyrouter', system.file('www/bower_components/page/', package = 'shinyrouter', mustWork = TRUE))
+  shiny::addResourcePath('shiny.router', system.file('www/bower_components/page/', package = 'shiny.router', mustWork = TRUE))
 }
 
 #' Internal function that escapes routing path from not safe characters.
@@ -82,7 +82,7 @@ create_router_callback <- function(root, routes) {
 #' Creates router. Returned callback needs to be called within Shiny server code.
 #'
 #' @param default Main route to which all invalid routes should redirect.
-#' @param ... All other routes defined with shinyrouter::route function.
+#' @param ... All other routes defined with shiny.router::route function.
 #' @return Shiny router callback that should be run in server code with Shiny input and output lists.
 #' @examples
 #' router <- make_router(
@@ -111,7 +111,7 @@ router_ui <- function() {
     shinyjs::useShinyjs(),
     shiny::singleton(
       shiny::tags$head(
-        shiny::tags$script(src = "shinyrouter/page.js")
+        shiny::tags$script(src = "shiny.router/page.js")
       )
     ),
     shiny::uiOutput(ROUTER_UI_ID),
