@@ -1,5 +1,6 @@
 ROUTER_UI_ID <- '_router_ui'
-HIDDEN_ROUTE_INPUT <- '_location'
+HIDDEN_ROUTE_INPUT <- '_shiny_router_path'
+HIDDEN_FULLROUTE_INPUT <- '_shiny_router_full'
 
 .onLoad <- function(libname, pkgname) {
   # Adds inst/www directory for loading static resources from server.
@@ -55,7 +56,10 @@ create_router_callback <- function(root, routes) {
       for (path in names(routes)) {
         if (substr(path, 1, 1) == "/") {
           clean_path <- escape_path(path)
-          register_code <- paste0("page('", clean_path, "', function() { $('#", HIDDEN_ROUTE_INPUT, "').val('", clean_path, "').keyup(); });\n")
+          register_code <- paste0("page('", clean_path, "', function(context) {
+              $('#", HIDDEN_ROUTE_INPUT, "').val('", clean_path, "').keyup();
+              $('#", HIDDEN_FULLROUTE_INPUT, "').val(context.path).keyup();
+          });\n")
           initialize_code_buffer <- paste0(initialize_code_buffer, register_code)
         }
       }
@@ -116,7 +120,9 @@ router_ui <- function() {
     ),
     shiny::uiOutput(ROUTER_UI_ID),
     shiny::textInput(HIDDEN_ROUTE_INPUT, label = ""),
-    shiny::tags$style(paste0("#", HIDDEN_ROUTE_INPUT, " {display: none;}"))
+    shiny::tags$style(paste0("#", HIDDEN_ROUTE_INPUT, " {display: none;}")),
+    shiny::textInput(HIDDEN_FULLROUTE_INPUT, label = ""),
+    shiny::tags$style(paste0("#", HIDDEN_FULLROUTE_INPUT, " {display: none;}"))
   )
 }
 
