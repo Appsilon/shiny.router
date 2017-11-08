@@ -12,6 +12,5 @@ LazyData: true
 License: MIT + file LICENSE
 Imports:
     magrittr,
-    shiny,
-    shinyjs
+    shiny
 RoxygenNote: 5.0.1
