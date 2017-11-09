@@ -5,7 +5,7 @@
  * @todo: minify.
  */
 window.shiny_router = function() {
-  const ROUTE_INPUT = '_shiny_router_path'
+  const ROUTER_INPUT_ID = 'shiny_router_inputId'
 
   current_context = false;
 
@@ -23,7 +23,10 @@ window.shiny_router = function() {
     // client-side!
     current_context = context;
     if (false !== shinyTriggerUpdateFn) {
+      console.log("Telling shiny we have an upate!")
       shinyTriggerUpdateFn();
+    } else {
+      console.log("Still no shiny trigger function.")
     }
   })
   page({
@@ -33,18 +36,19 @@ window.shiny_router = function() {
   });
 
   /**
-   * To fit into the Shiny lifecycle nicely, we'll use an InputBinding. Normally
-   * this is meant to track a specific DOM element, but we'll just return a phantom
-   * empty jQuery object, and ignore whatever element gets passed in to the other
-   * functions.
+   * To fit into the Shiny lifecycle nicely, we'll use an InputBinding. In order
+   * for end-to-end communication to work correctly, we'll need an actual HTML
+   * element on the page. The router_ui() R method takes care of this for us
+   * by providing a hidden input tag.
    */
   var inputBinding = new Shiny.InputBinding();
   jQuery.extend(inputBinding, {
     find: function(scope) {
-      return jQuery({id: ROUTE_INPUT});
+      return jQuery("input#" + ROUTER_INPUT_ID);
     },
     getId: function(el) {
-      return ROUTE_INPUT
+      // There should only be exactly one instance, so we know its ID.
+      return ROUTER_INPUT_ID
     },
     /**
      * When it tries to get the value of the input, we just retrieve it from

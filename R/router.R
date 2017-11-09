@@ -1,5 +1,5 @@
 ROUTER_UI_ID <- '_router_ui'
-INPUT_BINDING_ID <- '_shiny_router_path'
+INPUT_BINDING_ID <- 'shiny_router_inputId'
 
 .onLoad <- function(libname, pkgname) {
   # Adds inst/www directory for loading static resources from server.
@@ -52,28 +52,28 @@ route <- function(path, ui) {
 create_router_callback <- function(root, routes) {
   function(input, output, session = shiny::getDefaultReactiveDomain()) {
 
-    # When the user is first visiting the page, check if they entered a URL
-    # with a hashbang path, and if so, take them there.
-    starting_hash <- isolate(session$clientData$url_hash)
-    if (nzchar(starting_hash)) {
-      # TODO: Can probably shorten this with regexes.
-      if (substr(starting_hash, 1, 1) == "#") {
-        starting_hash <- substr(starting_hash, 2, nchar(starting_hash))
-      }
-      if (substr(starting_hash, 1, 1) == "!") {
-        starting_hash <- substr(starting_hash, 2, nchar(starting_hash))
-      }
-      parsed_start_url <- httr::parse_url(starting_hash)
-      startpage <- paste0("/", parsed_start_url)
-      startpage_with_params <- paste0("/", starting_hash)
-      cat(file=stderr(), "router startup: found a hash\n")
-    } else {
+    # # When the user is first visiting the page, check if they entered a URL
+    # # with a hashbang path, and if so, take them there.
+    # starting_hash <- isolate(session$clientData$url_hash)
+    # if (nzchar(starting_hash)) {
+    #   # TODO: Can probably shorten this with regexes.
+    #   if (substr(starting_hash, 1, 1) == "#") {
+    #     starting_hash <- substr(starting_hash, 2, nchar(starting_hash))
+    #   }
+    #   if (substr(starting_hash, 1, 1) == "!") {
+    #     starting_hash <- substr(starting_hash, 2, nchar(starting_hash))
+    #   }
+    #   parsed_start_url <- httr::parse_url(starting_hash)
+    #   startpage <- paste0("/", parsed_start_url)
+    #   startpage_with_params <- paste0("/", starting_hash)
+    #   cat(file=stderr(), "router startup: found a hash\n")
+    # } else {
       cat(file=stderr(), "router startup: found no hash\n")
       # No hashbang path on starting page. Just take them to "/" route then.
       startpage <- "/"
       startpage_with_params <- "/"
-    }
-    cat(file=stderr(), "page: ", startpage, "\npage_with_params: ", startpage_with_params, "\n")
+    # }
+    # cat(file=stderr(), "page: ", startpage, "\npage_with_params: ", startpage_with_params, "\n")
 
     current_page <- shiny::reactiveVal(list(
       page = startpage,
@@ -178,6 +178,7 @@ router_ui <- function() {
         shiny::tags$script(src = "shiny.router/shiny.router.js")
       )
     ),
+    shiny::tags$input(id = INPUT_BINDING_ID, type = "hidden", value="/"),
     #' TODO debug code
     verbatimTextOutput("shiny.router.status"),
     shiny::uiOutput(ROUTER_UI_ID)
@@ -245,18 +246,22 @@ get_page_with_params <- function(session = shiny::getDefaultReactiveDomain()) {
 #' @reactivesource
 #' @export
 get_page_params <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
+  cat(file=stderr(), "Trying to fetch field '", field, "'.\n")
   n <- get_router_field("page_with_params", session)
   if(!identical(FALSE, n)) {
+    cat(file=stderr(), "page_with_params: '", n, "'\n")
     if (missing(field)) {
       return(
         # Return a list of all the query params
         httr::parse_url(n)$query
       )
     } else {
-      field <- httr::parse_url(n)$query$field
-      return(field)
+      fieldVal <- httr::parse_url(n)$query[[field]]
+      cat(file = stderr(), "field value: '", fieldVal, "'\n");
+      return(fieldVal)
     }
   } else {
+    cat(file=stderr(), "Couldn't fetch page_with_params.\n");
     return(FALSE)
   }
 }
@@ -286,5 +291,5 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' @export
 change_page <- function(page, session = shiny::getDefaultReactiveDomain()) {
   cat(file=stderr(), "Sending page change message to client: ", page, "\n")
-  session$sendInputMessage(page, INPUT_BINDING_ID)
+  session$sendInputMessage(INPUT_BINDING_ID, page)
 }
