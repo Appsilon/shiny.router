@@ -68,12 +68,12 @@ create_router_callback <- function(root, routes) {
     #   startpage_with_params <- paste0("/", starting_hash)
     #   cat(file=stderr(), "router startup: found a hash\n")
     # } else {
-      cat(file=stderr(), "router startup: found no hash\n")
+      log_msg("router startup: found no hash")
       # No hashbang path on starting page. Just take them to "/" route then.
       startpage <- "/"
       startpage_with_params <- "/"
     # }
-    # cat(file=stderr(), "page: ", startpage, "\npage_with_params: ", startpage_with_params, "\n")
+    # log_mgs("page: ", startpage, "\npage_with_params: ", startpage_with_params, "\n")
 
     current_page <- shiny::reactiveVal(list(
       page = startpage,
@@ -83,28 +83,27 @@ create_router_callback <- function(root, routes) {
     # Watch for updates from page.js to our client-side reactive input,
     # which will tell us when page.js's notion of the current "page" has changed.
     observe({
-      cat(file=stderr(), "Inside the observer\n")
+      log_msg("Inside the observer")
       # Creates a reactive dependency on our reactive input.
       location <- get_page()
-      cat(file=stderr(), "Location = ", location, "\n")
+      log_msg("Location = ", location)
 
       if (valid_path(routes, location)) {
-        cat(file=stderr(), "It's recognized as valid.\n")
+        log_msg("It's recognized as valid.")
         # If it's a recognized path, then update the display to match.
         current_page(list(
           page = location,
           page_with_params = get_page_with_params()
         ))
-        shiny::isolate(cat(
-          file=stderr(),
+        log_msg(
           "Updated current_page.\n",
           "current_page()$page_with_params: ", current_page()$page_with_params, "\n",
-          "current_page()$page: ", current_page()$page, "\n"
-        ))
+          "current_page()$page: ", current_page()$page
+        )
 
         #' TODO: Validation of routes that have mandatory params...
       } else {
-        cat(file=stderr(), "Invalid path sent to observer\n")
+        log_msg("Invalid path sent to observer")
 
         # If it's not a recognized path, then don't update the display.
         # Instead, tell page.js to flop the URL back to what it last was.
@@ -115,11 +114,10 @@ create_router_callback <- function(root, routes) {
           # dependency on it for this observe() block, and since we also
           # write to current_page() in this block, it would risk creating
           # an infinite loop.
-          cat(
-            file=stderr(),
+          log_msg(
             "Sending proper path back up to page.js\n",
-            "current_page()$page_with_params: ", current_page()$page_with_params, "\n"
-            # "session$clientData$url_hash: ", session$clientData$url_hash, "\n"
+            "current_page()$page_with_params: ", current_page()$page_with_params
+            # "session$clientData$url_hash: ", session$clientData$url_hash
           )
           change_page(current_page()$page_with_params)
         })
@@ -128,7 +126,7 @@ create_router_callback <- function(root, routes) {
 
     # Once the (validated) route has changed, update the UI accordingly.
     output[[ROUTER_UI_ID]] <- shiny::renderUI({
-      cat(file=stderr(), "shiny.router main output. page: ", current_page()$page, "\n")
+      log_msg("shiny.router main output. page: ", current_page()$page)
       routes[[current_page()$page]]
     })
 
@@ -246,10 +244,10 @@ get_page_with_params <- function(session = shiny::getDefaultReactiveDomain()) {
 #' @reactivesource
 #' @export
 get_page_params <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
-  cat(file=stderr(), "Trying to fetch field '", field, "'.\n")
+  log_msg("Trying to fetch field '", field)
   n <- get_router_field("page_with_params", session)
   if(!identical(FALSE, n)) {
-    cat(file=stderr(), "page_with_params: '", n, "'\n")
+    log_msg("page_with_params: '", n)
     if (missing(field)) {
       return(
         # Return a list of all the query params
@@ -257,11 +255,11 @@ get_page_params <- function(field = NULL, session = shiny::getDefaultReactiveDom
       )
     } else {
       fieldVal <- httr::parse_url(n)$query[[field]]
-      cat(file = stderr(), "field value: '", fieldVal, "'\n");
+      log_msg("field value: '", fieldVal);
       return(fieldVal)
     }
   } else {
-    cat(file=stderr(), "Couldn't fetch page_with_params.\n");
+    log_msg("Couldn't fetch page_with_params.");
     return(FALSE)
   }
 }
@@ -276,7 +274,7 @@ get_page_params <- function(field = NULL, session = shiny::getDefaultReactiveDom
 #' @export
 #' @reactivesource
 is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
-  cat(file=stderr(), "Checking if page is '", page, "'\n");
+  log_msg("Checking if page is '", page);
   get_page(session) == page
 }
 
@@ -290,6 +288,6 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' @param session The current Shiny session.
 #' @export
 change_page <- function(page, session = shiny::getDefaultReactiveDomain()) {
-  cat(file=stderr(), "Sending page change message to client: ", page, "\n")
+  log_msg("Sending page change message to client: ", page)
   session$sendInputMessage(INPUT_BINDING_ID, page)
 }
