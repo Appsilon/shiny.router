@@ -1,22 +1,4 @@
 ROUTER_UI_ID <- '_router_ui'
-INPUT_BINDING_ID <- 'shiny_router_inputId'
-
-.onLoad <- function(libname, pkgname) {
-  # Adds inst/www directory for loading static resources from server.
-  # We need to add that to get all javascript code from client app.
-  shiny::addResourcePath('shiny.router.page', system.file('www/bower_components/page/', package = 'shiny.router', mustWork = TRUE))
-  shiny::addResourcePath('shiny.router', system.file('www', package = 'shiny.router', mustWork = TRUE))
-}
-
-#' Internal function that escapes routing path from not safe characters.
-#'
-#' @param path A path.
-#' @return String with escaped characters.
-escape_path <- function(path) {
-  clean_path <- gsub("'", "%27", path, fixed = T)
-  clean_path <- gsub("\\", "%5C", path, fixed = T)
-  clean_path
-}
 
 #' Internal function that validates that path is defined in routes.
 #'
@@ -52,92 +34,80 @@ route <- function(path, ui) {
 create_router_callback <- function(root, routes) {
   function(input, output, session = shiny::getDefaultReactiveDomain()) {
 
-    # # When the user is first visiting the page, check if they entered a URL
-    # # with a hashbang path, and if so, take them there.
-    # starting_hash <- isolate(session$clientData$url_hash)
-    # if (nzchar(starting_hash)) {
-    #   # TODO: Can probably shorten this with regexes.
-    #   if (substr(starting_hash, 1, 1) == "#") {
-    #     starting_hash <- substr(starting_hash, 2, nchar(starting_hash))
-    #   }
-    #   if (substr(starting_hash, 1, 1) == "!") {
-    #     starting_hash <- substr(starting_hash, 2, nchar(starting_hash))
-    #   }
-    #   parsed_start_url <- httr::parse_url(starting_hash)
-    #   startpage <- paste0("/", parsed_start_url)
-    #   startpage_with_params <- paste0("/", starting_hash)
-    #   cat(file=stderr(), "router startup: found a hash\n")
-    # } else {
-      log_msg("router startup: found no hash")
-      # No hashbang path on starting page. Just take them to "/" route then.
-      startpage <- "/"
-      startpage_with_params <- "/"
-    # }
-    # log_mgs("page: ", startpage, "\npage_with_params: ", startpage_with_params, "\n")
-
-    current_page <- shiny::reactiveVal(list(
-      page = startpage,
-      page_with_params = startpage_with_params
+    # Making this a list inside a shiny::reactiveVal, instead of using a
+    # shiny::reactiveValues, because it should change atomically.
+    log_msg("Creating current_page reactive...")
+    session$userData$shiny.router.page <- shiny::reactiveVal(list(
+      path = "/",
+      query = NULL,
+      unparsed = "/"
     ))
+    log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
 
-    # Watch for updates from page.js to our client-side reactive input,
-    # which will tell us when page.js's notion of the current "page" has changed.
-    observe({
-      log_msg("Inside the observer")
-      # Creates a reactive dependency on our reactive input.
-      location <- get_page()
-      log_msg("Location = ", location)
+    # Watch for updates to the address bar's fragment (aka "hash"), and update
+    # our router state if needed.
+    observeEvent(
+      ignoreNULL = FALSE,
+      ignoreInit = FALSE,
+      # Shiny uses the "onhashchange" browser method (via JQuery) to detect
+      # changes to the hash
+      eventExpr = shiny::getUrlHash(session),
+      handlerExpr = {
 
-      if (valid_path(routes, location)) {
-        log_msg("It's recognized as valid.")
-        # If it's a recognized path, then update the display to match.
-        current_page(list(
-          page = location,
-          page_with_params = get_page_with_params()
-        ))
-        log_msg(
-          "Updated current_page.\n",
-          "current_page()$page_with_params: ", current_page()$page_with_params, "\n",
-          "current_page()$page: ", current_page()$page
-        )
+        log_msg("hashchange observer triggered!")
+        new_hash = shiny::getUrlHash(session)
+        log_msg("New raw hash: ", new_hash)
 
-        #' TODO: Validation of routes that have mandatory params...
-      } else {
-        log_msg("Invalid path sent to observer")
+        if (!isTRUE(nchar(new_hash) > 0)) {
+          log_msg("Empty hash.")
+          # No fragment. Treat it as path "/"
+          new_hash = "/"
+        } else {
 
-        # If it's not a recognized path, then don't update the display.
-        # Instead, tell page.js to flop the URL back to what it last was.
-        shiny::isolate({
-          # Doing this in an isolate() block, because we also update the
-          # reactive variable "current_page" in this context. Reading
-          # current_page() outside of an isolate block would create a reactive
-          # dependency on it for this observe() block, and since we also
-          # write to current_page() in this block, it would risk creating
-          # an infinite loop.
-          log_msg(
-            "Sending proper path back up to page.js\n",
-            "current_page()$page_with_params: ", current_page()$page_with_params
-            # "session$clientData$url_hash: ", session$clientData$url_hash
-          )
-          change_page(current_page()$page_with_params)
-        })
+          if (substr(new_hash, 1, 2) != "#!") {
+            # TODO: be tolerant of #! and # URLs?
+            log_msg("That's weird. URL Hash doesn't start with #!: ", new_hash)
+            stop()
+          }
+
+          # Strip off the initial "#", ensure it starts with a single "/",
+          # and then parse into path and query string.
+          new_hash = substr(new_hash, 3, nchar(new_hash))
+          if (substr(new_hash, 1, 1) != "/") {
+            new_hash = paste0("/", new_hash)
+          }
+        }
+        parsed = httr::parse_url(new_hash)
+
+        log_msg("Path: ", parsed$path)
+        if (!valid_path(routes, parsed$path)) {
+
+          log_msg("Invalid path sent to observer")
+          # If it's not a recognized path, then don't update the display.
+          # Instead, tell Shiny to revert the URL to its previous value
+          change_page(session$userData$shiny.router.page()$unparsed)
+
+        } else {
+
+          log_msg("Path recognized!")
+          # If it's a recognized path, then update the display to match.
+          # TODO: Validation of routes that have mandatory query params?
+          # TODO: Wildcard routes? e.g. /user/:id
+          session$userData$shiny.router.page(list(
+            path = parsed$path,
+            query = parsed$query,
+            unparsed = new_hash
+          ))
+
+        }
       }
-    })
-
-    # Once the (validated) route has changed, update the UI accordingly.
-    output[[ROUTER_UI_ID]] <- shiny::renderUI({
-      log_msg("shiny.router main output. page: ", current_page()$page)
-      routes[[current_page()$page]]
-    })
-
-    output$shiny.router.status = renderText(
-      paste0(
-        "get_page(): ", get_page(), "\n",
-        "get_page_with_params(): ", get_page_with_params(), "\n",
-        "current_page()$page: ", current_page()$page, "\n",
-        "current_page()$page_with_params: ", current_page()$page_with_params, "\n"
-      )
     )
+
+    # Switch the displayed page, if the path changes.
+    output[[ROUTER_UI_ID]] <- shiny::renderUI({
+      log_msg("shiny.router main output. path: ", session$userData$shiny.router.page()$path)
+      routes[[session$userData$shiny.router.page()$path]]
+    })
   }
 }
 
@@ -169,69 +139,20 @@ make_router <- function(default, ...) {
 #' ))
 #' @export
 router_ui <- function() {
-  shiny::tagList(
-    shiny::singleton(
-      shiny::tags$head(
-        shiny::tags$script(src = "shiny.router.page/page.js"),
-        shiny::tags$script(src = "shiny.router/shiny.router.js")
-      )
-    ),
-    shiny::tags$input(id = INPUT_BINDING_ID, type = "hidden", value="/"),
-    #' TODO debug code
-    verbatimTextOutput("shiny.router.status"),
-    shiny::uiOutput(ROUTER_UI_ID)
-  )
-}
-
-#' Convenience function to retrieve one of the fields from the object returned
-#' by our client-side reactive input binding. See "shiny.router.js" for the
-#' side that writes these.
-#'
-#' Currently it sends across two fields (which are derived from the page.js
-#' "Context" object for the current page.js route being displayed.)
-#'
-#' page: The "path" part of the URL, with a leading slash. But note that currently
-#' we're using hashbanged URLs, e.g. "http://www.example.com/#!path?params=1"
-#'
-#' page_with_params: The "path" and "query" part of the URL, combined.
-#'
-#' @param fieldName The field to retrieve
-#' @param session The Shiny session.
-#' @return The requested field, as a length-1 character vector, or FALSE if the input
-#' currently has no value.
-#' @reactivesource
-get_router_field<- function(field_name, session = shiny::getDefaultReactiveDomain()) {
-  # TODO: validation of the field name?
-  if (shiny::isTruthy(session$input[[INPUT_BINDING_ID]])) {
-    return(session$input[[INPUT_BINDING_ID]][[field_name]] )
-  } else {
-    return(FALSE)
-  }
+  shiny::uiOutput(ROUTER_UI_ID)
 }
 
 #' Convenience function to retrieve just the "page" part of the input. This
 #' corresponds to what might be called the "path" component of a URL, except
 #' that we're using URLs with hashes before the path & query (e.g.:
-#' http://www.example.com/#!virtual/path?and=params)
+#' http://www.example.com/#!/virtual/path?and=params)
 #' @param session The current Shiny Session
 #' @return The current page in a length-1 character vector, or FALSE if the input
 #' has no value.
 #' @reactivesource
 #' @export
 get_page <- function(session = shiny::getDefaultReactiveDomain()) {
-  get_router_field("page", session)
-}
-
-#' Convenience function to retrieve the full "page and params" part of the input.
-#' This corresponds to the path with the query (if any), and is suitable for
-#' usage with change_page()
-#' @param session The current Shiny session
-#' @return The page and params in a length-1 character vector, or FALSE if the
-#' input has no value.
-#' @reactivesource
-#' @export
-get_page_with_params <- function(session = shiny::getDefaultReactiveDomain()) {
-  get_router_field("page_with_params", session)
+  session$userData$shiny.router.page()$path
 }
 
 #' Convenience function to retrieve any params that were part of the requested
@@ -243,24 +164,20 @@ get_page_with_params <- function(session = shiny::getDefaultReactiveDomain()) {
 #' requested param (if present). Or FALSE if there's no input, or no params.
 #' @reactivesource
 #' @export
-get_page_params <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
+get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
   log_msg("Trying to fetch field '", field)
-  n <- get_router_field("page_with_params", session)
-  if(!identical(FALSE, n)) {
-    log_msg("page_with_params: '", n)
-    if (missing(field)) {
-      return(
-        # Return a list of all the query params
-        httr::parse_url(n)$query
-      )
-    } else {
-      fieldVal <- httr::parse_url(n)$query[[field]]
-      log_msg("field value: '", fieldVal);
-      return(fieldVal)
-    }
-  } else {
-    log_msg("Couldn't fetch page_with_params.");
+
+  if (is.null(session$userData$shiny.router.page()$query)) {
     return(FALSE)
+  }
+
+  if (missing(field)) {
+    return(
+      # Return a list of all the query params
+      session$userData$shiny.router.page()$query
+    )
+  } else {
+    return(session$userData$shiny.router.page()$query[[field]])
   }
 }
 
@@ -288,6 +205,6 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' @param session The current Shiny session.
 #' @export
 change_page <- function(page, session = shiny::getDefaultReactiveDomain()) {
-  log_msg("Sending page change message to client: ", page)
-  session$sendInputMessage(INPUT_BINDING_ID, page)
+  log_msg("Sending page change message to client: ", paste0("#page"))
+  shiny::updateQueryString(paste0("#!", page), mode="push", session)
 }
