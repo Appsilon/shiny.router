@@ -23,3 +23,32 @@ log_msg <- function(...) {
     cat("\n")
   }
 }
+
+
+#' Formats a URL fragment into a hashpath starting with "#!/"
+cleanup_hashpath <- function(hashpath) {
+  hashpath = hashpath[1]
+
+  # Already correctly formatted.
+  if (substr(hashpath, 1, 3) == "#!/") {
+    return(hashpath)
+  }
+
+  # We remove any partial hashbang path morker from the start
+  # of the string, then add back the full one.
+  slicefrom <- 1
+  if (substr(hashpath, slicefrom, slicefrom) == "#") {
+    slicefrom <- slicefrom + 1
+  }
+  if (substr(hashpath, slicefrom, slicefrom) == "!") {
+    slicefrom <- slicefrom + 1
+  }
+  if (substr(hashpath, slicefrom, slicefrom) == "/") {
+    slicefrom <- slicefrom + 1
+  }
+
+  paste0(
+    "#!/",
+    substr(hashpath, slicefrom, nchar(hashpath))
+  )
+}

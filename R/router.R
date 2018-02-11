@@ -57,27 +57,13 @@ create_router_callback <- function(root, routes) {
         log_msg("hashchange observer triggered!")
         new_hash = shiny::getUrlHash(session)
         log_msg("New raw hash: ", new_hash)
+        cleaned_hash = cleanup_hashpath(new_hash)
+        log_msg("New cleaned hash: ", cleaned_hash)
 
-        if (!isTRUE(nchar(new_hash) > 0)) {
-          log_msg("Empty hash.")
-          # No fragment. Treat it as path "/"
-          new_hash = "/"
-        } else {
-
-          if (substr(new_hash, 1, 2) != "#!") {
-            # TODO: be tolerant of #! and # URLs?
-            log_msg("That's weird. URL Hash doesn't start with #!: ", new_hash)
-            stop()
-          }
-
-          # Strip off the initial "#", ensure it starts with a single "/",
-          # and then parse into path and query string.
-          new_hash = substr(new_hash, 3, nchar(new_hash))
-          if (substr(new_hash, 1, 1) != "/") {
-            new_hash = paste0("/", new_hash)
-          }
-        }
-        parsed = httr::parse_url(new_hash)
+        # Parse out the components of the hashpath
+        parsed = httr::parse_url(
+          substr(cleaned_hash, 3, nchar(cleaned_hash)) # Strip off the "#!"
+        )
 
         log_msg("Path: ", parsed$path)
         if (!valid_path(routes, parsed$path)) {
@@ -85,7 +71,12 @@ create_router_callback <- function(root, routes) {
           log_msg("Invalid path sent to observer")
           # If it's not a recognized path, then don't update the display.
           # Instead, tell Shiny to revert the URL to its previous value
-          change_page(session$userData$shiny.router.page()$unparsed)
+          change_page(session$userData$shiny.router.page()$unparsed, mode = "replace")
+
+        } else if (new_hash != cleaned_hash) {
+
+          log_msg("Cleaning up hashpath in URL...")
+          change_page(cleaned_hash, mode="replace")
 
         } else {
 
@@ -139,7 +130,22 @@ make_router <- function(default, ...) {
 #' ))
 #' @export
 router_ui <- function() {
-  shiny::uiOutput(ROUTER_UI_ID)
+  shiny::addResourcePath(
+    "shiny.router",
+    system.file("www", package = "shiny.router")
+  )
+  jsFile <- file.path("shiny.router", "shiny.router.js")
+
+  list(
+    shiny::singleton(
+      shiny::withTags(
+        head(
+          script(type = "text/javascript", src = jsFile)
+        )
+      )
+    ),
+    shiny::uiOutput(ROUTER_UI_ID)
+  )
 }
 
 #' Convenience function to retrieve just the "page" part of the input. This
@@ -191,7 +197,7 @@ get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDom
 #' @export
 #' @reactivesource
 is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
-  log_msg("Checking if page is '", page);
+  log_msg("Checking if page is: ", page);
   get_page(session) == page
 }
 
@@ -204,7 +210,7 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' URL, with optional query, e.g. "/learner?id=%d"
 #' @param session The current Shiny session.
 #' @export
-change_page <- function(page, session = shiny::getDefaultReactiveDomain()) {
-  log_msg("Sending page change message to client: ", paste0("#page"))
-  shiny::updateQueryString(paste0("#!", page), mode="push", session)
+change_page <- function(page, session = shiny::getDefaultReactiveDomain(), mode="push") {
+  log_msg("Sending page change message to client: ", page, "With page change mode: ", mode)
+  shiny::updateQueryString(cleanup_hashpath(page), mode, session)
 }
