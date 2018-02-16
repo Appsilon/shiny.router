@@ -15,8 +15,3 @@ test_that("test cleanup_hashpath", {
   expect_equal(cleanup_hashpath("#/abc"), "#!/abc")
   expect_equal(cleanup_hashpath("#/xyz"), "#!/xyz")
 })
-
-test_that("test route_link", {
-  expect_equal(route_link("#!/abc"), "#!/abc")
-  expect_equal(route_link("abc"), "#!/abc")
-})
