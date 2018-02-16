@@ -5,7 +5,7 @@ library(shiny.router)
 menu <- (
   tags$ul(
     tags$li(a(class = "item", href = "/", "Page")),
-    tags$li(a(class = "item", href = "/other", "Other page"))
+    tags$li(a(class = "item", href = route_link("other"), "Other page"))
   )
 )
 
@@ -25,7 +25,7 @@ other_page <- page("Some other page", "Lorem ipsum dolor sit amet, consectetur a
 # Creates router. We provide routing path and UI for this page.
 router <- make_router(
   route("/", root_page),
-  route("/other", other_page)
+  route("other", other_page)
 )
 
 # Creat output for our router in main UI of Shiny app.

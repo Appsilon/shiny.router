@@ -62,7 +62,7 @@ create_router_callback <- function(root, routes) {
 
         # Parse out the components of the hashpath
         parsed = httr::parse_url(
-          substr(cleaned_hash, 3, nchar(cleaned_hash)) # Strip off the "#!"
+          extract_link_name(cleaned_hash)
         )
 
         log_msg("Path: ", parsed$path)
@@ -206,11 +206,29 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' the window URL accordingly, then tells clientside shiny that our reactive
 #' input binding has changed, then that comes back down to our router callback
 #' function and all other observers watching get_page() or similar.
+#'
 #' @param page The new URL to go to. Should just be the path component of the
 #' URL, with optional query, e.g. "/learner?id=%d"
+#' @param mode replace or push history (more in \code{shiny::updateQueryString})
 #' @param session The current Shiny session.
+#'
 #' @export
 change_page <- function(page, session = shiny::getDefaultReactiveDomain(), mode="push") {
   log_msg("Sending page change message to client: ", page, "With page change mode: ", mode)
   shiny::updateQueryString(cleanup_hashpath(page), mode, session)
+}
+
+#' Route link
+#'
+#' Adds /#!/ prefix to link.
+#'
+#' @param path character with path
+#'
+#' @return route link
+#' @export
+#'
+#' @examples
+#' route_link("abc") # /#!/abc
+route_link <- function(path) {
+  paste0("/", cleanup_hashpath(path))
 }
