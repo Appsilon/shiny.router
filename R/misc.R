@@ -24,13 +24,30 @@ log_msg <- function(...) {
   }
 }
 
+#' Chack hashpath
+#'
+#' Validates if path starts from hash #!/
+#'
+#' @param hashpath character with hash path
+#'
+#' @return TRUE if hash path starts with "#!/"
+#'
+#' @examples
+#' check_hashpath("#!/abc")
+check_hashpath <- function(hashpath){
+  substr(hashpath, 1, 3) == "#!/"
+}
 
+#' Cleanup Hashpath
+#'
 #' Formats a URL fragment into a hashpath starting with "#!/"
+#'
+#' @param hashpath character with hash path
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
 
   # Already correctly formatted.
-  if (substr(hashpath, 1, 3) == "#!/") {
+  if (check_hashpath(hashpath)) {
     return(hashpath)
   }
 
