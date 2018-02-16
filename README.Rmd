@@ -113,10 +113,6 @@ However, if you encounter any problems, try the following:
     ```
     install.packages("shiny", version='0.14.2.9001')
     ```
-    * shinyjs
-    ```
-    install.packages("shinyjs", version='0.8')
-    ```
 
 3. Missing semanticui dependency - one of our examples uses one of our others libraries, so please install it as well, when running that example.
 Repository: [semanticui](https://github.com/Appsilon/semanticui)

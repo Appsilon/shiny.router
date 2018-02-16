@@ -3,3 +3,7 @@
 export(make_router)
 export(route)
 export(router_ui)
+export(get_page)
+export(get_query_param)
+export(change_page)
+export(is_page)
