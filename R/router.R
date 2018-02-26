@@ -61,9 +61,7 @@ create_router_callback <- function(root, routes) {
         log_msg("New cleaned hash: ", cleaned_hash)
 
         # Parse out the components of the hashpath
-        parsed = httr::parse_url(
-          extract_link_name(cleaned_hash)
-        )
+        parsed <- parse_url_path(cleaned_hash)
 
         log_msg("Path: ", parsed$path)
         if (!valid_path(routes, parsed$path)) {

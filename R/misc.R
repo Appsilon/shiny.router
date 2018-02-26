@@ -71,3 +71,20 @@ extract_link_name <- function(path) {
     return(path)
   substr(path, 4, nchar(path))
 }
+
+parse_url_path <- function(url_path) {
+  extracted_link <- extract_link_name(url_path)
+  extracted_url_parts <- regmatches(extracted_link, regexpr("\\?", extracted_link), invert = TRUE)[[1]]
+  path <- extracted_url_parts[1]
+
+  if (length(extracted_url_parts) == 1) {
+    query <- NULL
+  } else {
+    query <- shiny::parseQueryString(extracted_url_parts[2], nested = TRUE)
+  }
+
+  parsed <-  list(
+    path = path,
+    query = query
+  )
+}
