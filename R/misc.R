@@ -42,15 +42,8 @@ cleanup_hashpath <- function(hashpath) {
   # We remove any partial hashbang path morker from the start
   # of the string, then add back the full one.
   slicefrom <- 1
-  if (substr(hashpath, slicefrom, slicefrom) == "#") {
+  while (substr(hashpath, slicefrom, slicefrom) %in% c("#", "!", "/"))
     slicefrom <- slicefrom + 1
-  }
-  if (substr(hashpath, slicefrom, slicefrom) == "!") {
-    slicefrom <- slicefrom + 1
-  }
-  if (substr(hashpath, slicefrom, slicefrom) == "/") {
-    slicefrom <- slicefrom + 1
-  }
 
   paste0(
     "#!/",
@@ -67,7 +60,5 @@ cleanup_hashpath <- function(hashpath) {
 #' @example
 #' extract_link_name("#!/abc")
 extract_link_name <- function(path) {
-  if (!(substr(path, 1, 3) == "#!/"))
-    return(path)
-  substr(path, 4, nchar(path))
+  sub("#!/", "", cleanup_hashpath(path))
 }
