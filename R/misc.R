@@ -39,7 +39,7 @@ cleanup_hashpath <- function(hashpath) {
     return(hashpath)
   }
 
-  # We remove any partial hashbang path morker from the start
+  # We remove any partial hashbang path marker from the start
   # of the string, then add back the full one.
   slicefrom <- 1
   while (substr(hashpath, slicefrom, slicefrom) %in% c("#", "!", "/"))
