@@ -23,4 +23,3 @@ router <- make_router(
   route("/other", other_page)
 )
 }
-

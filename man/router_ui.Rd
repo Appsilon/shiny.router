@@ -21,4 +21,3 @@ ui <- shinyUI(fluidPage(
   router_ui()
 ))
 }
-
