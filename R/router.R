@@ -38,9 +38,9 @@ create_router_callback <- function(root, routes) {
     # shiny::reactiveValues, because it should change atomically.
     log_msg("Creating current_page reactive...")
     session$userData$shiny.router.page <- shiny::reactiveVal(list(
-      path = "/",
+      path = root,
       query = NULL,
-      unparsed = "/"
+      unparsed = root
     ))
     log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
 
