@@ -167,14 +167,14 @@ get_page <- function(session = shiny::getDefaultReactiveDomain()) {
 #' return all params)
 #' @param session The Shiny session
 #' @return The full list of params on the URL (if any), as a list. Or, the single
-#' requested param (if present). Or FALSE if there's no input, or no params.
+#' requested param (if present). Or NULL if there's no input, or no params.
 #' @reactivesource
 #' @export
 get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
   log_msg("Trying to fetch field '", field)
 
   if (is.null(session$userData$shiny.router.page()$query)) {
-    return(FALSE)
+    return(NULL)
   }
 
   if (missing(field)) {
