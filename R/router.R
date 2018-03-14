@@ -6,7 +6,7 @@ ROUTER_UI_ID <- '_router_ui'
 #' @param path A path.
 #' @return Boolean value indicating if path is defined.
 valid_path <- function(routes, path) {
-  (!is.null(path) && path %in% names(routes))
+  (path %in% names(routes))
 }
 
 #' Create single route configuration.
@@ -64,8 +64,7 @@ create_router_callback <- function(root, routes) {
         parsed = httr::parse_url(
           extract_link_name(cleaned_hash)
         )
-
-        log_msg("Path: ", parsed$path)
+        parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
         if (!valid_path(routes, parsed$path)) {
 
           log_msg("Invalid path sent to observer")
