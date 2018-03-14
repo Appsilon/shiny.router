@@ -24,7 +24,6 @@ log_msg <- function(...) {
   }
 }
 
-
 #' Formats a URL fragment into a hashpath starting with "#!/"
 #'
 #' @param hashpath character with hash path
@@ -33,24 +32,16 @@ log_msg <- function(...) {
 #' cleanup_hashpath("/abc") #  "#!/abc"
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
-
   # Already correctly formatted.
   if (substr(hashpath, 1, 3) == "#!/") {
     return(hashpath)
   }
 
-  # We remove any partial hashbang path morker from the start
+  # We remove any partial hashbang path marker from the start
   # of the string, then add back the full one.
   slicefrom <- 1
-  if (substr(hashpath, slicefrom, slicefrom) == "#") {
+  while (substr(hashpath, slicefrom, slicefrom) %in% c("#", "!", "/"))
     slicefrom <- slicefrom + 1
-  }
-  if (substr(hashpath, slicefrom, slicefrom) == "!") {
-    slicefrom <- slicefrom + 1
-  }
-  if (substr(hashpath, slicefrom, slicefrom) == "/") {
-    slicefrom <- slicefrom + 1
-  }
 
   paste0(
     "#!/",
@@ -67,24 +58,5 @@ cleanup_hashpath <- function(hashpath) {
 #' @example
 #' extract_link_name("#!/abc")
 extract_link_name <- function(path) {
-  if (!(substr(path, 1, 3) == "#!/"))
-    return(path)
-  substr(path, 4, nchar(path))
-}
-
-parse_url_path <- function(url_path) {
-  extracted_link <- extract_link_name(url_path)
-  extracted_url_parts <- regmatches(extracted_link, regexpr("\\?", extracted_link), invert = TRUE)[[1]]
-  path <- extracted_url_parts[1]
-
-  if (length(extracted_url_parts) == 1) {
-    query <- NULL
-  } else {
-    query <- shiny::parseQueryString(extracted_url_parts[2], nested = TRUE)
-  }
-
-  parsed <-  list(
-    path = path,
-    query = query
-  )
+  sub("#!/", "", cleanup_hashpath(path))
 }

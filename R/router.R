@@ -6,7 +6,7 @@ ROUTER_UI_ID <- '_router_ui'
 #' @param path A path.
 #' @return Boolean value indicating if path is defined.
 valid_path <- function(routes, path) {
-  (!is.null(path) && path %in% names(routes))
+  (path %in% names(routes))
 }
 
 #' Create single route configuration.
@@ -38,9 +38,9 @@ create_router_callback <- function(root, routes) {
     # shiny::reactiveValues, because it should change atomically.
     log_msg("Creating current_page reactive...")
     session$userData$shiny.router.page <- shiny::reactiveVal(list(
-      path = "/",
+      path = root,
       query = NULL,
-      unparsed = "/"
+      unparsed = root
     ))
     log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
 
@@ -62,8 +62,7 @@ create_router_callback <- function(root, routes) {
 
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_hash)
-
-        log_msg("Path: ", parsed$path)
+        parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
         if (!valid_path(routes, parsed$path)) {
 
           log_msg("Invalid path sent to observer")
@@ -165,14 +164,14 @@ get_page <- function(session = shiny::getDefaultReactiveDomain()) {
 #' return all params)
 #' @param session The Shiny session
 #' @return The full list of params on the URL (if any), as a list. Or, the single
-#' requested param (if present). Or FALSE if there's no input, or no params.
+#' requested param (if present). Or NULL if there's no input, or no params.
 #' @reactivesource
 #' @export
 get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
   log_msg("Trying to fetch field '", field)
 
   if (is.null(session$userData$shiny.router.page()$query)) {
-    return(FALSE)
+    return(NULL)
   }
 
   if (missing(field)) {
