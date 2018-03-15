@@ -24,7 +24,6 @@ log_msg <- function(...) {
   }
 }
 
-
 #' Formats a URL fragment into a hashpath starting with "#!/"
 #'
 #' @param hashpath character with hash path
