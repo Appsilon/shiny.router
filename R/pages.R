@@ -1,11 +1,11 @@
 # Constants
 
 #' @export
-PAGE_404_ADDRESS <- "404"
+PAGE_404_ROUTE <- "404"
 
 #' 404 page
 #'
-#' The page which appear when address of visited page is wrong.
+#' The page which appear when path is wrong.
 #'
 #' @param page shiny page style, eg. `div(h1("Not found"))``
 #' @param message404 message to display at the 404 website
