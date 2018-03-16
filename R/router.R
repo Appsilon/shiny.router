@@ -66,11 +66,8 @@ create_router_callback <- function(root, routes) {
         if (!valid_path(routes, parsed$path)) {
 
           log_msg("Invalid path sent to observer")
-          # If it's not a recognized path, then don't update the display.
-          # Instead, tell Shiny to revert the URL to its previous value
-          #output[[ROUTER_UI_ID]] <- shiny::renderUI({routes[[PAGE_404_ADDRESS]]})
-          cat('----', session$userData$shiny.router.page()$unparsed,'\n')
-          #change_page(session$userData$shiny.router.page()$unparsed, mode = "replace")
+          # If it's not a recognized path, then go to default 404 page.
+          change_page(PAGE_404_ADDRESS, mode = "replace")
 
         } else if (new_hash != cleaned_hash) {
 
