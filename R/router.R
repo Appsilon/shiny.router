@@ -68,7 +68,9 @@ create_router_callback <- function(root, routes) {
           log_msg("Invalid path sent to observer")
           # If it's not a recognized path, then don't update the display.
           # Instead, tell Shiny to revert the URL to its previous value
-          change_page(session$userData$shiny.router.page()$unparsed, mode = "replace")
+          #output[[ROUTER_UI_ID]] <- shiny::renderUI({routes[[PAGE_404_ADDRESS]]})
+          cat('----', session$userData$shiny.router.page()$unparsed,'\n')
+          #change_page(session$userData$shiny.router.page()$unparsed, mode = "replace")
 
         } else if (new_hash != cleaned_hash) {
 
@@ -113,6 +115,8 @@ create_router_callback <- function(root, routes) {
 make_router <- function(default, ...) {
   routes <- c(default, ...)
   root <- names(default)[1]
+  if (! PAGE_404_ADDRESS %in% names(routes) )
+    routes <- c(routes, route(PAGE_404_ADDRESS, page404()))
   create_router_callback(root, routes)
 }
 
@@ -168,7 +172,7 @@ get_page <- function(session = shiny::getDefaultReactiveDomain()) {
 #' @reactivesource
 #' @export
 get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
-  log_msg("Trying to fetch field '", field)
+  log_msg("Trying to fetch field ", field)
 
   if (is.null(session$userData$shiny.router.page()$query)) {
     return(NULL)
