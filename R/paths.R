@@ -16,14 +16,29 @@
 #' parse_url_path("#!/?a=1&b[1]=foo&b[2]=bar")
 #' parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar")
 parse_url_path <- function(url_path) {
-  extracted_link <- extract_link_name(url_path)
-  extracted_url_parts <- regmatches(extracted_link, regexpr("\\?", extracted_link), invert = TRUE)[[1]]
-  path <- extracted_url_parts[1]
+  extracted_link <- cleanup_hashpath(url_path)
+  url_has_query <- grepl("?", extracted_link, fixed = TRUE)
+  extracted_url_parts <- strsplit(extracted_link, split = "\\?|#")[[1]]
 
-  if (length(extracted_url_parts) == 1) {
+  if (length(extracted_url_parts) == 0) {
+    path <-  ""
+    query = NULL
+  } else if (url_has_query && length(extracted_url_parts) == 3) {
+    path <- substr(extracted_url_parts[3], 3, nchar(extracted_url_parts[3]))
+    query <- extracted_url_parts[2]
+  } else if (url_has_query && length(extracted_url_parts) != 3) {
+    path <- ""
+    query <- extracted_url_parts[2]
+  } else if (length(extracted_url_parts) == 1) {
+    path <- extracted_url_parts[1]
     query <- NULL
   } else {
-    query <- shiny::parseQueryString(extracted_url_parts[2], nested = TRUE)
+    path <- substr(extracted_url_parts[2], 3, nchar(extracted_url_parts[2]))
+    query <- NULL
+  }
+
+  if (!is.null(query)) {
+    query <- shiny::parseQueryString(query, nested = TRUE)
   }
 
   parsed <-  list(

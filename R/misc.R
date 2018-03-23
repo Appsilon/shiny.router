@@ -33,7 +33,7 @@ log_msg <- function(...) {
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
-  if (substr(hashpath, 1, 3) == "#!/") {
+  if (substr(hashpath, 1, 3) == "#!/" | substr(hashpath, 1, 1) == "?") {
     return(hashpath)
   }
 

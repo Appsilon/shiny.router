@@ -33,7 +33,6 @@ route <- function(path, ui) {
 #' @return Router callback.
 create_router_callback <- function(root, routes) {
   function(input, output, session = shiny::getDefaultReactiveDomain()) {
-
     # Making this a list inside a shiny::reactiveVal, instead of using a
     # shiny::reactiveValues, because it should change atomically.
     log_msg("Creating current_page reactive...")
@@ -51,17 +50,19 @@ create_router_callback <- function(root, routes) {
       ignoreInit = FALSE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect
       # changes to the hash
-      eventExpr = shiny::getUrlHash(session),
+      eventExpr = c(shiny::getUrlHash(session), session$clientData$url_search),
       handlerExpr = {
-
         log_msg("hashchange observer triggered!")
         new_hash = shiny::getUrlHash(session)
+        log_msg("query not followed by hash extracted!")
+        new_query = session$clientData$url_search
         log_msg("New raw hash: ", new_hash)
         cleaned_hash = cleanup_hashpath(new_hash)
         log_msg("New cleaned hash: ", cleaned_hash)
+        cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
 
         # Parse out the components of the hashpath
-        parsed <- parse_url_path(cleaned_hash)
+        parsed <- parse_url_path(cleaned_url)
         parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
         if (!valid_path(routes, parsed$path)) {
 
@@ -73,7 +74,7 @@ create_router_callback <- function(root, routes) {
         } else if (new_hash != cleaned_hash) {
 
           log_msg("Cleaning up hashpath in URL...")
-          change_page(cleaned_hash, mode="replace")
+          change_page(cleaned_url, mode="replace")
 
         } else {
 
