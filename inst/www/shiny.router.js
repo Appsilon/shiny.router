@@ -8,7 +8,7 @@ window.shinyrouter = function() {
     // method, it triggers a "hashchange" event, and a Shiny event handler
     // uses that to detect the change and update the value you get from
     // shiny::getUrlHash().
-    // 
+    //
     // But, as noted in the docs for shiny::getUrlHash(), doing it with
     // "replace" mode doesn't trigger the event, and so the value in
     // shiny::getUrlHash() doesn't update either.
@@ -21,12 +21,13 @@ window.shinyrouter = function() {
         var newhash = false;
         var oldhash = window.location.hash;
         if (arguments.length >= 3 && typeof arguments[2] === 'string') {
-            // The easiest way to parse out the hash component (if any) of
-            // the new URL, is to use a browser native "URL" object.
-            var u = new URL(arguments[2], "https://example.com");
-            newhash = u.hash;
+            var newhash = "";
+            var url = arguments[2];
+            if (url.indexOf("#") >= 0) {
+              newhash = url.substring(url.indexOf("#"), url.length);
+            }
         }
-        
+
         var result = origReplaceState.apply(this, arguments);
 
         if (newhash !== oldhash) {
