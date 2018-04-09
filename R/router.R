@@ -26,6 +26,10 @@ valid_path <- function(routes, path) {
   (!is.null(path) && path %in% names(routes))
 }
 
+#' Create a mapping bewtween a ui element
+#' and a server callack
+#' @param ui Valid Shiny user interface.
+#' @param server Function that is called within the global server function if given
 callback_mapping <- function(ui, server = NA) {
   out <- list()
   out[["ui"]] <- ui
