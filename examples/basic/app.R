@@ -5,7 +5,8 @@ library(shiny.router)
 menu <- (
   tags$ul(
     tags$li(a(class = "item", href = "/", "Page")),
-    tags$li(a(class = "item", href = "/other", "Other page"))
+    tags$li(a(class = "item", href = "/other", "Other page")),
+    tags$li(a(class = "item", href = "/third", "A third page"))
   )
 )
 
@@ -41,7 +42,8 @@ other_callback <- function(input, output) {
 # well as a server-side callback for each page.
 router <- make_router(
   route("/", root_page, root_callback),
-  route("/other", other_page, other_callback)
+  route("/other", other_page, other_callback),
+  route("/third", other_page, NA)
 )
 
 # Creat output for our router in main UI of Shiny app.
