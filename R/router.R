@@ -79,8 +79,10 @@ create_router_callback <- function(root, routes) {
       initialize_router()
       location <- input[[HIDDEN_ROUTE_INPUT]]
       if (valid_path(routes, location)) {
+        routes[[location]][["server"]](input, output)
         routes[[location]][["ui"]]
       } else {
+        routes[[root]][["server"]](input, output)
         routes[[root]][["ui"]]
       }
     })
