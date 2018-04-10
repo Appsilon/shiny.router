@@ -32,7 +32,7 @@ valid_path <- function(routes, path) {
 #' @param ui Valid Shiny user interface.
 #' @param server Function that is called within the global server function if given
 callback_mapping <- function(ui, server = NA) {
-  server <- if(is.na(server)) {
+  server <- if(exists("server")) {
               function(input, output) {}
             } else {
               server
