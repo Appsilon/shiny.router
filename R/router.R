@@ -33,9 +33,9 @@ valid_path <- function(routes, path) {
 #' @param server Function that is called within the global server function if given
 callback_mapping <- function(ui, server = NA) {
   server <- if(exists("server")) {
-              function(input, output) {}
-            } else {
               server
+            } else {
+              function(input, output) {}
             }
 
   out <- list()
