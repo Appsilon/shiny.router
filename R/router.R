@@ -1,14 +1,5 @@
 ROUTER_UI_ID <- '_router_ui'
 
-#' Internal function that validates that path is defined in routes.
-#'
-#' @param routes A routes (list).
-#' @param path A path.
-#' @return Boolean value indicating if path is defined.
-valid_path <- function(routes, path) {
-  (path %in% names(routes))
-}
-
 #' Create single route configuration.
 #'
 #' @param path Website route.
@@ -159,32 +150,6 @@ get_page <- function(session = shiny::getDefaultReactiveDomain()) {
   session$userData$shiny.router.page()$path
 }
 
-#' Convenience function to retrieve any params that were part of the requested
-#' page. The param values returned come from "httr::parse_url()"
-#' @param field If provided, retrieve only a param with this name. (Otherwise,
-#' return all params)
-#' @param session The Shiny session
-#' @return The full list of params on the URL (if any), as a list. Or, the single
-#' requested param (if present). Or NULL if there's no input, or no params.
-#' @reactivesource
-#' @export
-get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
-  log_msg("Trying to fetch field ", field)
-
-  if (is.null(session$userData$shiny.router.page()$query)) {
-    return(NULL)
-  }
-
-  if (missing(field)) {
-    return(
-      # Return a list of all the query params
-      session$userData$shiny.router.page()$query
-    )
-  } else {
-    return(session$userData$shiny.router.page()$query[[field]])
-  }
-}
-
 #' Tell the reactive chain to halt if we're not on the specified page. Useful
 #' for making sure we don't waste cycles re-rendering the UI for pages that are
 #' not currently displayed.
@@ -214,19 +179,4 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 change_page <- function(page, session = shiny::getDefaultReactiveDomain(), mode="push") {
   log_msg("Sending page change message to client: ", page, "With page change mode: ", mode)
   shiny::updateQueryString(cleanup_hashpath(page), mode, session)
-}
-
-#' Route link
-#'
-#' Adds /#!/ prefix to link.
-#'
-#' @param path character with path
-#'
-#' @return route link
-#' @export
-#'
-#' @examples
-#' route_link("abc") # /#!/abc
-route_link <- function(path) {
-  paste0("/", cleanup_hashpath(path))
 }
