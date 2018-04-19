@@ -43,29 +43,36 @@ check_hashpath <- function(hashpath){
 #' Formats a URL fragment into a hashpath starting with "#!/"
 #'
 #' @param hashpath character with hash path
+#'
+#' @example
+#' cleanup_hashpath("/abc") #  "#!/abc"
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
-
   # Already correctly formatted.
   if (check_hashpath(hashpath)) {
     return(hashpath)
   }
 
-  # We remove any partial hashbang path morker from the start
+  # We remove any partial hashbang path marker from the start
   # of the string, then add back the full one.
   slicefrom <- 1
-  if (substr(hashpath, slicefrom, slicefrom) == "#") {
+  while (substr(hashpath, slicefrom, slicefrom) %in% c("#", "!", "/"))
     slicefrom <- slicefrom + 1
-  }
-  if (substr(hashpath, slicefrom, slicefrom) == "!") {
-    slicefrom <- slicefrom + 1
-  }
-  if (substr(hashpath, slicefrom, slicefrom) == "/") {
-    slicefrom <- slicefrom + 1
-  }
 
   paste0(
     "#!/",
     substr(hashpath, slicefrom, nchar(hashpath))
   )
+}
+
+#' Extract link name
+#'
+#' Strips off the first 3 character, assuming that they are: "#!/".
+#'
+#' @param path character with link path
+#' @return stripped link
+#' @example
+#' extract_link_name("#!/abc")
+extract_link_name <- function(path) {
+  sub("#!/", "", cleanup_hashpath(path))
 }
