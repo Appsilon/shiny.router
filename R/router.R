@@ -54,6 +54,7 @@ create_router_callback <- function(root, routes) {
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_hash)
         parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
+
         if (!valid_path(routes, parsed$path)) {
 
           log_msg("Invalid path sent to observer")
@@ -63,7 +64,7 @@ create_router_callback <- function(root, routes) {
         } else if (new_hash != cleaned_hash) {
 
           log_msg("Cleaning up hashpath in URL...")
-          change_page(cleaned_hash, mode="replace")
+          change_page(cleaned_hash, mode = "replace")
 
         } else {
 
@@ -172,7 +173,8 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #'
 #' @param page The new URL to go to. Should just be the path component of the
 #' URL, with optional query, e.g. "/learner?id=%d"
-#' @param mode replace or push history (more in \code{shiny::updateQueryString})
+#' @param mode ("replace" or "push") whether to replace current history or push a new one.
+#' More in \code{shiny::updateQueryString}.
 #' @param session The current Shiny session.
 #'
 #' @export
