@@ -13,7 +13,7 @@ PAGE_404_ROUTE <- "404"
 #' @export
 #' @examples
 #' page404() # div(h1("Not found"))
-#' page404(messege = "ABC") # div(h1("ABC"))
+#' page404(message404 = "ABC") # div(h1("ABC"))
 page404 <- function(page = NULL, message404 = NULL){
   if (is.null(page)) {
     if (is.null(message404)){
