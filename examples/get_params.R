@@ -43,7 +43,6 @@ server <- shinyServer(function(input, output, session) {
     get_query_param()
   )
   observeEvent(input$button, {
-    print("aaaa")
     change_page("?a=2#other")
   })
 
