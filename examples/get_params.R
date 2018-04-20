@@ -44,7 +44,7 @@ server <- shinyServer(function(input, output, session) {
   )
   observeEvent(input$button, {
     print("aaaa")
-    change_page("other?a=3&b=appsilon")
+    change_page("?a=2#other")
   })
 
 })

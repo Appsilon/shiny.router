@@ -74,29 +74,23 @@ route_link <- function(path) {
 #' \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
 #' @export
 #' @examples
-#' parse_url_path("#!/?a=1&b=foo")
-#' parse_url_path("#!/?a=1&b[1]=foo&b[2]=bar")
-#' parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar")
+#' parse_url_path("?a=1&b=foo")
+#' parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/")
+#' parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/other_page")
+#' parse_url_path("www.foo.bar/#!/other_page")
+#' parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar/#!/other")
 parse_url_path <- function(url_path) {
-  extracted_link <- cleanup_hashpath(url_path)
-  url_has_query <- grepl("?", extracted_link, fixed = TRUE)
-  extracted_url_parts <- strsplit(extracted_link, split = "\\?|#")[[1]]
+  url_has_query <- grepl("?", url_path, fixed = TRUE)
+  url_has_hash <- grepl("#", url_path, fixed = TRUE)
+  extracted_url_parts <- sub("^/|/$", "", strsplit(url_path, split = "\\?|/#!|/#")[[1]])
+  path <- ""
 
-  if (length(extracted_url_parts) == 0) {
-    path <-  ""
-    query = NULL
-  } else if (url_has_query && length(extracted_url_parts) == 3) {
-    path <- substr(extracted_url_parts[3], 3, nchar(extracted_url_parts[3]))
+  if (url_has_query) {
     query <- extracted_url_parts[2]
-  } else if (url_has_query && length(extracted_url_parts) != 3) {
-    path <- ""
-    query <- extracted_url_parts[2]
-  } else if (length(extracted_url_parts) == 1) {
-    path <- extracted_url_parts[1]
-    query <- NULL
+    path <- if (url_has_hash) extracted_url_parts[3] else path
   } else {
-    path <- substr(extracted_url_parts[2], 3, nchar(extracted_url_parts[2]))
     query <- NULL
+    path <- if (url_has_hash) extracted_url_parts[2] else path
   }
 
   if (!is.null(query)) {
