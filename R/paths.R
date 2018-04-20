@@ -82,7 +82,7 @@ route_link <- function(path) {
 parse_url_path <- function(url_path) {
   url_has_query <- grepl("?", url_path, fixed = TRUE)
   url_has_hash <- grepl("#", url_path, fixed = TRUE)
-  extracted_url_parts <- sub("^/|/$", "", strsplit(url_path, split = "\\?|/#!|/#")[[1]])
+  extracted_url_parts <- sub("^/|/$", "", strsplit(url_path, split = "\\?|#!|#")[[1]])
   path <- ""
 
   if (url_has_query) {
@@ -91,6 +91,10 @@ parse_url_path <- function(url_path) {
   } else {
     query <- NULL
     path <- if (url_has_hash) extracted_url_parts[2] else path
+  }
+
+  if (is.na(path)) {
+    path <- ""
   }
 
   if (!is.null(query)) {

@@ -51,9 +51,9 @@ create_router_callback <- function(root, routes) {
         cleaned_hash = cleanup_hashpath(new_hash)
         log_msg("New cleaned hash: ", cleaned_hash)
         cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
-
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_url)
+        print(parsed)
         parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
 
         if (!valid_path(routes, parsed$path)) {
