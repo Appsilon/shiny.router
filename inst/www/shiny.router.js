@@ -21,7 +21,7 @@ window.shinyrouter = function() {
         var newhash = false;
         var oldhash = window.location.hash;
         if (arguments.length >= 3 && typeof arguments[2] === 'string') {
-            var newhash = "";
+            var newhash = ""; // this part extracts url hash from url with pure JS
             var path_params_and_anchor = arguments[2];
             if (path_params_and_anchor.indexOf("#") >= 0) {
               newhash = path_params_and_anchor.substring(path_params_and_anchor.indexOf("#"), path_params_and_anchor.length);
