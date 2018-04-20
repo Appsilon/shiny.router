@@ -18,7 +18,7 @@ valid_path <- function(routes, path) {
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
-  if (substr(hashpath, 1, 3) == "#!/") {
+  if (substr(hashpath, 1, 3) == "#!/" | substr(hashpath, 1, 1) == "?") {
     return(hashpath)
   }
 
@@ -74,18 +74,31 @@ route_link <- function(path) {
 #' \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
 #' @export
 #' @examples
-#' parse_url_path("#!/?a=1&b=foo")
-#' parse_url_path("#!/?a=1&b[1]=foo&b[2]=bar")
-#' parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar")
+#' parse_url_path("?a=1&b=foo")
+#' parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/")
+#' parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/other_page")
+#' parse_url_path("www.foo.bar/#!/other_page")
+#' parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar/#!/other")
 parse_url_path <- function(url_path) {
-  extracted_link <- extract_link_name(url_path)
-  extracted_url_parts <- regmatches(extracted_link, regexpr("\\?", extracted_link), invert = TRUE)[[1]]
-  path <- extracted_url_parts[1]
+  url_has_query <- grepl("?", url_path, fixed = TRUE)
+  url_has_hash <- grepl("#", url_path, fixed = TRUE)
+  extracted_url_parts <- sub("^/|/$", "", strsplit(url_path, split = "\\?|#!|#")[[1]])
+  path <- ""
 
-  if (length(extracted_url_parts) == 1) {
-    query <- NULL
+  if (url_has_query) {
+    query <- extracted_url_parts[2]
+    path <- if (url_has_hash) extracted_url_parts[3] else path
   } else {
-    query <- shiny::parseQueryString(extracted_url_parts[2], nested = TRUE)
+    query <- NULL
+    path <- if (url_has_hash) extracted_url_parts[2] else path
+  }
+
+  if (is.na(path)) {
+    path <- ""
+  }
+
+  if (!is.null(query)) {
+    query <- shiny::parseQueryString(query, nested = TRUE)
   }
 
   parsed <-  list(
