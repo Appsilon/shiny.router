@@ -13,7 +13,7 @@ HIDDEN_ROUTE_INPUT <- '_location'
 #' @return String with escaped characters.
 escape_path <- function(path) {
   clean_path <- gsub("'", "%27", path, fixed = T)
-  clean_path <- gsub("\\", "%5C", path, fixed = T)
+  clean_path <- gsub("\\", "%5C", clean_path, fixed = T)
   clean_path
 }
 
