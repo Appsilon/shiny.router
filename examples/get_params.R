@@ -1,12 +1,12 @@
 library(shiny)
 library(shiny.router)
 
+options(shiny.router.debug = T)
 # This generates menu in user interface with links.
 menu <- (
   tags$ul(
     tags$li(a(class = "item", href = "/", "Page")),
-    tags$li(a(class = "item", href = route_link("other"), "Other page")),
-    tags$li(a(class = "item", href = route_link("third"), "A third page"))
+    tags$li(a(class = "item", href = route_link("other"), "Other page"))
   )
 )
 
@@ -15,8 +15,7 @@ page <- function(title, content) {
   div(
     menu,
     titlePanel(title),
-    p(content),
-    dataTableOutput("table")
+    p(content)
   )
 }
 
@@ -24,36 +23,29 @@ page <- function(title, content) {
 root_page <- page("Home page", "Welcome on sample routing page!")
 other_page <- page("Some other page", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 
-# Callbacks on the server side for
-# the sample pages
-root_callback <- function(input, output) {
-  output$table <- renderDataTable({
-    data.frame(x = c(1, 2), y = c(3, 4))
-  })
-}
-
-other_callback <- function(input, output) {
-  output$table <- renderDataTable({
-    data.frame(x = c(5, 6), y = c(7, 8))
-  })
-}
-
-# Creates router. We provide routing path, a UI as
-# well as a server-side callback for each page.
+# Creates router. We provide routing path and UI for this page.
 router <- make_router(
-  route("/", root_page, root_callback),
-  route("other", other_page, other_callback),
-  route("third", other_page, NA)
+  route("/", root_page),
+  route("other", other_page)
 )
 
 # Creat output for our router in main UI of Shiny app.
 ui <- shinyUI(fluidPage(
-  router_ui()
+  router_ui(),
+  actionButton("button", "An action button"),
+  verbatimTextOutput("url")
 ))
 
 # Plug router into Shiny server.
-server <- shinyServer(function(input, output) {
-  router(input, output)
+server <- shinyServer(function(input, output, session) {
+  router(input, output, session)
+  output$url <- renderPrint(
+    get_query_param()
+  )
+  observeEvent(input$button, {
+    change_page("?a=2#other")
+  })
+
 })
 
 # Run server in a standard way.

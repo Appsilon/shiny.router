@@ -1,7 +1,7 @@
 Package: shiny.router
 Type: Package
 Title: Basic routing for Shiny web applications
-Version: 0.1.0
+Version: 0.1.1
 Author: Filip Stachura <filip@appsilondatascience.com>
 Maintainer: Marek Rogala <marek@appsilondatascience.com>
 Description: shiny.router is a minimalistic router for your Shiny apps.
@@ -12,6 +12,6 @@ LazyData: true
 License: MIT + file LICENSE
 Imports:
     magrittr,
-    shiny,
-    shinyjs
-RoxygenNote: 5.0.1
+    shiny
+RoxygenNote: 6.0.1
+Suggests: testthat
