@@ -26,13 +26,13 @@ other_page <- page("Some other page", "Lorem ipsum dolor sit amet, consectetur a
 
 # Callbacks on the server side for
 # the sample pages
-root_callback <- function(input, output) {
+root_callback <- function(input, output, session) {
   output$table <- renderDataTable({
     data.frame(x = c(1, 2), y = c(3, 4))
   })
 }
 
-other_callback <- function(input, output) {
+other_callback <- function(input, output, session) {
   output$table <- renderDataTable({
     data.frame(x = c(5, 6), y = c(7, 8))
   })

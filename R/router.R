@@ -9,7 +9,7 @@ callback_mapping <- function(ui, server = NA) {
   server <- if (is.function(server)) {
               server
             } else {
-              function(input, output) {}
+              function(input, output, session) {}
             }
 
   out <- list()
@@ -72,7 +72,6 @@ create_router_callback <- function(root, routes) {
         cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_url)
-        print(parsed)
         parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
 
         if (!valid_path(routes, parsed$path)) {
@@ -105,7 +104,7 @@ create_router_callback <- function(root, routes) {
     # Switch the displayed page, if the path changes.
     output[[ROUTER_UI_ID]] <- shiny::renderUI({
       log_msg("shiny.router main output. path: ", session$userData$shiny.router.page()$path)
-      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output)
+      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session)
       routes[[session$userData$shiny.router.page()$path]][["ui"]]
     })
   }
