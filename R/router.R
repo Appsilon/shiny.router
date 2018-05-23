@@ -1,18 +1,37 @@
 ROUTER_UI_ID <- '_router_ui'
 
+#' Create a mapping bewtween a ui element
+#' and a server callack
+#'
+#' @param ui Valid Shiny user interface.
+#' @param server Function that is called within the global server function if given
+callback_mapping <- function(ui, server = NA) {
+  server <- if (is.function(server)) {
+              server
+            } else {
+              function(input, output, session) {}
+            }
+
+  out <- list()
+  out[["ui"]] <- ui
+  out[["server"]] <- server
+  out
+}
+
 #' Create single route configuration.
 #'
 #' @param path Website route.
 #' @param ui Valid Shiny user interface.
+#' @param server Function that is called as callback on server side
 #' @return A route configuration.
 #' @examples
 #' route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 #'
 #' route("/main", div(h1("Main page"), p("Lorem ipsum.")))
 #' @export
-route <- function(path, ui) {
+route <- function(path, ui, server = NA) {
   out <- list()
-  out[[path]] <- ui
+  out[[path]] <- callback_mapping(ui, server)
   out
 }
 
@@ -53,7 +72,6 @@ create_router_callback <- function(root, routes) {
         cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_url)
-        print(parsed)
         parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
 
         if (!valid_path(routes, parsed$path)) {
@@ -86,7 +104,8 @@ create_router_callback <- function(root, routes) {
     # Switch the displayed page, if the path changes.
     output[[ROUTER_UI_ID]] <- shiny::renderUI({
       log_msg("shiny.router main output. path: ", session$userData$shiny.router.page()$path)
-      routes[[session$userData$shiny.router.page()$path]]
+      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session)
+      routes[[session$userData$shiny.router.page()$path]][["ui"]]
     })
   }
 }
