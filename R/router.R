@@ -11,7 +11,6 @@ callback_mapping <- function(ui, server = NA) {
             } else {
               function(input, output, session) {}
             }
-
   out <- list()
   out[["ui"]] <- ui
   out[["server"]] <- server
