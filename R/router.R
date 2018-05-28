@@ -4,7 +4,7 @@ ROUTER_UI_ID <- '_router_ui'
 #' and a server callack
 #'
 #' @param ui Valid Shiny user interface.
-#' @param server Function that is called within the global server function if given
+#' @param server Function that is called within the global server function if given
 callback_mapping <- function(ui, server = NA) {
   server <- if (is.function(server)) {
               server
@@ -21,7 +21,7 @@ callback_mapping <- function(ui, server = NA) {
 #'
 #' @param path Website route.
 #' @param ui Valid Shiny user interface.
-#' @param server Function that is called as callback on server side
+#' @param server Function that is called as callback on server side
 #' @return A route configuration.
 #' @examples
 #' route("/", shiny::tags$div(shiny::tags$span("Hello world")))
@@ -51,7 +51,6 @@ create_router_callback <- function(root, routes) {
       unparsed = root
     ))
     log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
-
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
     observeEvent(
@@ -71,7 +70,7 @@ create_router_callback <- function(root, routes) {
         cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_url)
-        parsed$path <- ifelse(parsed$path == "", "/", parsed$path)
+        parsed$path <- ifelse(parsed$path == "", root, parsed$path)
 
         if (!valid_path(routes, parsed$path)) {
 
