@@ -2,27 +2,24 @@
 % Please edit documentation in R/router.R
 \name{change_page}
 \alias{change_page}
-\title{Change the currently displayed page. Works by sending a message up to
-our reactive input binding on the clientside, which tells page.js to update
-the window URL accordingly, then tells clientside shiny that our reactive
-input binding has changed, then that comes back down to our router callback
-function and all other observers watching get_page() or similar.}
+\title{Change the currently displayed page.}
 \usage{
 change_page(page, session = shiny::getDefaultReactiveDomain(),
   mode = "push")
 }
 \arguments{
 \item{page}{The new URL to go to. Should just be the path component of the
-URL, with optional query, e.g. "/learner?id=%d"}
+URL, with optional query, e.g. "/learner?id=\%d"}
 
 \item{session}{The current Shiny session.}
 
-\item{mode}{replace or push history (more in \code{shiny::updateQueryString})}
+\item{mode}{("replace" or "push") whether to replace current history or push a new one.
+More in \code{shiny::updateQueryString}.}
 }
 \description{
-Change the currently displayed page. Works by sending a message up to
+Works by sending a message up to
 our reactive input binding on the clientside, which tells page.js to update
 the window URL accordingly, then tells clientside shiny that our reactive
 input binding has changed, then that comes back down to our router callback
-function and all other observers watching get_page() or similar.
+function and all other observers watching \code{get_page()} or similar.
 }

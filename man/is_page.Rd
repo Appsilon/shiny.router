@@ -2,9 +2,7 @@
 % Please edit documentation in R/router.R
 \name{is_page}
 \alias{is_page}
-\title{Tell the reactive chain to halt if we're not on the specified page. Useful
-for making sure we don't waste cycles re-rendering the UI for pages that are
-not currently displayed.}
+\title{Is page}
 \usage{
 is_page(page, session = shiny::getDefaultReactiveDomain(), ...)
 }

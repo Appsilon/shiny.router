@@ -9,7 +9,7 @@ make_router(default, ...)
 \arguments{
 \item{default}{Main route to which all invalid routes should redirect.}
 
-\item{...}{All other routes defined with shiny.router::route function.}
+\item{...}{All other routes defined with \code{shiny.router::route} function.}
 }
 \value{
 Shiny router callback that should be run in server code with Shiny input and output lists.
@@ -18,8 +18,10 @@ Shiny router callback that should be run in server code with Shiny input and out
 Creates router. Returned callback needs to be called within Shiny server code.
 }
 \examples{
+\dontrun{
 router <- make_router(
   route("/", root_page),
   route("/other", other_page)
 )
+}
 }

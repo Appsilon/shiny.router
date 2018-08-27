@@ -4,12 +4,14 @@
 \alias{route}
 \title{Create single route configuration.}
 \usage{
-route(path, ui)
+route(path, ui, server = NA)
 }
 \arguments{
 \item{path}{Website route.}
 
 \item{ui}{Valid Shiny user interface.}
+
+\item{server}{Function that is called as callback on server side}
 }
 \value{
 A route configuration.
@@ -18,7 +20,9 @@ A route configuration.
 Create single route configuration.
 }
 \examples{
+\dontrun{
 route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 
 route("/main", div(h1("Main page"), p("Lorem ipsum.")))
+}
 }
