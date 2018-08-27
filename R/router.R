@@ -143,9 +143,11 @@ make_router <- function(default, ...) {
 #'
 #' @import shiny
 #' @examples
+#' \dontrun{
 #' ui <- shinyUI(fluidPage(
 #'   router_ui()
 #' ))
+#' }
 #' @export
 router_ui <- function() {
   shiny::addResourcePath(
