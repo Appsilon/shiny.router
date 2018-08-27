@@ -17,7 +17,8 @@ URL, with optional query, e.g. "/learner?id=%d"}
 
 \item{session}{The current Shiny session.}
 
-\item{mode}{replace or push history (more in \code{shiny::updateQueryString})}
+\item{mode}{("replace" or "push") whether to replace current history or push a new one.
+More in \code{shiny::updateQueryString}.}
 }
 \description{
 Change the currently displayed page. Works by sending a message up to

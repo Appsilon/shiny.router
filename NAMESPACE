@@ -2,6 +2,7 @@
 
 export(PAGE_404_ROUTE)
 export(change_page)
+export(disable_bootstrap_on_bookmark)
 export(get_page)
 export(get_query_param)
 export(is_page)
