@@ -1,5 +1,9 @@
 # Constants
 
+#' Default 404 page
+#'
+#' This is default 404 page.
+#'
 #' @export
 PAGE_404_ROUTE <- "404"
 
