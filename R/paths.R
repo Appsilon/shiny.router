@@ -14,7 +14,7 @@ valid_path <- function(routes, path) {
 #' @param hashpath character with hash path
 #'
 #' @example
-#' cleanup_hashpath("/abc") #  "#!/abc"
+#' cleanup_hashpath("/abc")
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
@@ -115,7 +115,7 @@ parse_url_path <- function(url_path) {
 #' @param session The Shiny session
 #' @return The full list of params on the URL (if any), as a list. Or, the single
 #' requested param (if present). Or NULL if there's no input, or no params.
-#' @reactivesource
+#'
 #' @export
 get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
   log_msg("Trying to fetch field '", field)
