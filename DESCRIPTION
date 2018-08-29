@@ -1,6 +1,6 @@
 Package: shiny.router
 Type: Package
-Title: Basic routing for Shiny web applications
+Title: Basic Routing for Shiny Web Applications
 Version: 0.1.1
 Author: Filip Stachura <filip@appsilondatascience.com>
 Maintainer: Marek Rogala <marek@appsilondatascience.com>
