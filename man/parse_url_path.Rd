@@ -22,7 +22,9 @@ Extract info about url path and parameters that follow \code{?} sign.
 \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
 }
 \examples{
-parse_url_path("#!/?a=1&b=foo")
-parse_url_path("#!/?a=1&b[1]=foo&b[2]=bar")
-parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar")
+parse_url_path("?a=1&b=foo")
+parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/")
+parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/other_page")
+parse_url_path("www.foo.bar/#!/other_page")
+parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar/#!/other")
 }
