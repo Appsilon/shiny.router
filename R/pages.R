@@ -28,7 +28,7 @@ page404 <- function(page = NULL, message404 = NULL){
 
 #' Fix conflicts when some bookmark uses bootstrap
 #'
-#' @description This function dynamically removes bootstrap dependency when user opens specified bookmark.
+#' This function dynamically removes bootstrap dependency when user opens specified bookmark.
 #' It should be inserted in head of bootrstrap page.
 #' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
 #'
