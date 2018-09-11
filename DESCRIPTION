@@ -2,11 +2,10 @@ Package: shiny.router
 Type: Package
 Title: Basic Routing for Shiny Web Applications
 Version: 0.1.1
-Author: Filip Stachura <filip@appsilondatascience.com>
-Maintainer: Marek Rogala <marek@appsilondatascience.com>
-Description: shiny.router is a minimalistic router for your Shiny apps.
-    It allows you to create dynamic webapplications with real-time UI
-    and easily share urls to pages within your Shiny apps.
+Author: Filip Stachura <filip@appsilon.com>
+Maintainer: Dominik Krzemiński <dominik@appsilon.com>
+Description: The minimal router for your Shiny apps.
+    It allows you to create dynamic web applications with real-time user interface and easily share URLs to pages within your Shiny apps.
 Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
