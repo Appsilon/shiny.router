@@ -25,3 +25,31 @@ page404 <- function(page = NULL, message404 = NULL){
     return(page)
   }
 }
+
+#' Fix conflicts when some bookmark uses bootstrap
+#'
+#' This function dynamically removes bootstrap dependency when user opens specified bookmark.
+#' It should be inserted in head of bootrstrap page.
+#' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
+#'
+#' @export
+disable_bootstrap_on_bookmark <- function(bookmark) {
+  bootstrap_dependency <- htmltools::renderDependencies(list(shiny:::bootstrapLib()), srcType = "href")
+  tagList(
+    suppressDependencies("bootstrap"),
+    singleton(div(id = "bootstrap_dependency", bootstrap_dependency)),
+    tags$script('
+      var init_bootstrap_dependency = $("#bootstrap_dependency").html()
+    '),
+    tags$script(sprintf('
+      window.addEventListener("hashchange", myFunction);
+      function myFunction() {
+        var dependency = init_bootstrap_dependency;
+        if (window.location.hash == \"#!/%s\") {
+          dependency = ""
+        };
+        $("#bootstrap_dependency").html(dependency);
+      }
+    ', bookmark))
+  )
+}

@@ -12,3 +12,6 @@ cleanup_hashpath(hashpath)
 \description{
 Formats a URL fragment into a hashpath starting with "#!/"
 }
+\examples{
+cleanup_hashpath("/abc") #  "#!/abc"
+}
