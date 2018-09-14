@@ -112,18 +112,21 @@ create_router_callback <- function(root, routes) {
 #'
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... All other routes defined with shiny.router::route function.
+#' @param page_404 Styling of page when wrong bookmark is open. See \link{page404}.
 #' @return Shiny router callback that should be run in server code with Shiny input and output lists.
 #' @examples
 #' router <- make_router(
 #'   route("/", root_page),
-#'   route("/other", other_page)
+#'   route("/other", other_page),
+#'   page_404 = page404(
+#'     message404 = "Please check if you passed correct bookmark name!")
 #' )
 #' @export
-make_router <- function(default, ...) {
+make_router <- function(default, ..., page_404 = page404()) {
   routes <- c(default, ...)
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes) )
-    routes <- c(routes, route(PAGE_404_ROUTE, page404()))
+    routes <- c(routes, route(PAGE_404_ROUTE, page_404))
   create_router_callback(root, routes)
 }
 
