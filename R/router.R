@@ -118,7 +118,8 @@ create_router_callback <- function(root, routes) {
 #' router <- make_router(
 #'   route("/", root_page),
 #'   route("/other", other_page),
-#'   page_404 = page404(message404 = "Please check if you passed correct bookmark name!")
+#'   page_404 = page404(
+#'     message404 = "Please check if you passed correct bookmark name!")
 #' )
 #' @export
 make_router <- function(default, ..., page_404 = page404()) {
