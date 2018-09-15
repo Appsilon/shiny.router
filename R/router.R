@@ -9,7 +9,7 @@ callback_mapping <- function(ui, server = NA) {
   server <- if (is.function(server)) {
               server
             } else {
-              function(input, output, session) {}
+              function(input, output, session, ...) {}
             }
   out <- list()
   out[["ui"]] <- ui
@@ -41,7 +41,7 @@ route <- function(path, ui, server = NA) {
 #' @param routes A routes (list).
 #' @return Router callback.
 create_router_callback <- function(root, routes) {
-  function(input, output, session = shiny::getDefaultReactiveDomain()) {
+  function(input, output, session = shiny::getDefaultReactiveDomain(), ...) {
     # Making this a list inside a shiny::reactiveVal, instead of using a
     # shiny::reactiveValues, because it should change atomically.
     log_msg("Creating current_page reactive...")
@@ -102,7 +102,7 @@ create_router_callback <- function(root, routes) {
     # Switch the displayed page, if the path changes.
     output[[ROUTER_UI_ID]] <- shiny::renderUI({
       log_msg("shiny.router main output. path: ", session$userData$shiny.router.page()$path)
-      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session)
+      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session, ...)
       routes[[session$userData$shiny.router.page()$path]][["ui"]]
     })
   }

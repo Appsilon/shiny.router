@@ -26,13 +26,13 @@ other_page <- page("Some other page", "Lorem ipsum dolor sit amet, consectetur a
 
 # Callbacks on the server side for
 # the sample pages
-root_callback <- function(input, output, session) {
+root_callback <- function(input, output, session, oko) {
   output$table <- renderDataTable({
     data.frame(x = c(1, 2), y = c(3, 4))
   })
 }
 
-other_callback <- function(input, output, session) {
+other_callback <- function(input, output, session, oko) {
   output$table <- renderDataTable({
     data.frame(x = c(5, 6), y = c(7, 8))
   })
@@ -52,8 +52,8 @@ ui <- shinyUI(fluidPage(
 ))
 
 # Plug router into Shiny server.
-server <- shinyServer(function(input, output) {
-  router(input, output)
+server <- shinyServer(function(input, output, session) {
+  router(input, output, session)
 })
 
 # Run server in a standard way.
