@@ -53,8 +53,8 @@ router <- make_router(
 
 # Creat output for our router in main UI of Shiny app.
 ui <- shinyUI(fluidPage(
-  shiny::actionButton("clicks_separate", "Each server counts me differently!"),
-  shiny::actionButton("clicks_common", "My counter is passed to both servers!"),
+  shiny::actionButton("clicks_separate", "Each router callback counts me differently!"),
+  shiny::actionButton("clicks_common", "My counter is passed to both router callbacks!"),
   router_ui()
 ))
 
