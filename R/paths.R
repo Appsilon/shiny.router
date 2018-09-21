@@ -13,8 +13,8 @@ valid_path <- function(routes, path) {
 #'
 #' @param hashpath character with hash path
 #'
-#' @example
-#' cleanup_hashpath("/abc")
+#' @examples
+#' cleanup_hashpath("/abc") #  "#!/abc"
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
@@ -40,7 +40,7 @@ cleanup_hashpath <- function(hashpath) {
 #'
 #' @param path character with link path
 #' @return stripped link
-#' @example
+#' @examples
 #' extract_link_name("#!/abc")
 extract_link_name <- function(path) {
   sub("#!/", "", cleanup_hashpath(path))

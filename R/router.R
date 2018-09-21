@@ -9,7 +9,7 @@ callback_mapping <- function(ui, server = NA) {
   server <- if (is.function(server)) {
               server
             } else {
-              function(input, output, session) {}
+              function(input, output, session, ...) {}
             }
   out <- list()
   out[["ui"]] <- ui
@@ -46,7 +46,7 @@ route <- function(path, ui, server = NA) {
 #'
 #' @return Router callback.
 create_router_callback <- function(root, routes) {
-  function(input, output, session = shiny::getDefaultReactiveDomain()) {
+  function(input, output, session = shiny::getDefaultReactiveDomain(), ...) {
     # Making this a list inside a shiny::reactiveVal, instead of using a
     # shiny::reactiveValues, because it should change atomically.
     log_msg("Creating current_page reactive...")
@@ -107,7 +107,7 @@ create_router_callback <- function(root, routes) {
     # Switch the displayed page, if the path changes.
     output[[ROUTER_UI_ID]] <- shiny::renderUI({
       log_msg("shiny.router main output. path: ", session$userData$shiny.router.page()$path)
-      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session)
+      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session, ...)
       routes[[session$userData$shiny.router.page()$path]][["ui"]]
     })
   }
@@ -116,22 +116,25 @@ create_router_callback <- function(root, routes) {
 #' Creates router. Returned callback needs to be called within Shiny server code.
 #'
 #' @param default Main route to which all invalid routes should redirect.
-#' @param ... All other routes defined with \code{shiny.router::route} function.
+#' @param ... All other routes defined with shiny.router::route function.
+#' @param page_404 Styling of page when wrong bookmark is open. See \link{page404}.
 #' @return Shiny router callback that should be run in server code with Shiny input and output lists.
 #'
 #' @examples
 #' \dontrun{
 #' router <- make_router(
 #'   route("/", root_page),
-#'   route("/other", other_page)
+#'   route("/other", other_page),
+#'   page_404 = page404(
+#'     message404 = "Please check if you passed correct bookmark name!")
 #' )
 #' }
 #' @export
-make_router <- function(default, ...) {
+make_router <- function(default, ..., page_404 = page404()) {
   routes <- c(default, ...)
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes) )
-    routes <- c(routes, route(PAGE_404_ROUTE, page404()))
+    routes <- c(routes, route(PAGE_404_ROUTE, page_404))
   create_router_callback(root, routes)
 }
 

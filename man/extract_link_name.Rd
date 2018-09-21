@@ -15,3 +15,6 @@ stripped link
 \description{
 Strips off the first 3 character, assuming that they are: "#!/".
 }
+\examples{
+extract_link_name("#!/abc")
+}
