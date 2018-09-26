@@ -16,23 +16,25 @@ Now it's possible to recreate a state of your app, by providing a specific URL, 
 <!--
 TODO We would like to have a nice graphic explaning routing mechanism
 -->
-Basic tutorial article is available on [Appsilon Data Science blog](http://blog.appsilondatascience.com/rstats/2016/12/08/shiny.router.html).
+Basic tutorial article is available on [Appsilon Data Science blog](http://blog.appsilon.com/rstats/2016/12/08/shiny.router.html).
 
 <p style="text-align: center; font-size: x-large;">
-<a href="http://demo.appsilondatascience.com/shiny.router/">Live demo</a>
+<a href="http://demo.appsilon.com/shiny.router/">Live demo</a>
 </p>
 
 Source code
 -----------
 
-This library source code can be found on [Appsilon Data Science's](http://appsilondatascience.com) Github: <br> <https://github.com/Appsilon/shiny.router>
+This library source code can be found on [Appsilon Data Science's](http://appsilon.com) Github: <br> <https://github.com/Appsilon/shiny.router>
 
 How to install?
 ---------------
 
-**Note! This library is still in its infancy. Api might change in the future.**
+It's possible to install this library through CRAN
 
-At the moment it's possible to install this library through [devtools](https://github.com/hadley/devtools).
+    install.packages("shiny.router")
+
+The most recent version you can get from this repo using [devtools](https://github.com/hadley/devtools).
 
     devtools::install_github("Appsilon/shiny.router")
 
@@ -101,6 +103,6 @@ Appsilon Data Science
 
 We Provide End-to-End Data Science Solutions
 
-<a href="http://appsilondatascience.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a>
+<a href="http://appsilon.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a>
 
-Get in touch [dev@appsilondatascience.com](dev@appsilondatascience.com)
+Get in touch [dev@appsilon.com](dev@appsilon.com)
