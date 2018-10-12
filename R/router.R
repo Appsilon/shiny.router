@@ -42,8 +42,6 @@ route <- function(path, ui, server = NA) {
 #' @param root Main route to which all invalid routes should redirect.
 #' @param routes A routes (list).
 #'
-#' @import shiny
-#'
 #' @return Router callback.
 create_router_callback <- function(root, routes) {
   function(input, output, session = shiny::getDefaultReactiveDomain(), ...) {
@@ -144,7 +142,6 @@ make_router <- function(default, ..., page_404 = page404()) {
 #'
 #' @return Shiny tags that configure router and build reactive but hidden input _location.
 #'
-#' @import shiny
 #' @examples
 #' \dontrun{
 #' ui <- shinyUI(fluidPage(
@@ -162,8 +159,8 @@ router_ui <- function() {
   list(
     shiny::singleton(
       shiny::withTags(
-        tags$head(
-          tags$script(type = "text/javascript", src = jsFile)
+        shiny::tags$head(
+          shiny::tags$script(type = "text/javascript", src = jsFile)
         )
       )
     ),

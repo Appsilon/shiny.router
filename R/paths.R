@@ -12,9 +12,7 @@ valid_path <- function(routes, path) {
 #' Formats a URL fragment into a hashpath starting with "#!/"
 #'
 #' @param hashpath character with hash path
-#'
-#' @examples
-#' cleanup_hashpath("/abc") #  "#!/abc"
+#' @return character with formated hashpath
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
@@ -40,8 +38,6 @@ cleanup_hashpath <- function(hashpath) {
 #'
 #' @param path character with link path
 #' @return stripped link
-#' @examples
-#' extract_link_name("#!/abc")
 extract_link_name <- function(path) {
   sub("#!/", "", cleanup_hashpath(path))
 }

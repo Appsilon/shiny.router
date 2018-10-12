@@ -14,7 +14,6 @@ PAGE_404_ROUTE <- "404"
 #' @param page shiny page style, eg. `div(h1("Not found"))``
 #' @param message404 message to display at the 404 website
 #'
-#' @import shiny
 #' @export
 #' @examples
 #' page404() # div(h1("Not found"))
@@ -37,18 +36,17 @@ page404 <- function(page = NULL, message404 = NULL){
 #' It should be inserted in head of bootrstrap page.
 #' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
 #'
-#' @import htmltools
-#' @import shiny
+#' @importFrom htmltools renderDependencies
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
-  bootstrap_dependency <- htmltools::renderDependencies(list(shiny:::bootstrapLib()), srcType = "href")
-  tagList(
-    suppressDependencies("bootstrap"),
-    singleton(div(id = "bootstrap_dependency", bootstrap_dependency)),
-    tags$script('
+  bootstrap_dependency <- renderDependencies(list(shiny:::bootstrapLib()), srcType = "href")
+  shiny::tagList(
+    shiny::suppressDependencies("bootstrap"),
+    shiny::singleton(shiny::div(id = "bootstrap_dependency", bootstrap_dependency)),
+    shiny::tags$script('
       var init_bootstrap_dependency = $("#bootstrap_dependency").html()
     '),
-    tags$script(sprintf('
+    shiny::tags$script(sprintf('
       window.addEventListener("hashchange", myFunction);
       function myFunction() {
         var dependency = init_bootstrap_dependency;

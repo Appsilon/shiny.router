@@ -9,9 +9,9 @@ cleanup_hashpath(hashpath)
 \arguments{
 \item{hashpath}{character with hash path}
 }
+\value{
+character with formated hashpath
+}
 \description{
 Formats a URL fragment into a hashpath starting with "#!/"
-}
-\examples{
-cleanup_hashpath("/abc") #  "#!/abc"
 }
