@@ -20,10 +20,12 @@ Shiny router callback that should be run in server code with Shiny input and out
 Creates router. Returned callback needs to be called within Shiny server code.
 }
 \examples{
+\dontrun{
 router <- make_router(
   route("/", root_page),
   route("/other", other_page),
   page_404 = page404(
     message404 = "Please check if you passed correct bookmark name!")
 )
+}
 }

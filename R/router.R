@@ -24,9 +24,11 @@ callback_mapping <- function(ui, server = NA) {
 #' @param server Function that is called as callback on server side
 #' @return A route configuration.
 #' @examples
+#' \dontrun{
 #' route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 #'
 #' route("/main", div(h1("Main page"), p("Lorem ipsum.")))
+#' }
 #' @export
 route <- function(path, ui, server = NA) {
   out <- list()
@@ -39,6 +41,7 @@ route <- function(path, ui, server = NA) {
 #'
 #' @param root Main route to which all invalid routes should redirect.
 #' @param routes A routes (list).
+#'
 #' @return Router callback.
 create_router_callback <- function(root, routes) {
   function(input, output, session = shiny::getDefaultReactiveDomain(), ...) {
@@ -53,7 +56,7 @@ create_router_callback <- function(root, routes) {
     log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
-    observeEvent(
+    shiny::observeEvent(
       ignoreNULL = FALSE,
       ignoreInit = FALSE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect
@@ -114,13 +117,16 @@ create_router_callback <- function(root, routes) {
 #' @param ... All other routes defined with shiny.router::route function.
 #' @param page_404 Styling of page when wrong bookmark is open. See \link{page404}.
 #' @return Shiny router callback that should be run in server code with Shiny input and output lists.
+#'
 #' @examples
+#' \dontrun{
 #' router <- make_router(
 #'   route("/", root_page),
 #'   route("/other", other_page),
 #'   page_404 = page404(
 #'     message404 = "Please check if you passed correct bookmark name!")
 #' )
+#' }
 #' @export
 make_router <- function(default, ..., page_404 = page404()) {
   routes <- c(default, ...)
@@ -135,10 +141,13 @@ make_router <- function(default, ..., page_404 = page404()) {
 #' according to current routing.
 #'
 #' @return Shiny tags that configure router and build reactive but hidden input _location.
+#'
 #' @examples
+#' \dontrun{
 #' ui <- shinyUI(fluidPage(
 #'   router_ui()
 #' ))
+#' }
 #' @export
 router_ui <- function() {
   shiny::addResourcePath(
@@ -150,8 +159,8 @@ router_ui <- function() {
   list(
     shiny::singleton(
       shiny::withTags(
-        head(
-          script(type = "text/javascript", src = jsFile)
+        shiny::tags$head(
+          shiny::tags$script(type = "text/javascript", src = jsFile)
         )
       )
     ),
@@ -166,37 +175,41 @@ router_ui <- function() {
 #' @param session The current Shiny Session
 #' @return The current page in a length-1 character vector, or FALSE if the input
 #' has no value.
-#' @reactivesource
+#'
 #' @export
 get_page <- function(session = shiny::getDefaultReactiveDomain()) {
   session$userData$shiny.router.page()$path
 }
 
+#' Is page
+#'
 #' Tell the reactive chain to halt if we're not on the specified page. Useful
 #' for making sure we don't waste cycles re-rendering the UI for pages that are
 #' not currently displayed.
+#'
 #' @param page The page to display. Should match one of the paths sent to the
 #' @param session Shiny session
 #' @param ... Other parameters are sent through to shiny::req()
 #' router.
 #' @export
-#' @reactivesource
 is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
   log_msg("Checking if page is: ", page);
   get_page(session) == page
 }
 
-#' Change the currently displayed page. Works by sending a message up to
+#' Change the currently displayed page.
+#'
+#' Works by sending a message up to
 #' our reactive input binding on the clientside, which tells page.js to update
 #' the window URL accordingly, then tells clientside shiny that our reactive
 #' input binding has changed, then that comes back down to our router callback
-#' function and all other observers watching get_page() or similar.
+#' function and all other observers watching \code{get_page()} or similar.
 #'
 #' @param page The new URL to go to. Should just be the path component of the
-#' URL, with optional query, e.g. "/learner?id=%d"
+#' URL, with optional query, e.g. "/learner?id=\%d"
+#' @param session The current Shiny session.
 #' @param mode ("replace" or "push") whether to replace current history or push a new one.
 #' More in \code{shiny::updateQueryString}.
-#' @param session The current Shiny session.
 #'
 #' @export
 change_page <- function(page, session = shiny::getDefaultReactiveDomain(), mode="push") {

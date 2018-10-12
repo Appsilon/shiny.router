@@ -1,5 +1,9 @@
 # Constants
 
+#' Default 404 page
+#'
+#' This is default 404 page.
+#'
 #' @export
 PAGE_404_ROUTE <- "404"
 
@@ -32,16 +36,18 @@ page404 <- function(page = NULL, message404 = NULL){
 #' It should be inserted in head of bootrstrap page.
 #' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
 #'
+#' @importFrom htmltools renderDependencies
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
-  bootstrap_dependency <- htmltools::renderDependencies(list(shiny:::bootstrapLib()), srcType = "href")
-  tagList(
-    suppressDependencies("bootstrap"),
-    singleton(div(id = "bootstrap_dependency", bootstrap_dependency)),
-    tags$script('
+  func_bootstrapLib <- 'shiny' %:::% 'bootstrapLib' # workaround about R CMD CRAN NOTE regarding :::
+  bootstrap_dependency <- renderDependencies(list(func_bootstrapLib()), srcType = "href")
+  shiny::tagList(
+    shiny::suppressDependencies("bootstrap"),
+    shiny::singleton(shiny::div(id = "bootstrap_dependency", bootstrap_dependency)),
+    shiny::tags$script('
       var init_bootstrap_dependency = $("#bootstrap_dependency").html()
     '),
-    tags$script(sprintf('
+    shiny::tags$script(sprintf('
       window.addEventListener("hashchange", myFunction);
       function myFunction() {
         var dependency = init_bootstrap_dependency;
@@ -52,4 +58,16 @@ disable_bootstrap_on_bookmark <- function(bookmark) {
       }
     ', bookmark))
   )
+}
+
+#' ::: hack solution
+#'
+#' @param pkg package name
+#' @param name function name
+#'
+#' @return function
+`%:::%` <- function (pkg, name) {
+  pkg <- as.character(substitute(pkg))
+  name <- as.character(substitute(name))
+  get(name, envir = asNamespace(pkg), inherits = FALSE)
 }

@@ -20,7 +20,9 @@ A route configuration.
 Create single route configuration.
 }
 \examples{
+\dontrun{
 route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 
 route("/main", div(h1("Main page"), p("Lorem ipsum.")))
+}
 }

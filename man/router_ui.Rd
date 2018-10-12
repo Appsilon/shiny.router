@@ -17,7 +17,9 @@ Call it in your UI Shiny code. In this output ui is going to be rendered
 according to current routing.
 }
 \examples{
+\dontrun{
 ui <- shinyUI(fluidPage(
   router_ui()
 ))
+}
 }
