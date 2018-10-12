@@ -8,3 +8,4 @@ build_readme\.R
 \.travis\.yml
 ^\.git.*$
 docs
+examples
