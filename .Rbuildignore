@@ -1,2 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.github
+readme_rmd_template
+CHANGELOG\.md
+README\.Rmd
+build_readme\.R
+\.travis\.yml
+^\.git.*$
+docs
