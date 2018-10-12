@@ -39,7 +39,8 @@ page404 <- function(page = NULL, message404 = NULL){
 #' @importFrom htmltools renderDependencies
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
-  bootstrap_dependency <- renderDependencies(list(shiny:::bootstrapLib()), srcType = "href")
+  func_bootstrapLib <- 'shiny' %:::% 'bootstrapLib' # workaround about R CMD CRAN NOTE regarding :::
+  bootstrap_dependency <- renderDependencies(list(func_bootstrapLib()), srcType = "href")
   shiny::tagList(
     shiny::suppressDependencies("bootstrap"),
     shiny::singleton(shiny::div(id = "bootstrap_dependency", bootstrap_dependency)),
@@ -57,4 +58,16 @@ disable_bootstrap_on_bookmark <- function(bookmark) {
       }
     ', bookmark))
   )
+}
+
+#' ::: hack solution
+#'
+#' @param pkg package name
+#' @param name function name
+#'
+#' @return function
+`%:::%` <- function (pkg, name) {
+  pkg <- as.character(substitute(pkg))
+  name <- as.character(substitute(name))
+  get(name, envir = asNamespace(pkg), inherits = FALSE)
 }
