@@ -42,7 +42,7 @@ route <- function(path, ui, server = NA) {
 #' @param root Main route to which all invalid routes should redirect.
 #' @param routes A routes (list).
 #'
-#' @importFrom shiny observeEvent
+#' @import shiny
 #'
 #' @return Router callback.
 create_router_callback <- function(root, routes) {
@@ -58,7 +58,7 @@ create_router_callback <- function(root, routes) {
     log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
-    observeEvent(
+    shiny::observeEvent(
       ignoreNULL = FALSE,
       ignoreInit = FALSE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect

@@ -14,6 +14,7 @@ PAGE_404_ROUTE <- "404"
 #' @param page shiny page style, eg. `div(h1("Not found"))``
 #' @param message404 message to display at the 404 website
 #'
+#' @import shiny
 #' @export
 #' @examples
 #' page404() # div(h1("Not found"))
@@ -36,6 +37,8 @@ page404 <- function(page = NULL, message404 = NULL){
 #' It should be inserted in head of bootrstrap page.
 #' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
 #'
+#' @import htmltools
+#' @import shiny
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
   bootstrap_dependency <- htmltools::renderDependencies(list(shiny:::bootstrapLib()), srcType = "href")
