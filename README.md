@@ -4,6 +4,10 @@
 shiny.router
 ============
 
+![](https://www.r-pkg.org/badges/version/shiny.router)
+[![Travis build status](https://travis-ci.org/Appsilon/shiny.router.svg?branch=master)](https://travis-ci.org/Appsilon/shiny.router)
+![](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)
+
 A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
 
 Now it's possible to recreate a state of your app, by providing a specific URL, like:
