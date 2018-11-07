@@ -4,7 +4,7 @@ library(shiny.router)
 # This generates menu in user interface with links.
 menu <- (
   tags$ul(
-    tags$li(a(class = "item", href = "/", "Page")),
+    tags$li(a(class = "item", href = route_link("/"), "Page")),
     tags$li(a(class = "item", href = route_link("other"), "Other page")),
     tags$li(a(class = "item", href = route_link("third"), "A third page"))
   )

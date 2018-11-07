@@ -13,8 +13,8 @@ test_that("test extract_link_name", {
 })
 
 test_that("test route_link", {
-  expect_equal(route_link("abc"), "/#!/abc")
-  expect_equal(route_link("#/xyzq"), "/#!/xyzq")
+  expect_equal(route_link("abc"), "./#!/abc")
+  expect_equal(route_link("#/xyzq"), "./#!/xyzq")
 })
 
 test_that("test parse_url_path", {
@@ -26,5 +26,3 @@ test_that("test parse_url_path", {
   expect_true(length(p$query$b) == 2)
   expect_equal(p$query$b[[2]], "bar")
 })
-
-

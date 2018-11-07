@@ -51,7 +51,7 @@ extract_link_name <- function(path) {
 #' @examples
 #' route_link("abc") # /#!/abc
 route_link <- function(path) {
-  paste0("/", cleanup_hashpath(path))
+  paste0("./", cleanup_hashpath(path))
 }
 
 ########################### To export
