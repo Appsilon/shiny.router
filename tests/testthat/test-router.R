@@ -30,3 +30,30 @@ test_that("test basic make_router behaviour", {
   )
   expect_equal(typeof(router), "closure")
 })
+
+test_that("test basic get_page behaviour", {
+  session <- list(userData = NULL)
+  session$userData$shiny.router.page <- shiny::reactiveVal(list(
+    path = "root",
+    query = NULL,
+    unparsed = "root"
+  ))
+  expect_equal(shiny::isolate(get_page(session)), "root")
+
+  session$userData$shiny.router.page <- shiny::reactiveVal(list(
+    query = NULL,
+    unparsed = "root"
+  ))
+  expect_null(shiny::isolate(get_page(session)))
+})
+
+test_that("test basic is_page behaviour", {
+  session <- list(userData = NULL)
+  session$userData$shiny.router.page <- shiny::reactiveVal(list(
+    path = "root",
+    query = NULL,
+    unparsed = "root"
+  ))
+  expect_true(shiny::isolate(is_page("root", session)))
+  expect_false(shiny::isolate(is_page("s", session)))
+})
