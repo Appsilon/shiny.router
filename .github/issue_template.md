@@ -1,5 +1,4 @@
-TLDR
-Thank you for using our pakcage. You can describe your issue here. If you use the following template, it will help us address your issue faster. Please add a tag to the the issue: `bug`, `enhancement`, `question` or `feature request`.
+Thank you for using our package. You can describe your issue here. If you use the following template, it will help us address your issue faster. Please add a tag to the the issue: `bug`, `enhancement`, `question` or `feature request`.
 
 ---
 Before you submit an issue, please read the following instruction:
