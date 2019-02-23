@@ -53,7 +53,6 @@ create_router_callback <- function(root, routes) {
       query = NULL,
       unparsed = root
     ))
-    log_msg(shiny::isolate(as.character(session$userData$shiny.router.page())))
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
     shiny::observeEvent(
@@ -76,18 +75,13 @@ create_router_callback <- function(root, routes) {
         parsed$path <- ifelse(parsed$path == "", root, parsed$path)
 
         if (!valid_path(routes, parsed$path)) {
-
           log_msg("Invalid path sent to observer")
           # If it's not a recognized path, then go to default 404 page.
           change_page(PAGE_404_ROUTE, mode = "replace")
-
         } else if (new_hash != cleaned_hash) {
-
           log_msg("Cleaning up hashpath in URL...")
           change_page(cleaned_hash, mode = "replace")
-
         } else {
-
           log_msg("Path recognized!")
           # If it's a recognized path, then update the display to match.
           # TODO: Validation of routes that have mandatory query params?
@@ -97,7 +91,6 @@ create_router_callback <- function(root, routes) {
             query = parsed$query,
             unparsed = new_hash
           ))
-
         }
       }
     )

@@ -115,11 +115,9 @@ parse_url_path <- function(url_path) {
 #' @export
 get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDomain()) {
   log_msg("Trying to fetch field '", field)
-
   if (is.null(session$userData$shiny.router.page()$query)) {
     return(NULL)
   }
-
   if (missing(field)) {
     return(
       # Return a list of all the query params
