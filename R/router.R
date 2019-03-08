@@ -57,7 +57,7 @@ create_router_callback <- function(root, routes) {
     # our router state if needed.
     shiny::observeEvent(
       ignoreNULL = FALSE,
-      ignoreInit = FALSE,
+      ignoreInit = TRUE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect
       # changes to the hash
       eventExpr = c(shiny::getUrlHash(session), session$clientData$url_search),
