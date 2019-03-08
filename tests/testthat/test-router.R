@@ -57,3 +57,11 @@ test_that("test basic is_page behaviour", {
   expect_true(shiny::isolate(is_page("root", session)))
   expect_false(shiny::isolate(is_page("s", session)))
 })
+
+test_that("test geting clean url hash", {
+  session <- list(userData = NULL)
+  session$userData$shiny.router.url_hash <-
+    shiny::reactiveVal(cleanup_hashpath(""))
+
+  expect_equal(shiny::isolate(get_url_hash(session)), "#!/")
+})

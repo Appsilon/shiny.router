@@ -5,7 +5,8 @@
 \title{Convenience function to retrieve any params that were part of the requested
 page. The param values returned come from "httr::parse_url()"}
 \usage{
-get_query_param(field = NULL, session = shiny::getDefaultReactiveDomain())
+get_query_param(field = NULL,
+  session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
 \item{field}{If provided, retrieve only a param with this name. (Otherwise,
