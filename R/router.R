@@ -63,7 +63,7 @@ create_router_callback <- function(root, routes) {
       unparsed = root
     ))
 
-    # Watch and clean hash before change page.
+    # Watch and clean hash before changing page.
     session$userData$shiny.router.url_hash = shiny::reactiveVal("#!/")
     shiny::observeEvent(shiny::getUrlHash() ,{
       session$userData$shiny.router.url_hash(cleanup_hashpath(shiny::getUrlHash()))
