@@ -17,6 +17,15 @@ callback_mapping <- function(ui, server = NA) {
   out
 }
 
+#' Internal function to get url hash with #!.
+#'
+#' @param session The current Shiny Session
+#'
+#' @return Reactive hash value.
+get_url_hash <- function(session = shiny::getDefaultReactiveDomain()) {
+  session$userData$shiny.router.url_hash()
+}
+
 #' Create single route configuration.
 #'
 #' @param path Website route.
@@ -53,6 +62,13 @@ create_router_callback <- function(root, routes) {
       query = NULL,
       unparsed = root
     ))
+
+    # Watch and clean hash before changing page.
+    session$userData$shiny.router.url_hash = shiny::reactiveVal("#!/")
+    shiny::observeEvent(shiny::getUrlHash() ,{
+      session$userData$shiny.router.url_hash(cleanup_hashpath(shiny::getUrlHash()))
+    })
+
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
     shiny::observeEvent(
@@ -60,7 +76,7 @@ create_router_callback <- function(root, routes) {
       ignoreInit = FALSE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect
       # changes to the hash
-      eventExpr = c(shiny::getUrlHash(session), session$clientData$url_search),
+      eventExpr = c(get_url_hash(session), session$clientData$url_search),
       handlerExpr = {
         log_msg("hashchange observer triggered!")
         new_hash = shiny::getUrlHash(session)
