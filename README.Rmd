@@ -4,10 +4,9 @@ params:
    website_url: http://appsilon.com
    logo_url: https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png
    
-   repo_name: shiny.semantic
-   repo_url: https://github.com/Appsilon/shiny.semantic
-   demo_url: http://demo.appsilon.com/shiny.semantic/components
-   chagelog_url: https://github.com/Appsilon/shiny.semantic/blob/master/CHANGELOG.md
+   repo_name: shiny.router
+   repo_url: https://github.com/Appsilon/shiny.router
+   chagelog_url: https://github.com/Appsilon/shiny.router/blob/master/CHANGELOG.md
    escape_script: FALSE 
 ---
 
@@ -17,11 +16,15 @@ params:
 shiny.router
 ===========
 
-![](https://www.r-pkg.org/badges/version/shiny.router)
-[![Travis build status](https://travis-ci.org/Appsilon/shiny.router.svg?branch=master)](https://travis-ci.org/Appsilon/shiny.router)
-![](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)
+<div class="subheader">
 
-<div class="subheader">A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.</div>
+A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
+<br>
+
+[![Travis build status](https://travis-ci.org/Appsilon/shiny.router.svg?branch=master)](https://travis-ci.org/Appsilon/shiny.router)
+[![codecov](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)](https://codecov.io/gh/Appsilon/shiny.router)
+
+</div>
 
 <div class="section level2">
 Now it's possible to recreate a state of your app, by providing a specific URL, like: 
@@ -49,12 +52,13 @@ This library source code can be found on [Appsilon Data Science's](http://appsil
 <br>
 [https://github.com/Appsilon/shiny.router](https://github.com/Appsilon/shiny.router)
 
-```{python, echo=FALSE, results='asis', eval=!params$escape_script}
-print("""
-<script>
-document.write('<div class="logo"><a href="http://appsilon.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a></div>')
-</script>
-""")
+```{r, echo = F, results = 'asis'}
+if (params$type == "web") {
+  cat(paste0('<script>
+    document.write(\'<div class="logo"><a href="', params$website_url, '"><img alt="Appsilon Data Science" src="', params$logo_url, '"/></a></div>\')
+    </script>
+  '))
+}
 ```
 
 How to install?
@@ -78,7 +82,7 @@ devtools::install_github("Appsilon/shiny.router", ref = "0.1.0")
 
 Example {.firebrick}
 -------
-Visit /examples directory for some complete samples.
+Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples.
 Here's the basic usage:
 ```
 router <- make_router(
@@ -104,7 +108,13 @@ If you want to contribute to this project please submit a regular PR, once you'r
 
 **Changes in documentation**
 
-Both repository **README.md** file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file  and run a **build_readme.R** script to compile it.
+Both repository **README.md** file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file  and use [readmebuilder](https://github.com/Appsilon/readmebuilder) package to render the new README.
+
+In most cases a simple call of: 
+
+```r
+readmebuilder::build_readme()
+```
 
 Troubleshooting {.darkorange}
 -----------------
@@ -136,16 +146,23 @@ Future enhacements
 Appsilon Data Science {.footer}
 =====================
 
-<div class="subheader"> We Provide End-to-End Data Science Solutions </div>  
-<div class="logo"><a href="`r params$website_url`"><img alt="Appsilon Data Science" src="`r params$logo_url`"/></a></div>
+```{r, echo = F, results='asis'}
+if (params$type == "web") {
+  cat(paste0('<script>
+    document.write(\'<div class="logo"><a href="', params$website_url, '"><img alt="Appsilon Data Science" src="', params$logo_url, '" /></a></div><div class="subheader"> We Provide End-to-End Data Science Solutions </div>  \');
+    </script>
+  '))
+}
+```
 
 Get in touch [dev@appsilon.com](dev@appsilon.com)
 
-```{python, echo=FALSE, results='asis', eval=!params$escape_script}
-print("""
-<script>
-document.write('<a href="https://github.com/Appsilon/shiny.router"><img style="position: absolute; margin: 0; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>')
-</script>
-""")
+```{r, echo = F, results='asis'}
+if (params$type == "web") {
+  cat(paste0('<script>
+    document.write(\'<a href="', params$repo_url, '"><img style="position: absolute; margin: 0; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>\');
+    </script>
+  '))
+}
 ```
 

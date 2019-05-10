@@ -4,11 +4,9 @@
 shiny.router
 ============
 
-![](https://www.r-pkg.org/badges/version/shiny.router)
-[![Travis build status](https://travis-ci.org/Appsilon/shiny.router.svg?branch=master)](https://travis-ci.org/Appsilon/shiny.router)
-![](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)
+A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps. <br>
 
-A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
+[![Travis build status](https://travis-ci.org/Appsilon/shiny.router.svg?branch=master)](https://travis-ci.org/Appsilon/shiny.router) [![codecov](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)](https://codecov.io/gh/Appsilon/shiny.router)
 
 Now it's possible to recreate a state of your app, by providing a specific URL, like:
 
@@ -49,7 +47,7 @@ To install [previous version](https://github.com/Appsilon/shiny.router/blob/mast
 Example
 -------
 
-Visit /examples directory for some complete samples. Here's the basic usage:
+Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples. Here's the basic usage:
 
     router <- make_router(
       route("/", root_page),
@@ -74,7 +72,13 @@ If you want to contribute to this project please submit a regular PR, once you'r
 
 **Changes in documentation**
 
-Both repository **README.md** file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file and run a **build\_readme.R** script to compile it.
+Both repository **README.md** file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file and use [readmebuilder](https://github.com/Appsilon/readmebuilder) package to render the new README.
+
+In most cases a simple call of:
+
+``` r
+readmebuilder::build_readme()
+```
 
 Troubleshooting
 ---------------
@@ -104,9 +108,5 @@ Future enhacements
 
 Appsilon Data Science
 =====================
-
-We Provide End-to-End Data Science Solutions
-
-<a href="http://appsilon.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a>
 
 Get in touch [dev@appsilon.com](dev@appsilon.com)

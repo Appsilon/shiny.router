@@ -96,6 +96,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -103,14 +106,74 @@ button.code-folding-btn:focus {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -124,11 +187,12 @@ $(document).ready(function () {
 </div>
 
 
-<p><link href="data:text/css; charset=utf-8,%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Inconsolata%27%3B%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20font%2Dweight%3A%20400%3B%0A%20%20src%3A%20local%28%27Inconsolata%20Regular%27%29%2C%20local%28%27Inconsolata%2DRegular%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Finconsolata%2Fv16%2FQldKNThLqRwH%2DOJ1UHjlKGlZ5q0%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Lato%27%3B%0A%20%20font%2Dstyle%3A%20italic%3B%0A%20%20font%2Dweight%3A%20300%3B%0A%20%20src%3A%20local%28%27Lato%20Light%20Italic%27%29%2C%20local%28%27Lato%2DLightItalic%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Flato%2Fv14%2FS6u%5Fw4BMUTPHjxsI9w2%5FGwfo%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Lato%27%3B%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20font%2Dweight%3A%20300%3B%0A%20%20src%3A%20local%28%27Lato%20Light%27%29%2C%20local%28%27Lato%2DLight%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Flato%2Fv14%2FS6u9w4BMUTPHh7USSwiPHA%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Lato%27%3B%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20font%2Dweight%3A%20700%3B%0A%20%20src%3A%20local%28%27Lato%20Bold%27%29%2C%20local%28%27Lato%2DBold%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Flato%2Fv14%2FS6u9w4BMUTPHh6UVSwiPHA%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A" rel="stylesheet" type="text/css"> <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%3A%20oldlace%3B%0Afont%2Dfamily%3A%20%22Lato%22%2C%20sans%2Dserif%3B%0A%7D%0Ah1%20%7B%0Atext%2Dalign%3A%20center%3B%0Afont%2Dsize%3A%2080px%3B%0Afont%2Dweight%3A%20300%3B%0Apadding%2Dtop%3A%201em%3B%0Amargin%3A%200%3B%0A%7D%0A%2Efooter%20h1%20%7B%0Afont%2Dsize%3A%2050px%3B%0A%7D%0A%2Efooter%20a%20%7B%0Acolor%3A%20white%3B%0Atext%2Ddecoration%3A%20underline%3B%0A%7D%0A%2Esection%2Efooter%20img%20%7B%0Awidth%3A%20150px%20%21important%3B%0Amargin%3A%201em%3B%0Amargin%2Dbottom%3A%201em%3B%0A%7D%0Ah2%2C%20%2Esubheader%20%7B%0Afont%2Dsize%3A%2022px%3B%0Atext%2Dalign%3A%20center%3B%0Afont%2Dstyle%3A%20italic%3B%0Afont%2Dweight%3A%20300%3B%0Amargin%3A%200%3B%0A%7D%0A%2Emain%2Dcontainer%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0Apadding%3A%200%3B%0A%7D%0A%2Ecustom%20%7B%0Abackground%2Dcolor%3A%20rgb%2852%2C%2052%2C%2052%29%3B%0A%7D%0A%2Esection%2Elevel2%20%7B%0Atext%2Dalign%3A%20center%3B%0Apadding%3A%201em%200%3B%0A%7D%0A%2Esection%2Elevel2%20%2A%20%7B%0Atext%2Dalign%3A%20left%3B%0Amargin%3A%201em%20auto%3B%0Awidth%3A%2050%25%3B%0Amax%2Dwidth%3A%20940px%3B%0A%7D%0A%40media%20%28max%2Dwidth%3A%201440px%29%20%7B%0A%2Esection%2Elevel2%20%2A%20%7B%0Awidth%3A75%25%3B%0A%7D%0A%7D%0A%2Esection%2Elevel1%2Efooter%20%2A%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%2Esection%2Elevel2%20%2A%20%2A%20%7B%0Awidth%3A%20100%25%3B%0A%7D%0A%2Edarkslide%20%7B%0Abackground%2Dcolor%3A%20%23343434%3B%0Acolor%3A%20darkorange%3B%0A%7D%0A%2Efooter%20%7B%0Abackground%2Dcolor%3A%20%23343434%3B%0Acolor%3A%20white%3B%0Apadding%2Dbottom%3A%202em%3B%0A%7D%0A%2Edarkslide%20a%20%7B%0Acolor%3A%20white%3B%0A%7D%0A%2Efirebrick%20%7B%0Abackground%2Dcolor%3A%20firebrick%3B%0Acolor%3A%20white%3B%0A%7D%0A%2Edarkorange%20%7B%0Abackground%2Dcolor%3A%20darkorange%3B%0Acolor%3A%20%23343434%3B%0A%7D%0A%2Elogo%20img%20%7B%0Awidth%3A%20100px%20%21important%3B%0A%7D%0A" rel="stylesheet" type="text/css"></p>
+<p><link href="data:text/css; charset=utf-8,%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Inconsolata%27%3B%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20font%2Dweight%3A%20400%3B%0A%20%20src%3A%20local%28%27Inconsolata%20Regular%27%29%2C%20local%28%27Inconsolata%2DRegular%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Finconsolata%2Fv17%2FQldKNThLqRwH%2DOJ1UHjlKGlZ5q0%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Lato%27%3B%0A%20%20font%2Dstyle%3A%20italic%3B%0A%20%20font%2Dweight%3A%20300%3B%0A%20%20src%3A%20local%28%27Lato%20Light%20Italic%27%29%2C%20local%28%27Lato%2DLightItalic%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Flato%2Fv15%2FS6u%5Fw4BMUTPHjxsI9w2%5FGwfo%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Lato%27%3B%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20font%2Dweight%3A%20300%3B%0A%20%20src%3A%20local%28%27Lato%20Light%27%29%2C%20local%28%27Lato%2DLight%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Flato%2Fv15%2FS6u9w4BMUTPHh7USSwiPHA%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A%40font%2Dface%20%7B%0A%20%20font%2Dfamily%3A%20%27Lato%27%3B%0A%20%20font%2Dstyle%3A%20normal%3B%0A%20%20font%2Dweight%3A%20700%3B%0A%20%20src%3A%20local%28%27Lato%20Bold%27%29%2C%20local%28%27Lato%2DBold%27%29%2C%20url%28http%3A%2F%2Ffonts%2Egstatic%2Ecom%2Fs%2Flato%2Fv15%2FS6u9w4BMUTPHh6UVSwiPHA%2Ettf%29%20format%28%27truetype%27%29%3B%0A%7D%0A" rel="stylesheet" type="text/css"> <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%3A%20oldlace%3B%0Afont%2Dfamily%3A%20%22Lato%22%2C%20sans%2Dserif%3B%0A%7D%0Ah1%20%7B%0Atext%2Dalign%3A%20center%3B%0Afont%2Dsize%3A%2080px%3B%0Afont%2Dweight%3A%20300%3B%0Apadding%2Dtop%3A%201em%3B%0Amargin%3A%200%3B%0A%7D%0A%2Efooter%20h1%20%7B%0Afont%2Dsize%3A%2050px%3B%0A%7D%0A%2Efooter%20a%20%7B%0Acolor%3A%20white%3B%0Atext%2Ddecoration%3A%20underline%3B%0A%7D%0A%2Esection%2Efooter%20img%20%7B%0Awidth%3A%20150px%20%21important%3B%0Amargin%3A%201em%3B%0Amargin%2Dbottom%3A%201em%3B%0A%7D%0Ah2%2C%20%2Esubheader%20%7B%0Afont%2Dsize%3A%2022px%3B%0Atext%2Dalign%3A%20center%3B%0Afont%2Dstyle%3A%20italic%3B%0Afont%2Dweight%3A%20300%3B%0Amargin%3A%200%3B%0A%7D%0A%2Emain%2Dcontainer%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0Apadding%3A%200%3B%0A%7D%0A%2Ecustom%20%7B%0Abackground%2Dcolor%3A%20rgb%2852%2C%2052%2C%2052%29%3B%0A%7D%0A%2Esection%2Elevel2%20%7B%0Atext%2Dalign%3A%20center%3B%0Apadding%3A%201em%200%3B%0A%7D%0A%2Esection%2Elevel2%20%2A%20%7B%0Atext%2Dalign%3A%20left%3B%0Amargin%3A%201em%20auto%3B%0Awidth%3A%2050%25%3B%0Amax%2Dwidth%3A%20940px%3B%0A%7D%0A%40media%20%28max%2Dwidth%3A%201440px%29%20%7B%0A%2Esection%2Elevel2%20%2A%20%7B%0Awidth%3A75%25%3B%0A%7D%0A%7D%0A%2Esection%2Elevel1%2Efooter%20%2A%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%2Esection%2Elevel2%20%2A%20%2A%20%7B%0Awidth%3A%20100%25%3B%0A%7D%0A%2Edarkslide%20%7B%0Abackground%2Dcolor%3A%20%23343434%3B%0Acolor%3A%20darkorange%3B%0A%7D%0A%2Efooter%20%7B%0Abackground%2Dcolor%3A%20%23343434%3B%0Acolor%3A%20white%3B%0Apadding%2Dbottom%3A%202em%3B%0A%7D%0A%2Edarkslide%20a%20%7B%0Acolor%3A%20white%3B%0A%7D%0A%2Efirebrick%20%7B%0Abackground%2Dcolor%3A%20firebrick%3B%0Acolor%3A%20white%3B%0A%7D%0A%2Efirebrick%20a%20%7B%0Acolor%3A%20white%3B%0A%7D%0A%2Edarkorange%20%7B%0Abackground%2Dcolor%3A%20darkorange%3B%0Acolor%3A%20%23343434%3B%0A%7D%0A%2Elogo%20img%20%7B%0Awidth%3A%20100px%20%21important%3B%0A%7D%0A" rel="stylesheet" type="text/css"></p>
 <div id="shiny.router" class="section level1">
 <h1>shiny.router</h1>
 <div class="subheader">
-A minimalistic router for your <a href="https://shiny.rstudio.com/">Shiny</a> apps.
+<p>A minimalistic router for your <a href="https://shiny.rstudio.com/">Shiny</a> apps. <br></p>
+<p><a href="https://travis-ci.org/Appsilon/shiny.router"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MCIgaGVpZ2h0PSIyMCI+PGxpbmVhckdyYWRpZW50IGlkPSJhIiB4Mj0iMCIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1vcGFjaXR5PSIuMSIvPjwvbGluZWFyR3JhZGllbnQ+PHJlY3Qgcng9IjMiIHdpZHRoPSI5MCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzU1NSIvPjxyZWN0IHJ4PSIzIiB4PSIzNyIgd2lkdGg9IjUzIiBoZWlnaHQ9IjIwIiBmaWxsPSIjNGMxIi8+PHBhdGggZmlsbD0iIzRjMSIgZD0iTTM3IDBoNHYyMGgtNHoiLz48cmVjdCByeD0iMyIgd2lkdGg9IjkwIiBoZWlnaHQ9IjIwIiBmaWxsPSJ1cmwoI2EpIi8+PGcgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkRlamFWdSBTYW5zLFZlcmRhbmEsR2VuZXZhLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiPjx0ZXh0IHg9IjE5LjUiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5idWlsZDwvdGV4dD48dGV4dCB4PSIxOS41IiB5PSIxNCI+YnVpbGQ8L3RleHQ+PHRleHQgeD0iNjIuNSIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPnBhc3Npbmc8L3RleHQ+PHRleHQgeD0iNjIuNSIgeT0iMTQiPnBhc3Npbmc8L3RleHQ+PC9nPjwvc3ZnPg==" alt="Travis build status" /></a> <a href="https://codecov.io/gh/Appsilon/shiny.router"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMTIiIGhlaWdodD0iMjAiPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiIiB4Mj0iMCIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JiYiIgc3RvcC1vcGFjaXR5PSIuMSIgLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3Atb3BhY2l0eT0iLjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPG1hc2sgaWQ9ImEiPgogICAgICAgIDxyZWN0IHdpZHRoPSIxMTIiIGhlaWdodD0iMjAiIHJ4PSIzIiBmaWxsPSIjZmZmIiAvPgogICAgPC9tYXNrPgogICAgPGcgbWFzaz0idXJsKCNhKSI+CiAgICAgICAgPHBhdGggZmlsbD0iIzU1NSIgZD0iTTAgMGg3NnYyMEgweiIgLz4KICAgICAgICA8cGF0aCBmaWxsPSIjZTA1ZDQ0IiBkPSJNNzYgMGgzNnYyMEg3NnoiIC8+CiAgICAgICAgPHBhdGggZmlsbD0idXJsKCNiKSIgZD0iTTAgMGgxMTJ2MjBIMHoiIC8+CiAgICA8L2c+CiAgICA8ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSI+CiAgICAgICAgPHRleHQgeD0iNDYiIHk9IjE1IiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIj5jb2RlY292PC90ZXh0PgogICAgICAgIDx0ZXh0IHg9IjQ2IiB5PSIxNCI+Y29kZWNvdjwvdGV4dD4KICAgICAgICA8dGV4dCB4PSI5MyIgeT0iMTUiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiPjUyJTwvdGV4dD4KICAgICAgICA8dGV4dCB4PSI5MyIgeT0iMTQiPjUyJTwvdGV4dD4KICAgIDwvZz4KICAgIDxzdmcgdmlld0JveD0iMTIwIC04IDYwIDYwIj4KICAgICAgICA8cGF0aCBkPSJNMjMuMDEzIDBDMTAuMzMzLjAwOS4wMSAxMC4yMiAwIDIyLjc2MnYuMDU4bDMuOTE0IDIuMjc1LjA1My0uMDM2YTExLjI5MSAxMS4yOTEgMCAwIDEgOC4zNTItMS43NjcgMTAuOTExIDEwLjkxMSAwIDAgMSA1LjUgMi43MjZsLjY3My42MjQuMzgtLjgyOGMuMzY4LS44MDIuNzkzLTEuNTU2IDEuMjY0LTIuMjQuMTktLjI3Ni4zOTgtLjU1NC42MzctLjg1MWwuMzkzLS40OS0uNDg0LS40MDRhMTYuMDggMTYuMDggMCAwIDAtNy40NTMtMy40NjYgMTYuNDgyIDE2LjQ4MiAwIDAgMC03LjcwNS40NDlDNy4zODYgMTAuNjgzIDE0LjU2IDUuMDE2IDIzLjAzIDUuMDFjNC43NzkgMCA5LjI3MiAxLjg0IDEyLjY1MSA1LjE4IDIuNDEgMi4zODIgNC4wNjkgNS4zNSA0LjgwNyA4LjU5MWExNi41MyAxNi41MyAwIDAgMC00Ljc5Mi0uNzIzbC0uMjkyLS4wMDJhMTYuNzA3IDE2LjcwNyAwIDAgMC0xLjkwMi4xNGwtLjA4LjAxMmMtLjI4LjAzNy0uNTI0LjA3NC0uNzQ4LjExNS0uMTEuMDE5LS4yMTguMDQxLS4zMjcuMDYzLS4yNTcuMDUyLS41MS4xMDgtLjc1LjE2OWwtLjI2NS4wNjdhMTYuMzkgMTYuMzkgMCAwIDAtLjkyNi4yNzZsLS4wNTYuMDE4Yy0uNjgyLjIzLTEuMzYuNTExLTIuMDE2LjgzOGwtLjA1Mi4wMjZjLS4yOS4xNDUtLjU4NC4zMDUtLjg5OS40OWwtLjA2OS4wNGExNS41OTYgMTUuNTk2IDAgMCAwLTQuMDYxIDMuNDY2bC0uMTQ1LjE3NWMtLjI5LjM2LS41MjEuNjY2LS43MjMuOTYtLjE3LjI0Ny0uMzQuNTEzLS41NTIuODY0bC0uMTE2LjE5OWMtLjE3LjI5Mi0uMzIuNTctLjQ0OS44MjRsLS4wMy4wNTdhMTYuMTE2IDE2LjExNiAwIDAgMC0uODQzIDIuMDI5bC0uMDM0LjEwMmExNS42NSAxNS42NSAwIDAgMC0uNzg2IDUuMTc0bC4wMDMuMjE0YTIxLjUyMyAyMS41MjMgMCAwIDAgLjA0Ljc1NGMuMDA5LjExOS4wMi4yMzcuMDMyLjM1NS4wMTQuMTQ1LjAzMi4yOS4wNDkuNDMybC4wMS4wOGMuMDEuMDY3LjAxNy4xMzMuMDI2LjE5Ny4wMzQuMjQyLjA3NC40OC4xMTkuNzIuNDYzIDIuNDE5IDEuNjIgNC44MzYgMy4zNDUgNi45OWwuMDc4LjA5OC4wOC0uMDk1Yy42ODgtLjgxIDIuMzk1LTMuMzggMi41MzktNC45MjJsLjAwMy0uMDI5LS4wMTQtLjAyNWExMC43MjcgMTAuNzI3IDAgMCAxLTEuMjI2LTQuOTU2YzAtNS43NiA0LjU0NS0xMC41NDQgMTAuMzQzLTEwLjg5bC4zODEtLjAxNGExMS40MDMgMTEuNDAzIDAgMCAxIDYuNjUxIDEuOTU3bC4wNTQuMDM2IDMuODYyLTIuMjM3LjA1LS4wM3YtLjA1NmMuMDA2LTYuMDgtMi4zODQtMTEuNzkzLTYuNzI5LTE2LjA4OUMzNC45MzIgMi4zNjEgMjkuMTYgMCAyMy4wMTMgMCIgZmlsbD0iI0YwMUY3QSIgZmlsbC1ydWxlPSJldmVub2RkIi8+CiAgICA8L3N2Zz4KPC9zdmc+" alt="codecov" /></a></p>
 </div>
 <div class="section level2">
 <p>Now it’s possible to recreate a state of your app, by providing a specific URL, like:</p>
@@ -148,8 +212,8 @@ TODO We would like to have a nice graphic explaning routing mechanism
 <h2>Source code</h2>
 <p>This library source code can be found on <a href="http://appsilon.com">Appsilon Data Science’s</a> Github: <br> <a href="https://github.com/Appsilon/shiny.router" class="uri">https://github.com/Appsilon/shiny.router</a></p>
 <script>
-document.write('<div class="logo"><a href="http://appsilon.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a></div>')
-</script>
+    document.write('<div class="logo"><a href="http://appsilon.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png"/></a></div>')
+    </script>
 </div>
 <div id="how-to-install" class="section level2">
 <h2>How to install?</h2>
@@ -162,7 +226,7 @@ document.write('<div class="logo"><a href="http://appsilon.com"><img alt="Appsil
 </div>
 <div id="example" class="section level2 firebrick">
 <h2>Example</h2>
-<p>Visit /examples directory for some complete samples. Here’s the basic usage:</p>
+<p>Visit <a href="https://github.com/Appsilon/shiny.router/tree/master/examples">examples</a> directory for some complete samples. Here’s the basic usage:</p>
 <pre><code>router &lt;- make_router(
   route(&quot;/&quot;, root_page),
   route(&quot;/other&quot;, other_page)
@@ -183,7 +247,9 @@ shinyApp(ui, server)</code></pre>
 <h2>How to contribute?</h2>
 <p>If you want to contribute to this project please submit a regular PR, once you’re done with new feature or bug fix.<br></p>
 <p><strong>Changes in documentation</strong></p>
-<p>Both repository <strong>README.md</strong> file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a <strong>README.Rmd</strong> file and run a <strong>build_readme.R</strong> script to compile it.</p>
+<p>Both repository <strong>README.md</strong> file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a <strong>README.Rmd</strong> file and use <a href="https://github.com/Appsilon/readmebuilder">readmebuilder</a> package to render the new README.</p>
+<p>In most cases a simple call of:</p>
+<pre class="r"><code>readmebuilder::build_readme()</code></pre>
 </div>
 <div id="troubleshooting" class="section level2 darkorange">
 <h2>Troubleshooting</h2>
@@ -212,16 +278,13 @@ shinyApp(ui, server)</code></pre>
 </div>
 <div id="appsilon-data-science" class="section level1 footer">
 <h1>Appsilon Data Science</h1>
-<div class="subheader">
-We Provide End-to-End Data Science Solutions
-</div>
-<div class="logo">
-<a href="http://appsilon.com"><img alt="Appsilon Data Science" src="data:image/png;base64,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" /></a>
-</div>
+<script>
+    document.write('<div class="logo"><a href="http://appsilon.com"><img alt="Appsilon Data Science" src="https://cdn.rawgit.com/Appsilon/website-cdn/gh-pages/logo-white.png" /></a></div><div class="subheader"> We Provide End-to-End Data Science Solutions </div>  ');
+    </script>
 <p>Get in touch <a href="dev@appsilon.com" class="uri">dev@appsilon.com</a></p>
 <script>
-document.write('<a href="https://github.com/Appsilon/shiny.router"><img style="position: absolute; margin: 0; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>')
-</script>
+    document.write('<a href="https://github.com/Appsilon/shiny.router"><img style="position: absolute; margin: 0; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>');
+    </script>
 </div>
 
 
