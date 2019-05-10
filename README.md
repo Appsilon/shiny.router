@@ -47,7 +47,7 @@ To install [previous version](https://github.com/Appsilon/shiny.router/blob/mast
 Example
 -------
 
-Visit /examples directory for some complete samples. Here's the basic usage:
+Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples. Here's the basic usage:
 
     router <- make_router(
       route("/", root_page),

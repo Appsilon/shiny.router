@@ -82,7 +82,7 @@ devtools::install_github("Appsilon/shiny.router", ref = "0.1.0")
 
 Example {.firebrick}
 -------
-Visit /examples directory for some complete samples.
+Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples.
 Here's the basic usage:
 ```
 router <- make_router(
