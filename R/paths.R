@@ -68,6 +68,9 @@ route_link <- function(path) {
 #' }
 #' @details
 #' \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
+#' 
+#' Note that having query string appear before \code{#!} may cause browser to refresh
+#' and thus reset Shiny session.
 #' @export
 #' @examples
 #' parse_url_path("?a=1&b=foo")
@@ -75,18 +78,31 @@ route_link <- function(path) {
 #' parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/other_page")
 #' parse_url_path("www.foo.bar/#!/other_page")
 #' parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar/#!/other")
+#' parse_url_path("#!/?a=1&b[1]=foo&b[2]=bar")
+#' parse_url_path("#!/other_page?a=1&b[1]=foo&b[2]=bar")
+#' parse_url_path("www.foo.bar/#!/other?a=1&b[1]=foo&b[2]=bar")
 parse_url_path <- function(url_path) {
-  url_has_query <- grepl("?", url_path, fixed = TRUE)
-  url_has_hash <- grepl("#", url_path, fixed = TRUE)
+  url_query_pos <- gregexpr("?", url_path, fixed = TRUE)[[1]][1]
+  url_hash_pos <- gregexpr("#", url_path, fixed = TRUE)[[1]][1]
+  url_has_query <- url_query_pos[1] > -1
+  url_has_hash <- url_hash_pos[1] > -1
   extracted_url_parts <- sub("^/|/$", "", strsplit(url_path, split = "\\?|#!|#")[[1]])
   path <- ""
 
-  if (url_has_query) {
-    query <- extracted_url_parts[2]
-    path <- if (url_has_hash) extracted_url_parts[3] else path
+  if (url_has_query & url_has_hash) {
+    # Query string may appear before or after hash
+    if(url_query_pos < url_hash_pos) {
+      query <- extracted_url_parts[2]
+      path <- extracted_url_parts[3]
+    } else {
+      query <- extracted_url_parts[3]
+      path <- extracted_url_parts[2]
+    }
+  } else if (!url_has_query & url_has_hash) {
+    query <- extracted_url_parts[3]
+    path <- extracted_url_parts[2]
   } else {
-    query <- NULL
-    path <- if (url_has_hash) extracted_url_parts[2] else path
+    query <- extracted_url_parts[2]
   }
 
   if (is.na(path)) {
