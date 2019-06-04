@@ -30,6 +30,9 @@ test_that("test parse_url_path", {
   expect_equal(p$path, "foo")
   expect_equal(p$query$a, "1")
   expect_true(length(p$query$b) == 2)
+  p <- parse_url_path("?a=1&b=foo")
+  expect_equal(p$path, "")
+  expect_equal(p$query$b, "foo")
 })
 
 test_that("test valid_path", {

@@ -88,6 +88,7 @@ parse_url_path <- function(url_path) {
   url_has_hash <- url_hash_pos[1] > -1
   extracted_url_parts <- sub("^/|/$", "", strsplit(url_path, split = "\\?|#!|#")[[1]])
   path <- ""
+  query <- NULL
 
   if (url_has_query & url_has_hash) {
     # Query string may appear before or after hash
@@ -99,7 +100,6 @@ parse_url_path <- function(url_path) {
       path <- extracted_url_parts[2]
     }
   } else if (!url_has_query & url_has_hash) {
-    query <- extracted_url_parts[3]
     path <- extracted_url_parts[2]
   } else {
     query <- extracted_url_parts[2]
