@@ -7,10 +7,16 @@ ROUTER_UI_ID <- '_router_ui'
 #' @param server Function that is called within the global server function if given
 callback_mapping <- function(ui, server = NA) {
   server <- if (is.function(server)) {
-              server
-            } else {
-              function(input, output, session, ...) {}
-            }
+    if ("..." %in% names(formals(server))) {
+      server
+    } else {
+      # the package requires ellipsis (...) existing for each server callback
+      formals(server) <- append(formals(server), alist(... = ))
+      server
+    }
+  } else {
+    function(input, output, session, ...) {}
+  }
   out <- list()
   out[["ui"]] <- ui
   out[["server"]] <- server
@@ -69,6 +75,8 @@ create_router_callback <- function(root, routes) {
       session$userData$shiny.router.url_hash(cleanup_hashpath(shiny::getUrlHash()))
     })
 
+    lapply(routes, function(route) route$server(input, output, session, ...))
+
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
     shiny::observeEvent(
@@ -111,11 +119,13 @@ create_router_callback <- function(root, routes) {
       }
     )
 
-    # Switch the displayed page, if the path changes.
-    output[[ROUTER_UI_ID]] <- shiny::renderUI({
-      log_msg("shiny.router main output. path: ", session$userData$shiny.router.page()$path)
-      routes[[session$userData$shiny.router.page()$path]][["server"]](input, output, session, ...)
-      routes[[session$userData$shiny.router.page()$path]][["ui"]]
+    observeEvent(session$userData$shiny.router.page(), {
+      page_path <- session$userData$shiny.router.page()$path
+      shiny::removeUI("#page-wrapper")
+      shiny::insertUI(
+        "body", "afterBegin",
+        shiny::div(id = "page-wrapper", routes[[page_path]][["ui"]])
+      )
     })
   }
 }
@@ -173,7 +183,7 @@ router_ui <- function() {
         )
       )
     ),
-    shiny::uiOutput(ROUTER_UI_ID)
+    tags$div(id = "page-wrapper")
   )
 }
 

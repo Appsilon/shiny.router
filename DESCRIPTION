@@ -1,7 +1,7 @@
 Package: shiny.router
 Type: Package
 Title: Basic Routing for Shiny Web Applications
-Version: 0.1.1
+Version: 0.1.1.9000
 Authors@R: c(person("Filip", "Stachura",
                     email = "filip@appsilon.com",
                     role = c("aut")),
