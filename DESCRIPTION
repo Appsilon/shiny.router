@@ -8,8 +8,8 @@ Authors@R: c(person("Filip", "Stachura",
             person("Dominik", "Krzemiński",
                     email = "dominik@appsilon.com",
                     role = c("cre", "aut")),
-             person(family = "Appsilon", role = c("cph")))
-            )
+             person(family = "Appsilon", role = c("cph"))
+           )
 Description: shiny.router is a minimalistic router for your Shiny apps.
     It allows you to create dynamic webapplications with real-time UI
     and easily share urls to pages within your Shiny apps.
