@@ -15,8 +15,8 @@ menu <- (
     div(class = "item",
       div(class = "header", "Demo"),
       div(class = "menu",
-        a(class = "item", href = route_link("index"), uiicon("home"), "Page"),
-        a(class = "item", href = route_link("other"), uiicon("clock"), "Other")
+        a(class = "item", href = route_link("index"), icon("home"), "Page"),
+        a(class = "item", href = route_link("other"), icon("clock"), "Other")
       )
     )
   )
@@ -40,7 +40,7 @@ page <- function(title, content) {
 }
 
 root_page <- page("Home page", "Welcome on sample routing page!")
-other_page <- page("Some other page", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+other_page <- page("Some other page", "Lorem ipsum dolor sit amet.")
 
 router <- make_router(
   route("index", root_page),
@@ -52,8 +52,8 @@ ui <- shinyUI(semanticPage(
   router_ui()
 ))
 
-server <- shinyServer(function(input, output) {
-  router(input, output)
+server <- shinyServer(function(input, output, session) {
+  router(input, output, session)
 })
 
 shinyApp(ui, server)

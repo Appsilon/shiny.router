@@ -23,6 +23,7 @@ page <- function(title, content, table_id) {
 # Both sample pages.
 root_page <- page("Home page", "Welcome on sample routing page!", "table_one")
 other_page <- page("Some other page", "Lorem ipsum dolor sit amet.", "table_two")
+third_page <- div(menu, titlePanel("Third Page"))
 
 # Callbacks on the server side for
 # the sample pages
@@ -43,7 +44,7 @@ other_callback <- function(input, output, session) {
 router <- make_router(
   route("/", root_page, root_callback),
   route("other", other_page, other_callback),
-  route("third", other_page, NA)
+  route("third", third_page, NA)
 )
 
 # Creat output for our router in main UI of Shiny app.

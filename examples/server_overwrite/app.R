@@ -55,8 +55,10 @@ ui <- shinyUI(fluidPage(
 ))
 
 # Plug router into Shiny server.
-server <- shinyServer(function(input, output) {
-  router(input, output)
+server <- shinyServer(function(input, output, session) {
+  router(input, output, session)
+
+  # page callback are run at first, so the below code will overwrite click_me logic
   output$click_me <- renderText({
     as.numeric(input$clicks)
   })
