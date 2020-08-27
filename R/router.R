@@ -122,10 +122,10 @@ create_router_callback <- function(root, routes) {
     observeEvent(session$userData$shiny.router.page(), {
       page_path <- session$userData$shiny.router.page()$path
       log_msg("shiny.router main output. path: ", page_path)
-      shiny::removeUI("#page-wrapper")
+      shiny::removeUI("#router-page-content")
       shiny::insertUI(
-        "body", "afterBegin",
-        shiny::div(id = "page-wrapper", routes[[page_path]][["ui"]])
+        "#router-page-wrapper", "afterBegin",
+        shiny::div(id = "router-page-content", routes[[page_path]][["ui"]])
       )
     })
   }
@@ -184,7 +184,7 @@ router_ui <- function() {
         )
       )
     ),
-    tags$div(id = "page-wrapper")
+    tags$div(id = "router-page-wrapper")
   )
 }
 
