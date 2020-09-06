@@ -9,7 +9,7 @@ bootstrap_page <- fluidPage(
   ),
   sidebarLayout(
     sidebarPanel(
-      sliderInput("obs",
+      shiny::sliderInput("obs",
                   "Number of observations:",
                   min = 0,
                   max = 1000,
@@ -44,16 +44,13 @@ ui <- shinyUI(
 server <- shinyServer(function(input, output, session) {
   router(input, output, session)
 
-  output$url <- renderPrint(
-    get_query_param()
-  )
-
   output$distPlot <- renderPlot({
+    req(input$obs)
     hist(rnorm(input$obs))
   })
 
   output$dropdown <- renderUI({
-    dropdown("simple_dropdown", LETTERS, value = "A")
+    dropdown_input("simple_dropdown", LETTERS, value = "A")
   })
 
   output$selected_letter <- renderText(input[["simple_dropdown"]])
