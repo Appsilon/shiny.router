@@ -23,7 +23,7 @@ TODO We would like to have a nice graphic explaning routing mechanism
 Basic tutorial article is available on [Appsilon Data Science blog](http://blog.appsilon.com/rstats/2016/12/08/shiny.router.html).
 
 <p style="text-align: center; font-size: x-large;">
-<a href="http://demo.appsilon.ai/router/">Live demo</a>
+<a href="https://demo.appsilon.ai/apps/router/">Live demo</a>
 </p>
 
 Source code
