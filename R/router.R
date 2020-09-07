@@ -5,7 +5,7 @@ ROUTER_UI_ID <- '_router_ui'
 #'
 #' @param ui Valid Shiny user interface.
 #' @param server Function that is called within the global server function if given
-callback_mapping <- function(ui, server = NA) {
+callback_mapping <- function(path, ui, server = NA) {
   server <- if (is.function(server)) {
     if ("..." %in% names(formals(server))) {
       server
@@ -18,6 +18,11 @@ callback_mapping <- function(ui, server = NA) {
     function(input, output, session, ...) {}
   }
   out <- list()
+  # make pages identication easier
+  ui$attribs$`data-path` <- path
+  ui$attribs$class <- paste("router", ui$attribs$class)
+  # initially hide all ui elements
+  ui$attribs$style <- paste("display: none;", ui$attribs$style)
   out[["ui"]] <- ui
   out[["server"]] <- server
   out
@@ -47,7 +52,7 @@ get_url_hash <- function(session = shiny::getDefaultReactiveDomain()) {
 #' @export
 route <- function(path, ui, server = NA) {
   out <- list()
-  out[[path]] <- callback_mapping(ui, server)
+  out[[path]] <- callback_mapping(path, ui, server)
   out
 }
 
@@ -122,11 +127,7 @@ create_router_callback <- function(root, routes) {
     observeEvent(session$userData$shiny.router.page(), {
       page_path <- session$userData$shiny.router.page()$path
       log_msg("shiny.router main output. path: ", page_path)
-      shiny::removeUI("#router-page-content")
-      shiny::insertUI(
-        "#router-page-wrapper", "afterBegin",
-        shiny::div(id = "router-page-content", routes[[page_path]][["ui"]])
-      )
+      session$sendCustomMessage("switch-ui", page_path)
     })
   }
 }
@@ -153,7 +154,12 @@ make_router <- function(default, ..., page_404 = page404()) {
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes) )
     routes <- c(routes, route(PAGE_404_ROUTE, page_404))
-  create_router_callback(root, routes)
+  list(root = root, routes = routes)
+}
+
+#' @export
+router_server <- function(router, input, output, session, ...) {
+  create_router_callback(router$root, router$routes)(input, output, session, ...)
 }
 
 #' Creates an output for router. This configures client side.
@@ -169,7 +175,7 @@ make_router <- function(default, ..., page_404 = page404()) {
 #' ))
 #' }
 #' @export
-router_ui <- function() {
+router_ui <- function(router) {
   shiny::addResourcePath(
     "shiny.router",
     system.file("www", package = "shiny.router")
@@ -184,7 +190,10 @@ router_ui <- function() {
         )
       )
     ),
-    tags$div(id = "router-page-wrapper")
+    tags$div(
+      id = "router-page-wrapper",
+      lapply(router$routes, function(route) route$ui)
+    )
   )
 }
 

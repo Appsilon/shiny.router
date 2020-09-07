@@ -20,6 +20,9 @@ Extract info about url path and parameters that follow \code{?} sign.
 }
 \details{
 \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
+
+Note that having query string appear before \code{#!} may cause browser to refresh
+and thus reset Shiny session.
 }
 \examples{
 parse_url_path("?a=1&b=foo")
@@ -27,4 +30,7 @@ parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/")
 parse_url_path("?a=1&b[1]=foo&b[2]=bar/#!/other_page")
 parse_url_path("www.foo.bar/#!/other_page")
 parse_url_path("www.foo.bar?a=1&b[1]=foo&b[2]=bar/#!/other")
+parse_url_path("#!/?a=1&b[1]=foo&b[2]=bar")
+parse_url_path("#!/other_page?a=1&b[1]=foo&b[2]=bar")
+parse_url_path("www.foo.bar/#!/other?a=1&b[1]=foo&b[2]=bar")
 }

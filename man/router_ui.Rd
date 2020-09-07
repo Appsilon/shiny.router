@@ -6,7 +6,7 @@
 Call it in your UI Shiny code. In this output ui is going to be rendered
 according to current routing.}
 \usage{
-router_ui()
+router_ui(router)
 }
 \value{
 Shiny tags that configure router and build reactive but hidden input _location.

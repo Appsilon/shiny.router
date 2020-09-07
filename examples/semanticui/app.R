@@ -49,6 +49,7 @@ router <- make_router(
 
 ui <- shinyUI(semanticPage(
   title = "Router demo",
+  "Hello",
   router_ui()
 ))
 

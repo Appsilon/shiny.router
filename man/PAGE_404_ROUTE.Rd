@@ -4,7 +4,9 @@
 \name{PAGE_404_ROUTE}
 \alias{PAGE_404_ROUTE}
 \title{Default 404 page}
-\format{An object of class \code{character} of length 1.}
+\format{
+An object of class \code{character} of length 1.
+}
 \usage{
 PAGE_404_ROUTE
 }

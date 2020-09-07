@@ -5,7 +5,7 @@
 \title{Create a mapping bewtween a ui element
 and a server callack}
 \usage{
-callback_mapping(ui, server = NA)
+callback_mapping(path, ui, server = NA)
 }
 \arguments{
 \item{ui}{Valid Shiny user interface.}
