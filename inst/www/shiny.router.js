@@ -44,10 +44,10 @@ window.shinyrouter = function() {
 var switchUI = function(message) {
   var routes = $("#router-page-wrapper").find(".router");
   var active_route = routes.filter(function() {
-    return $(this).data("path") == message
+    return $(this).data("path") == message;
   });
   routes.hide();
   active_route.show();
-}
+};
 
 Shiny.addCustomMessageHandler("switch-ui", switchUI);

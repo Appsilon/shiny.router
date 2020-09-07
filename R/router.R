@@ -132,6 +132,32 @@ create_router_callback <- function(root, routes) {
   }
 }
 
+router_server <- function(router) {
+  create_router_callback(router$root, router$routes)
+}
+
+router_ui <- function(router) {
+  shiny::addResourcePath(
+    "shiny.router",
+    system.file("www", package = "shiny.router")
+  )
+  jsFile <- file.path("shiny.router", "shiny.router.js")
+
+  list(
+    shiny::singleton(
+      shiny::withTags(
+        shiny::tags$head(
+          shiny::tags$script(type = "text/javascript", src = jsFile)
+        )
+      )
+    ),
+    tags$div(
+      id = "router-page-wrapper",
+      lapply(router$routes, function(route) route$ui)
+    )
+  )
+}
+
 #' Creates router. Returned callback needs to be called within Shiny server code.
 #'
 #' @param default Main route to which all invalid routes should redirect.
@@ -154,47 +180,8 @@ make_router <- function(default, ..., page_404 = page404()) {
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes) )
     routes <- c(routes, route(PAGE_404_ROUTE, page_404))
-  list(root = root, routes = routes)
-}
-
-#' @export
-router_server <- function(router, input, output, session, ...) {
-  create_router_callback(router$root, router$routes)(input, output, session, ...)
-}
-
-#' Creates an output for router. This configures client side.
-#' Call it in your UI Shiny code. In this output ui is going to be rendered
-#' according to current routing.
-#'
-#' @return Shiny tags that configure router and build reactive but hidden input _location.
-#'
-#' @examples
-#' \dontrun{
-#' ui <- shinyUI(fluidPage(
-#'   router_ui()
-#' ))
-#' }
-#' @export
-router_ui <- function(router) {
-  shiny::addResourcePath(
-    "shiny.router",
-    system.file("www", package = "shiny.router")
-  )
-  jsFile <- file.path("shiny.router", "shiny.router.js")
-
-  list(
-    shiny::singleton(
-      shiny::withTags(
-        shiny::tags$head(
-          shiny::tags$script(type = "text/javascript", src = jsFile)
-        )
-      )
-    ),
-    tags$div(
-      id = "router-page-wrapper",
-      lapply(router$routes, function(route) route$ui)
-    )
-  )
+  router <- list(root = root, routes = routes)
+  list(ui = router_ui(router), server = router_server(router))
 }
 
 #' Convenience function to retrieve just the "page" part of the input. This
