@@ -13,8 +13,8 @@ test_that("test extract_link_name", {
 })
 
 test_that("test route_link", {
-  expect_equal(route_link("abc"), "./#!/abc")
-  expect_equal(route_link("#/xyzq"), "./#!/xyzq")
+  expect_equal(route_link("abc"), "/#!/abc")
+  expect_equal(route_link("#/xyzq"), "/#!/xyzq")
 })
 
 test_that("test parse_url_path", {
@@ -57,3 +57,4 @@ test_that("test get_query_param parameters", {
   expect_equal(shiny::isolate(get_query_param(session =  session)),
                list(one = 1, two = 2))
 })
+
