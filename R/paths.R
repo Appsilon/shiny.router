@@ -51,7 +51,7 @@ extract_link_name <- function(path) {
 #' @examples
 #' route_link("abc") # /#!/abc
 route_link <- function(path) {
-  paste0("./", cleanup_hashpath(path))
+  paste0("/", cleanup_hashpath(path))
 }
 
 ########################### To export
@@ -68,7 +68,7 @@ route_link <- function(path) {
 #' }
 #' @details
 #' \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
-#' 
+#'
 #' Note that having query string appear before \code{#!} may cause browser to refresh
 #' and thus reset Shiny session.
 #' @export
