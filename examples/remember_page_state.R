@@ -16,13 +16,32 @@ menu <- (
           div(class = "header", "Demo"),
           div(class = "menu",
               a(class = "item", href = route_link("/"), icon("home"), "Page"),
-              a(class = "item", href = route_link("other"), icon("clock"), "Other")
+              a(class = "item", href = route_link("other"), icon("clock"), "Other"),
+              a(class = "item", href = route_link("ui"), icon("clock"), "UI")
           )
       )
   )
 )
 
-page <- function(title, content) {
+page_content <- function(title, content) {
+  div(
+      h1(title),
+      p(content)
+  )
+}
+
+root_page <- page_content("Home page", actionButton("button", "Click me!"))
+other_page <- page_content("Some other page", textInput("text", "Type something here"))
+ui_page <- page_content("UI page", uiOutput("oko"))
+
+router <- make_router(
+  route("index", root_page),
+  route("other", other_page),
+  route("ui", ui_page)
+)
+
+ui <- semanticPage(
+  title = "Router demo",
   div(class = "ui container",
       style = "margin-top: 1em",
       div(class = "ui grid",
@@ -30,31 +49,17 @@ page <- function(title, content) {
               menu
           ),
           div(class = "twelve wide column",
-              div(class = "ui segment",
-                  h1(title),
-                  p(content)
-              )
+              router$ui
           )
       )
   )
-}
-
-root_page <- page("Home page", actionButton("button", "Click me!"))
-other_page <- page("Some other page", textInput("text", "Type something here"))
-
-router <- make_router(
-  route("index", root_page),
-  route("other", other_page)
 )
-
-ui <- shinyUI(semanticPage(
-  title = "Router demo",
-  "Hello",
-  router$ui
-))
 
 server <- shinyServer(function(input, output, session) {
   router$server(input, output, session)
+  output$oko <- renderUI({
+    div("Hello there")
+  })
 })
 
 shinyApp(ui, server)

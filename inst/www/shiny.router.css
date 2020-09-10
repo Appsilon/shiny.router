@@ -1,0 +1,11 @@
+.router-hidden {
+  visibility: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  max-height: 0 !important;
+}
+
+.router.ui.segment {
+  margin: 0;
+}

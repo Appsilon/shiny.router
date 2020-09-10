@@ -1,5 +1,25 @@
 ROUTER_UI_ID <- '_router_ui'
 
+attach_attribs <- function(ui, path) {
+  if ("shiny.tag" %in% class(ui)) {
+    # make pages identication easier
+    ui$attribs$`data-path` <- path
+    ui$attribs$class <- paste("router router-hidden", ui$attribs$class)
+    # initially hide all ui elements
+    #ui$attribs$style <- paste("display: none;", ui$attribs$style)
+  }
+  if ("shiny.tag.list" %in% class(ui)) {
+    # make pages identication easier
+    container <- div(ui)
+    container$attribs$`data-path` <- path
+    container$attribs$class <- "router router-hidden"
+    # initially hide all ui elements
+    #container$attribs$style <- "display: none;"
+    ui <- container
+  }
+  ui
+}
+
 #' Create a mapping bewtween a ui element
 #' and a server callack
 #'
@@ -18,11 +38,7 @@ callback_mapping <- function(path, ui, server = NA) {
     function(input, output, session, ...) {}
   }
   out <- list()
-  # make pages identication easier
-  ui$attribs$`data-path` <- path
-  ui$attribs$class <- paste("router", ui$attribs$class)
-  # initially hide all ui elements
-  ui$attribs$style <- paste("display: none;", ui$attribs$style)
+  ui <- attach_attribs(ui, path)
   out[["ui"]] <- ui
   out[["server"]] <- server
   out
@@ -142,12 +158,14 @@ router_ui <- function(router) {
     system.file("www", package = "shiny.router")
   )
   jsFile <- file.path("shiny.router", "shiny.router.js")
+  cssFile <- file.path("shiny.router", "shiny.router.css")
 
   list(
     shiny::singleton(
       shiny::withTags(
         shiny::tags$head(
-          shiny::tags$script(type = "text/javascript", src = jsFile)
+          shiny::tags$script(type = "text/javascript", src = jsFile),
+          shiny::tags$link(rel = "stylesheet", href = cssFile)
         )
       )
     ),
