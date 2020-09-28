@@ -5,16 +5,12 @@ attach_attribs <- function(ui, path) {
     # make pages identication easier
     ui$attribs$`data-path` <- path
     ui$attribs$class <- paste("router router-hidden", ui$attribs$class)
-    # initially hide all ui elements
-    #ui$attribs$style <- paste("display: none;", ui$attribs$style)
   }
   if ("shiny.tag.list" %in% class(ui)) {
     # make pages identication easier
     container <- shiny::div(ui)
     container$attribs$`data-path` <- path
     container$attribs$class <- "router router-hidden"
-    # initially hide all ui elements
-    #container$attribs$style <- "display: none;"
     ui <- container
   }
   ui

@@ -46,9 +46,7 @@ var switchUI = function(message) {
   var active_route = routes.filter(function() {
     return $(this).data("path") == message;
   });
-  //routes.hide();
   routes.addClass('router-hidden');
-  //active_route.show();
   active_route.removeClass('router-hidden');
 };
 
