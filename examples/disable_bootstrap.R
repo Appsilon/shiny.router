@@ -7,15 +7,15 @@ bootstrap_page <- fluidPage(
   tags$head(
     singleton(disable_bootstrap_on_bookmark("semanticui"))
   ),
-  sidebarLayout(
-    sidebarPanel(
+  shiny::sidebarLayout(
+    shiny::sidebarPanel(
       shiny::sliderInput("obs",
                   "Number of observations:",
                   min = 0,
                   max = 1000,
                   value = 500)
     ),
-    mainPanel(
+    shiny::mainPanel(
       plotOutput("distPlot")
     )
   )
@@ -37,20 +37,20 @@ router <- make_router(
 
 # Creat output for our router in main UI of Shiny app.
 ui <- shinyUI(
-  router_ui()
+  router$ui
 )
 
 # Plug router into Shiny server.
 server <- shinyServer(function(input, output, session) {
-  router(input, output, session)
+  router$server(input, output, session)
+
+  output$dropdown <- renderUI({
+    dropdown_input("simple_dropdown", LETTERS, value = "A")
+  })
 
   output$distPlot <- renderPlot({
     req(input$obs)
     hist(rnorm(input$obs))
-  })
-
-  output$dropdown <- renderUI({
-    dropdown_input("simple_dropdown", LETTERS, value = "A")
   })
 
   output$selected_letter <- renderText(input[["simple_dropdown"]])
