@@ -23,6 +23,6 @@ Create single route configuration.
 \dontrun{
 route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 
-route("/main", div(h1("Main page"), p("Lorem ipsum.")))
+route("/main", shiny::tags$div(h1("Main page"), p("Lorem ipsum.")))
 }
 }

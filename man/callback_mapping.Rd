@@ -8,6 +8,8 @@ and a server callack}
 callback_mapping(path, ui, server = NA)
 }
 \arguments{
+\item{path}{Bookmark id.}
+
 \item{ui}{Valid Shiny user interface.}
 
 \item{server}{Function that is called within the global server function if given}

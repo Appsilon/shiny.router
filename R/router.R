@@ -10,7 +10,7 @@ attach_attribs <- function(ui, path) {
   }
   if ("shiny.tag.list" %in% class(ui)) {
     # make pages identication easier
-    container <- div(ui)
+    container <- shiny::div(ui)
     container$attribs$`data-path` <- path
     container$attribs$class <- "router router-hidden"
     # initially hide all ui elements
@@ -23,6 +23,7 @@ attach_attribs <- function(ui, path) {
 #' Create a mapping bewtween a ui element
 #' and a server callack
 #'
+#' @param path Bookmark id.
 #' @param ui Valid Shiny user interface.
 #' @param server Function that is called within the global server function if given
 callback_mapping <- function(path, ui, server = NA) {
@@ -63,7 +64,7 @@ get_url_hash <- function(session = shiny::getDefaultReactiveDomain()) {
 #' \dontrun{
 #' route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 #'
-#' route("/main", div(h1("Main page"), p("Lorem ipsum.")))
+#' route("/main", shiny::tags$div(h1("Main page"), p("Lorem ipsum.")))
 #' }
 #' @export
 route <- function(path, ui, server = NA) {
@@ -140,7 +141,7 @@ create_router_callback <- function(root, routes) {
       }
     )
 
-    observeEvent(session$userData$shiny.router.page(), {
+    shiny::observeEvent(session$userData$shiny.router.page(), {
       page_path <- session$userData$shiny.router.page()$path
       log_msg("shiny.router main output. path: ", page_path)
       session$sendCustomMessage("switch-ui", page_path)
@@ -169,7 +170,7 @@ router_ui <- function(router) {
         )
       )
     ),
-    tags$div(
+    shiny::tags$div(
       id = "router-page-wrapper",
       lapply(router$routes, function(route) route$ui)
     )
