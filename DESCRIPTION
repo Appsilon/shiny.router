@@ -8,6 +8,9 @@ Authors@R: c(person("Filip", "Stachura",
             person("Dominik", "Krzemiński",
                     email = "dominik@appsilon.com",
                     role = c("cre", "aut")),
+            person("Krystian", "Igras",
+                    email = "krystian@appsilon.com",
+                    role = c("aut")),
              person(family = "Appsilon", role = c("cph"))
            )
 Description: shiny.router is a minimalistic router for your Shiny apps.

@@ -35,7 +35,7 @@ router <- make_router(
   route("semantic", semanticui_page)
 )
 
-# Creat output for our router in main UI of Shiny app.
+# Create output for our router in main UI of Shiny app.
 ui <- shinyUI(
   router$ui
 )

@@ -2,12 +2,12 @@ ROUTER_UI_ID <- '_router_ui'
 
 attach_attribs <- function(ui, path) {
   if ("shiny.tag" %in% class(ui)) {
-    # make pages identication easier
+    # make pages identification easier
     ui$attribs$`data-path` <- path
     ui$attribs$class <- paste("router router-hidden", ui$attribs$class)
   }
   if ("shiny.tag.list" %in% class(ui)) {
-    # make pages identication easier
+    # make pages identification easier
     container <- shiny::div(ui)
     container$attribs$`data-path` <- path
     container$attribs$class <- "router router-hidden"
@@ -16,12 +16,12 @@ attach_attribs <- function(ui, path) {
   ui
 }
 
-#' Create a mapping bewtween a ui element
-#' and a server callack
+#' Create a mapping between a UI element and a server callback.
 #'
 #' @param path Bookmark id.
 #' @param ui Valid Shiny user interface.
 #' @param server Function that is called within the global server function if given
+#' @return list with ui and server fields
 callback_mapping <- function(path, ui, server = NA) {
   server <- if (is.function(server)) {
     if ("..." %in% names(formals(server))) {
@@ -145,24 +145,37 @@ create_router_callback <- function(root, routes) {
   }
 }
 
+#' Creates router callback
+#'
+#' @param router router object
+#'
+#' @return router callback
+#' @export
 router_server <- function(router) {
   create_router_callback(router$root, router$routes)
 }
 
+#' Creates router UI
+#'
+#' @param router router object
+#'
+#' @return list with shiny tags that adds "router-page-wrapper" div and embeds
+#' router javascript script.
+#' @export
 router_ui <- function(router) {
   shiny::addResourcePath(
     "shiny.router",
     system.file("www", package = "shiny.router")
   )
-  jsFile <- file.path("shiny.router", "shiny.router.js")
-  cssFile <- file.path("shiny.router", "shiny.router.css")
+  js_file <- file.path("shiny.router", "shiny.router.js")
+  css_file <- file.path("shiny.router", "shiny.router.css")
 
   list(
     shiny::singleton(
       shiny::withTags(
         shiny::tags$head(
-          shiny::tags$script(type = "text/javascript", src = jsFile),
-          shiny::tags$link(rel = "stylesheet", href = cssFile)
+          shiny::tags$script(type = "text/javascript", src = js_file),
+          shiny::tags$link(rel = "stylesheet", href = css_file)
         )
       )
     ),

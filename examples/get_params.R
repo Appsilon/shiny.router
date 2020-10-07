@@ -29,7 +29,7 @@ router <- make_router(
   route("other", other_page)
 )
 
-# Creat output for our router in main UI of Shiny app.
+# Create output for our router in main UI of Shiny app.
 ui <- fluidPage(
   router$ui,
   actionButton("change", "Change query path"),
