@@ -1,5 +1,13 @@
 ROUTER_UI_ID <- '_router_ui'
 
+#' Attach 'router-hidden' class to single page UI content
+#'
+#' @description Covered UI types are Shiny/htmltools tags or tag lists and httml templates.
+#' In case of tag list (\code{tagList}) and html template (\code{htmlTemplate}) 'div' wrapper
+#' with 'router-hidden' class is added.
+#'
+#' @param ui Single page UI content created with proper html tags or tag list.
+#' @param path Single page path name. Attached to \code{data-path} attriubute.
 attach_attribs <- function(ui, path) {
   if ("shiny.tag" %in% class(ui)) {
     # make pages identification easier
@@ -145,23 +153,19 @@ create_router_callback <- function(root, routes) {
   }
 }
 
-#' Creates router callback
+#' Create router pages server callback
 #'
-#' @param router router object
-#'
-#' @return router callback
-#' @export
+#' @param router Router pages object. See \link{make_router}.
 router_server <- function(router) {
   create_router_callback(router$root, router$routes)
 }
 
 #' Creates router UI
 #'
-#' @param router router object
+#' @param router Router pages object. See \link{make_router}.
 #'
 #' @return list with shiny tags that adds "router-page-wrapper" div and embeds
 #' router javascript script.
-#' @export
 router_ui <- function(router) {
   shiny::addResourcePath(
     "shiny.router",

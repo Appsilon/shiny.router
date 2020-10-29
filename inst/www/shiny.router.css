@@ -5,3 +5,7 @@
   overflow: hidden !important;
   max-height: 0 !important;
 }
+
+.router-hidden * {
+  visibility: inherit;
+}
