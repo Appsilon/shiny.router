@@ -4,8 +4,7 @@
 \alias{change_page}
 \title{Change the currently displayed page.}
 \usage{
-change_page(page, session = shiny::getDefaultReactiveDomain(),
-  mode = "push")
+change_page(page, session = shiny::getDefaultReactiveDomain(), mode = "push")
 }
 \arguments{
 \item{page}{The new URL to go to. Should just be the path component of the

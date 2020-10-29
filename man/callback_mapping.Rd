@@ -2,17 +2,20 @@
 % Please edit documentation in R/router.R
 \name{callback_mapping}
 \alias{callback_mapping}
-\title{Create a mapping bewtween a ui element
-and a server callack}
+\title{Create a mapping between a UI element and a server callback.}
 \usage{
-callback_mapping(ui, server = NA)
+callback_mapping(path, ui, server = NA)
 }
 \arguments{
+\item{path}{Bookmark id.}
+
 \item{ui}{Valid Shiny user interface.}
 
 \item{server}{Function that is called within the global server function if given}
 }
+\value{
+list with ui and server fields
+}
 \description{
-Create a mapping bewtween a ui element
-and a server callack
+Create a mapping between a UI element and a server callback.
 }

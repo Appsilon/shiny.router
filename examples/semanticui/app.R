@@ -47,13 +47,13 @@ router <- make_router(
   route("other", other_page)
 )
 
-ui <- shinyUI(semanticPage(
+ui <- semanticPage(
   title = "Router demo",
-  router_ui()
-))
+  router$ui
+)
 
-server <- shinyServer(function(input, output, session) {
-  router(input, output, session)
-})
+server <- function(input, output, session) {
+  router$server(input, output, session)
+}
 
 shinyApp(ui, server)

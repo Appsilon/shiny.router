@@ -48,7 +48,7 @@ router <- make_router(
 ui <- fluidPage(
   shiny::actionButton("clicks_common", "Number of clicks is passed to both pages and processed differently."),
   textOutput("real_number"),
-  router_ui()
+  router$ui
 )
 
 # Plug router into Shiny server.
@@ -61,7 +61,7 @@ server <- shinyServer(function(input, output, session) {
     paste("Real value:", input$clicks_common)
   })
 
-  router(input, output, session, value = common_counter)
+  router$server(input, output, session, value = common_counter)
 
 })
 

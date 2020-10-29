@@ -49,12 +49,12 @@ router <- make_router(
 
 # Creat output for our router in main UI of Shiny app.
 ui <- shinyUI(fluidPage(
-  router_ui()
+  router$ui
 ))
 
 # Plug router into Shiny server.
 server <- shinyServer(function(input, output, session) {
-  router(input, output, session)
+  router$server(input, output, session)
 })
 
 # Run server in a standard way.
