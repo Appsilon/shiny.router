@@ -1,0 +1,17 @@
+---
+title: "Introduction to the routing in Shiny with shiny.router"
+author: "Appsilon"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to the routing in Shiny with shiny.router}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE, screenshot.force = FALSE}
+library(shiny)
+library(shiny.router)
+```
+
+In this tutorial we will walk you through the basics of routing with the `shiny.router` library.

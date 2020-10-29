@@ -1,0 +1,35 @@
+title: SHINY.I18N
+template:
+  params:
+    bootswatch: yeti
+
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      href: index.html
+      text: "Start"
+    - icon: fa-university
+      text: "Tutorials"
+      href: articles/index.html
+  right:
+    - icon: fa-file-code-o
+      text: "Reference"
+      href: reference/index.html
+    - icon: fa-github fa-lg
+      href: https://github.com/Appsilon/shiny.router
+    - icon: fa-twitter fa-lg
+      href: https://twitter.com/Appsilon
+
+articles:
+- title: All tutorials
+  desc: ~
+  contents:
+  - '`basics`'
+
+
+reference:
+- title: Main router functions
+  contents:
+  - '`Translator`'
+
