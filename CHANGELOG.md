@@ -9,11 +9,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Fixed
 ### Removed
 
-## [0.2.0]
+## [0.2.0] - 2020-10-30
 
 ### Added
 
-- js bindings for `shinyrouter` and companion `css` code
+- `shiny.router.js` bindings that change the routing subpage based on the what follows the hashstring
+
+- `shiny.router.css` with class `.router-hidden` that contains the content of a subpage
 
 - `get_query_param` function
 
