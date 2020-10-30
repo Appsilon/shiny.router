@@ -1,4 +1,4 @@
-title: SHINY.I18N
+title: SHINY.ROUTER
 template:
   params:
     bootswatch: yeti
@@ -31,5 +31,15 @@ articles:
 reference:
 - title: Main router functions
   contents:
-  - '`Translator`'
-
+  - '`make_router`'
+  - '`route`'
+  - '`route_link`'
+  - '`get_query_param`'
+  - '`change_page`'
+  - '`parse_url_path`'
+- title: Auxiliary functions
+  contents:
+  - '`disable_bootstrap_on_bookmark`'
+  - '`get_page`'
+  - '`is_page`'
+  - '`page404`'

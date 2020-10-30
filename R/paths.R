@@ -12,7 +12,7 @@ valid_path <- function(routes, path) {
 #' Formats a URL fragment into a hashpath starting with "#!/"
 #'
 #' @param hashpath character with hash path
-#' @return character with formated hashpath
+#' @return character with formatted hashpath
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
@@ -43,6 +43,7 @@ extract_link_name <- function(path) {
 }
 
 #' Route link
+#'
 #' Adds /#!/ prefix to link.
 #'
 #' @param path character with path
@@ -68,7 +69,7 @@ route_link <- function(path) {
 #' }
 #' @details
 #' \code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
-#' 
+#'
 #' Note that having query string appear before \code{#!} may cause browser to refresh
 #' and thus reset Shiny session.
 #' @export
@@ -120,6 +121,8 @@ parse_url_path <- function(url_path) {
   parsed
 }
 
+#' Get Query Parameters
+#'
 #' Convenience function to retrieve any params that were part of the requested
 #' page. The param values returned come from "httr::parse_url()"
 #' @param field If provided, retrieve only a param with this name. (Otherwise,
