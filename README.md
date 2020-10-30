@@ -1,86 +1,93 @@
-
-<link href="http://fonts.googleapis.com/css?family=Lato:300,700,300italic|Inconsolata" rel="stylesheet" type="text/css"> <link href='docs/style.css' rel='stylesheet' type='text/css'>
-
 <img src="man/figures/shiny.router.png" align="right" alt="" width="150" />
 
 shiny.router
 ============
 
-A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps. <br>
+<!-- badges: start -->
+![R-CMD-check](https://github.com/Appsilon/shiny.router/workflows/R-CMD-check/badge.svg)
+[![codecov](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)](https://codecov.io/gh/Appsilon/shiny.router)
+[![cranlogs](https://cranlogs.r-pkg.org/badges/shiny.router)](https://CRAN.R-project.org/package=shiny.router)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/shiny.router)](https://CRAN.R-project.org/package=shiny.router)
+<!-- badges: end -->
 
-[![Travis build status](https://travis-ci.org/Appsilon/shiny.router.svg?branch=master)](https://travis-ci.org/Appsilon/shiny.router) [![codecov](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)](https://codecov.io/gh/Appsilon/shiny.router)
+A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
 
 Now it's possible to recreate a state of your app, by providing a specific URL, like:
 
-    make_router(
-      route("<your_app_url>/main",  mainPageShinyUI),
-      route("<your_app_url>/other", otherPageShinyUI)
-    )
+```r
+  make_router(
+    route("<your_app_url>/main",  mainPageShinyUI),
+    route("<your_app_url>/other", otherPageShinyUI)
+  )
+```
 
-<!--
-TODO We would like to have a nice graphic explaning routing mechanism
--->
-Basic tutorial article is available on [Appsilon Data Science blog](http://blog.appsilon.com/rstats/2016/12/08/shiny.router.html).
+<!-- TODO We would like to have a nice graphic explaning routing mechanism -->
 
-<p style="text-align: center; font-size: x-large;">
-<a href="https://demo.appsilon.ai/apps/router/">Live demo</a>
-</p>
+Basic tutorial article is available on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
+
+
+<h4><a href="https://demo.appsilon.ai/apps/router2/" target="_blank">Live demo</a> </h4>
+
 
 Source code
 -----------
 
-This library source code can be found on [Appsilon Data Science's](http://appsilon.com) Github: <br> <https://github.com/Appsilon/shiny.router>
+This library source code can be found on [Appsilon's](https://appsilon.com) Github: https://github.com/Appsilon/shiny.router
 
 How to install?
 ---------------
 
 It's possible to install this library through CRAN
 
-    install.packages("shiny.router")
+```r
+  install.packages("shiny.router")
+```
 
-The most recent version you can get from this repo using [devtools](https://github.com/hadley/devtools).
+The most recent version you can get from this repo using [remotes](https://github.com/r-lib/remotes).
 
-    devtools::install_github("Appsilon/shiny.router")
+```r
+  remotes::install_github("Appsilon/shiny.router")
+```
 
 To install [previous version](https://github.com/Appsilon/shiny.router/blob/master/CHANGELOG.md) you can run:
 
-    devtools::install_github("Appsilon/shiny.router", ref = "0.1.0")
+```r
+  remotes::install_github("Appsilon/shiny.router", ref = "0.1.0")
+```
 
 Example
 -------
 
 Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples. Here's the basic usage:
 
-    router <- make_router(
-      route("/", root_page),
-      route("/other", other_page)
-    )
+```r
+  router <- make_router(
+    route("/", root_page),
+    route("/other", other_page)
+  )
 
-    ui <- shinyUI(semanticPage(
-      title = "Router demo",
-      router_ui()
-    ))
+  ui <- fluidPage(
+    title = "Router demo",
+    router$ui
+  )
 
-    server <- shinyServer(function(input, output) {
-      router(input, output)
-    })
+  server <- function(input, output, session) {
+    router$server(input, output, session)
+  }
 
-    shinyApp(ui, server)
+  shinyApp(ui, server)
+```
 
 How to contribute?
 ------------------
 
-If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.<br>
+If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.
+
+Reporting a bug is also helpful - please use github issues and describe your problem as detailed as possible.
 
 **Changes in documentation**
 
-Both repository **README.md** file and an official documentation page are generated with Rmarkdown, so if there is a need to update them, please modify accordingly a **README.Rmd** file and use [readmebuilder](https://github.com/Appsilon/readmebuilder) package to render the new README.
-
-In most cases a simple call of:
-
-``` r
-readmebuilder::build_readme()
-```
+Documentation is rendered with `pkgdown`. Just run `pkgdown::build_site()` after editing documentation or `README.md`.
 
 Troubleshooting
 ---------------
@@ -92,23 +99,28 @@ However, if you encounter any problems, try the following:
 1.  Up-to-date R language environment
 2.  Installing specific dependent libraries versions
     -   magrittr
-
-            install.packages("magrittr", version='1.5') 
+            ```r
+            install.packages("magrittr", version='1.5')
+            ```
 
     -   shiny
-
+            ```r
             install.packages("shiny", version='0.14.2.9001')
+            ```
 
-3.  Missing semanticui dependency - one of our examples uses one of our others libraries, so please install it as well, when running that example. Repository: [semanticui](https://github.com/Appsilon/semanticui)
+3.  Missing `shiny.semantic` dependency - one of our examples uses one of our others libraries, so please install it as well, when running that example. Repository: [shiny.semantic](https://github.com/Appsilon/shiny.semantic).
 
 Future enhacements
 ------------------
 
--   URL params handling
--   CRAN release
--   consider utilising <https://shiny.rstudio.com/articles/client-data.html> instead of Page.js
+- customize loading full session or just visible part
 
-Appsilon Data Science
-=====================
+Appsilon
+========
+
+<img src="https://avatars0.githubusercontent.com/u/6096772" align="right" alt="" width="6%" />
+
+Appsilon is the **Full Service Certified RStudio Partner**. Learn more
+at [appsilon.com](https://appsilon.com).
 
 Get in touch [dev@appsilon.com](dev@appsilon.com)

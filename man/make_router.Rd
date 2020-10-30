@@ -2,7 +2,7 @@
 % Please edit documentation in R/router.R
 \name{make_router}
 \alias{make_router}
-\title{Creates router. Returned callback needs to be called within Shiny server code.}
+\title{Creates router.}
 \usage{
 make_router(default, ..., page_404 = page404())
 }
@@ -17,7 +17,7 @@ make_router(default, ..., page_404 = page404())
 Shiny router callback that should be run in server code with Shiny input and output lists.
 }
 \description{
-Creates router. Returned callback needs to be called within Shiny server code.
+Returned callback needs to be called within Shiny server code.
 }
 \examples{
 \dontrun{

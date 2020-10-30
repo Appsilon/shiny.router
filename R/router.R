@@ -190,7 +190,9 @@ router_ui <- function(router) {
   )
 }
 
-#' Creates router. Returned callback needs to be called within Shiny server code.
+#' Creates router.
+#'
+#' Returned callback needs to be called within Shiny server code.
 #'
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... All other routes defined with shiny.router::route function.
@@ -216,8 +218,9 @@ make_router <- function(default, ..., page_404 = page404()) {
   list(ui = router_ui(router), server = router_server(router))
 }
 
-#' Convenience function to retrieve just the "page" part of the input. This
-#' corresponds to what might be called the "path" component of a URL, except
+#' Convenience function to retrieve just the "page" part of the input.
+#'
+#' This corresponds to what might be called the "path" component of a URL, except
 #' that we're using URLs with hashes before the path & query (e.g.:
 #' http://www.example.com/#!/virtual/path?and=params)
 #' @param session The current Shiny Session

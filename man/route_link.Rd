@@ -2,8 +2,7 @@
 % Please edit documentation in R/paths.R
 \name{route_link}
 \alias{route_link}
-\title{Route link
-Adds /#!/ prefix to link.}
+\title{Route link}
 \usage{
 route_link(path)
 }
@@ -14,7 +13,6 @@ route_link(path)
 route link
 }
 \description{
-Route link
 Adds /#!/ prefix to link.
 }
 \examples{

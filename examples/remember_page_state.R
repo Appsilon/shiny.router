@@ -2,8 +2,6 @@ library(shiny)
 library(shiny.semantic)
 library(shiny.router)
 
-# TODO adjust to new version of shiny.router
-
 # Hint: semanticui
 #
 # Div classes in the UI of this applications are created for semanticui package.

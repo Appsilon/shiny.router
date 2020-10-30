@@ -2,10 +2,7 @@
 % Please edit documentation in R/router.R
 \name{get_page}
 \alias{get_page}
-\title{Convenience function to retrieve just the "page" part of the input. This
-corresponds to what might be called the "path" component of a URL, except
-that we're using URLs with hashes before the path & query (e.g.:
-http://www.example.com/#!/virtual/path?and=params)}
+\title{Convenience function to retrieve just the "page" part of the input.}
 \usage{
 get_page(session = shiny::getDefaultReactiveDomain())
 }
@@ -17,8 +14,7 @@ The current page in a length-1 character vector, or FALSE if the input
 has no value.
 }
 \description{
-Convenience function to retrieve just the "page" part of the input. This
-corresponds to what might be called the "path" component of a URL, except
+This corresponds to what might be called the "path" component of a URL, except
 that we're using URLs with hashes before the path & query (e.g.:
 http://www.example.com/#!/virtual/path?and=params)
 }

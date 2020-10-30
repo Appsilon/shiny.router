@@ -47,7 +47,7 @@ router <- make_router(
   route("third", third_page, NA)
 )
 
-# Creat output for our router in main UI of Shiny app.
+# Make output for our router in main UI of Shiny app.
 ui <- shinyUI(fluidPage(
   router$ui
 ))

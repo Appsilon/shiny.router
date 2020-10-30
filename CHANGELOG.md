@@ -9,6 +9,40 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Fixed
 ### Removed
 
+## [0.2.0] - 2020-10-30
+
+### Added
+
+- `shiny.router.js` bindings that change the routing subpage based on the what follows the hashstring
+
+- `shiny.router.css` with class `.router-hidden` that contains the content of a subpage
+
+- `get_query_param` function
+
+- new documentation
+
+- vignette with tutorial
+
+### Changed
+
+- the way of calling router and ui, now this is one object with fields: server and ui
+
+- parameters go after hash now
+
+### Fixed
+
+- route_link() keeps root url but lose path
+
+- double loading when using browser back button
+
+- stopped rerendering whole page
+
+### Removed
+
+- `router_ui()` function
+
+- old `router` object (eg. replaced by a new `router` list)
+
 ## [0.1.0] - 2016-12-05
 ### Added
 - Basic path routing mechanism

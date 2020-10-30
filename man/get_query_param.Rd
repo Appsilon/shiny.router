@@ -2,8 +2,7 @@
 % Please edit documentation in R/paths.R
 \name{get_query_param}
 \alias{get_query_param}
-\title{Convenience function to retrieve any params that were part of the requested
-page. The param values returned come from "httr::parse_url()"}
+\title{Get Query Parameters}
 \usage{
 get_query_param(field = NULL, session = shiny::getDefaultReactiveDomain())
 }
