@@ -88,7 +88,7 @@
       <h1 data-toc-skip>Introduction to the routing in Shiny with shiny.router</h1>
                         <h4 class="author">Appsilon</h4>
             
-            <h4 class="date">2020-10-30</h4>
+            <h4 class="date">2020-11-03</h4>
       
       
       <div class="hidden name"><code>basics.Rmd</code></div>
@@ -135,22 +135,23 @@
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">server</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input</span>, <span class="no">output</span>, <span class="no">session</span>) {
   <span class="no">router</span>$<span class="fu">server</span>(<span class="no">input</span>, <span class="no">output</span>, <span class="no">session</span>)
 }</pre></body></html></div>
-<p>In theory that would be it, but now let’s introduce the mechanism of catching the parameters from the URL. We will use <code>get_query_param</code> function. Our modified Server code may look like this:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r">server &lt;- function(input, output, session) {
-  router$server(input, output, session)
+<p>In theory that would be it, but additionally we can also introduce the mechanism of catching the parameters from the URL. We will use <code>get_query_param</code> function. Our modified Server code may look like this:</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">server</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input</span>, <span class="no">output</span>, <span class="no">session</span>) {
+  <span class="no">router</span>$<span class="fu">server</span>(<span class="no">input</span>, <span class="no">output</span>, <span class="no">session</span>)
 
-  component &lt;- reactive({
-    if (is.null(get_query_param()$add)) {
-      return(0)
+  <span class="no">component</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reactive.html">reactive</a></span>({
+    <span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span>(<span class="fu"><a href="../reference/get_query_param.html">get_query_param</a></span>()$<span class="no">add</span>)) {
+      <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="fl">0</span>)
     }
-    as.numeric(get_query_param()$add)
+    <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="fu"><a href="../reference/get_query_param.html">get_query_param</a></span>()$<span class="no">add</span>)
   })
 
-  output$power_of_input &lt;- renderUI({
-    HTML(paste(
-      "I display input increased by &lt;code&gt;add&lt;/code&gt; GET parameter from app url and pass result to &lt;code&gt;output$power_of_input&lt;/code&gt;: ",
-      as.numeric(input$int) + component()))
-  })</pre></body></html></div>
+  <span class="no">output</span>$<span class="no">power_of_input</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderUI.html">renderUI</a></span>({
+    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/reexports.html">HTML</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(
+      <span class="st">"I display input increased by &lt;code&gt;add&lt;/code&gt; GET parameter from app url and pass result to &lt;code&gt;output$power_of_input&lt;/code&gt;: "</span>,
+      <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">input</span>$<span class="no">int</span>) + <span class="fu">component</span>()))
+  })
+}</pre></body></html></div>
 <p>It’s time to run it.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html">shinyApp</a></span>(<span class="no">ui</span>, <span class="no">server</span>)</pre></body></html></div>
 <p>Here you can see the final result:</p>

@@ -80,9 +80,9 @@ server <- function(input, output, session) {
 }
 ```
 
-In theory that would be it, but now let's introduce the mechanism of catching the
-parameters from the URL. We will use `get_query_param` function. Our modified
-Server code may look like this:
+In theory that would be it, but additionally we can also introduce the mechanism
+of catching the parameters from the URL. We will use `get_query_param` function.
+Our modified Server code may look like this:
 
 ```{r echo = T, include = T, eval = FALSE}
 server <- function(input, output, session) {
@@ -100,7 +100,7 @@ server <- function(input, output, session) {
       "I display input increased by <code>add</code> GET parameter from app url and pass result to <code>output$power_of_input</code>: ",
       as.numeric(input$int) + component()))
   })
-  
+}
 ```
 
 It's time to run it.
