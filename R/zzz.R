@@ -1,4 +1,4 @@
-#' onLoad
+#' On Load
 #'
 #' On package load it updates .i18_config reading yaml file from config.
 #'
