@@ -6,7 +6,8 @@ menu <- (
   tags$ul(
     tags$li(a(class = "item", href = route_link("/"), "Page")),
     tags$li(a(class = "item", href = route_link("other"), "Other page")),
-    tags$li(a(class = "item", href = route_link("third"), "A third page"))
+    tags$li(a(class = "item", href = route_link("third"), "A third page")),
+    tags$li(a(class = "item", href = "test", "A test page"))
   )
 )
 
@@ -24,6 +25,7 @@ page <- function(title, content, table_id) {
 root_page <- page("Home page", "Welcome on sample routing page!", "table_one")
 other_page <- page("Some other page", "Lorem ipsum dolor sit amet.", "table_two")
 third_page <- div(menu, titlePanel("Third Page"))
+test_page <- div(menu, titlePanel("Test Page"), p("Lorem ipsum ..."))
 
 # Callbacks on the server side for
 # the sample pages
@@ -44,7 +46,8 @@ other_callback <- function(input, output, session) {
 router <- make_router(
   route("/", root_page, root_callback),
   route("other", other_page, other_callback),
-  route("third", third_page, NA)
+  route("third", third_page, NA),
+  route("test", test_page, NA)
 )
 
 # Make output for our router in main UI of Shiny app.
@@ -58,4 +61,4 @@ server <- shinyServer(function(input, output, session) {
 })
 
 # Run server in a standard way.
-shinyApp(ui, server)
+shinyApp(ui, server, uiPattern = ".*")

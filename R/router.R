@@ -77,6 +77,11 @@ route <- function(path, ui, server = NA) {
   out
 }
 
+get_url_match <- function(path) {
+  m = gregexpr("/[^/]+$", path)
+  substring(path, m[[1]], m[[1]] + attr(m[[1]], 'match.length') - 1)
+}
+
 #' Internal function creating a router callback function.
 #' One need to call router callback with Shiny input and output in server code.
 #'
@@ -110,8 +115,16 @@ create_router_callback <- function(root, routes) {
       ignoreInit = FALSE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect
       # changes to the hash
-      eventExpr = c(get_url_hash(session), session$clientData$url_search),
+      eventExpr = c(get_url_hash(session), session$clientData$url_search, session$clientData$url_pathname),
       handlerExpr = {
+        path_name <- get_url_match(session$clientData$url_pathname)
+        print(path_name)
+        flag = F
+        if (path_name == "/test") {
+          shiny::updateQueryString("/test", "replace", session)
+          flag = T
+        }
+        print('_____')
         log_msg("hashchange observer triggered!")
         new_hash = shiny::getUrlHash(session)
         log_msg("query not followed by hash extracted!")
@@ -122,15 +135,16 @@ create_router_callback <- function(root, routes) {
         cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_url)
-        parsed$path <- ifelse(parsed$path == "", root, parsed$path)
+        if (flag) parsed$path <- gsub("/", "", path_name)
+        #parsed$path <- ifelse(parsed$path == "", root, parsed$path)
 
         if (!valid_path(routes, parsed$path)) {
           log_msg("Invalid path sent to observer")
           # If it's not a recognized path, then go to default 404 page.
-          change_page(PAGE_404_ROUTE, mode = "replace")
-        } else if (new_hash != cleaned_hash) {
-          log_msg("Cleaning up hashpath in URL...")
-          change_page(cleaned_hash, mode = "replace")
+          #change_page(PAGE_404_ROUTE, mode = "replace")
+        #} else if (new_hash != cleaned_hash) {
+          #log_msg("Cleaning up hashpath in URL...")
+          #change_page(cleaned_hash, mode = "replace")
         } else {
           log_msg("Path recognized!")
           # If it's a recognized path, then update the display to match.
