@@ -64,21 +64,27 @@ Example
 Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples. Here's the basic usage:
 
 ```r
-  router <- make_router(
-    route("/", root_page),
-    route("/other", other_page)
-  )
+library(shiny)
+library(shiny.router)
 
-  ui <- fluidPage(
-    title = "Router demo",
-    router$ui
-  )
+root_page <- div(h2("Root page"))
+other_page <- div(h3("Other page"))
 
-  server <- function(input, output, session) {
-    router$server(input, output, session)
-  }
+router <- make_router(
+  route("/", root_page),
+  route("other", other_page)
+)
 
-  shinyApp(ui, server)
+ui <- fluidPage(
+  title = "Router demo",
+  router$ui
+)
+
+server <- function(input, output, session) {
+  router$server(input, output, session)
+}
+
+shinyApp(ui, server)
 ```
 
 How to contribute?
