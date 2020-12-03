@@ -7,18 +7,25 @@ ROUTER_UI_ID <- '_router_ui'
 #' with 'router-hidden' class is added.
 #'
 #' @param ui Single page UI content created with proper html tags or tag list.
-#' @param path Single page path name. Attached to \code{data-path} attriubute.
-attach_attribs <- function(ui, path) {
+#' @param path Single page path name. Attached to \code{data-path} attribute.
+#' @param not_hidden character with default page that is not hidden by default.
+attach_attribs <- function(ui, path, not_hidden = "/") {
   if ("shiny.tag" %in% class(ui)) {
     # make pages identification easier
     ui$attribs$`data-path` <- path
-    ui$attribs$class <- paste("router router-hidden", ui$attribs$class)
+    if (path == not_hidden)
+      ui$attribs$class <- paste("router", ui$attribs$class)
+    else
+      ui$attribs$class <- paste("router router-hidden", ui$attribs$class)
   }
   if ("shiny.tag.list" %in% class(ui)) {
     # make pages identification easier
     container <- shiny::div(ui)
     container$attribs$`data-path` <- path
-    container$attribs$class <- "router router-hidden"
+    if (path == not_hidden)
+      container$attribs$class <- "router"
+    else
+      container$attribs$class <- "router router-hidden"
     ui <- container
   }
   ui
