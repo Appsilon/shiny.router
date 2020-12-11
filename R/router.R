@@ -9,7 +9,12 @@ ROUTER_UI_ID <- '_router_ui'
 #' @param ui Single page UI content created with proper html tags or tag list.
 #' @param path Single page path name. Attached to \code{data-path} attribute.
 #' @param not_hidden character with default page that is not hidden by default.
+#' this can be controlled globally by option \code{router.default.display} set
+#' to the default view of the app.
 attach_attribs <- function(ui, path, not_hidden = "/") {
+  option_not_hidden <- getOption("router_default_display")
+  if (!is.null(option_not_hidden))
+    not_hidden <- option_not_hidden
   if ("shiny.tag" %in% class(ui)) {
     # make pages identification easier
     ui$attribs$`data-path` <- path
