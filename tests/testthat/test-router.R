@@ -7,7 +7,7 @@ test_that("test route without server", {
   server <- function(input, output, session, ...){}
   router_ui <- shiny::div("a", `data-path` = "aa", class = "router router-hidden ")
   rr <- route("aa", ui)
-  expect_equal(rr$aa, list(ui = router_ui, server = server))
+  expect_equal(rr$aa, list(ui = router_ui, server = server), check.environment = FALSE)
 })
 
 test_that("test route with server", {
