@@ -36,11 +36,14 @@ page404 <- function(page = NULL, message404 = NULL){
 #' It should be inserted in head of bootrstrap page.
 #' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
 #'
-#' @importFrom htmltools renderDependencies
+#' @importFrom htmltools renderDependencies resolveDependencies
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
   func_bootstrapLib <- 'shiny' %:::% 'bootstrapLib' # workaround about R CMD CRAN NOTE regarding :::
-  bootstrap_dependency <- renderDependencies(list(func_bootstrapLib()), srcType = "href")
+  bootstrap_dependency <- renderDependencies(
+    resolveDependencies(list(func_bootstrapLib())),
+    srcType = "href"
+  )
   shiny::tagList(
     shiny::suppressDependencies("bootstrap"),
     shiny::singleton(shiny::div(id = "bootstrap_dependency", bootstrap_dependency)),
