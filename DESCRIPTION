@@ -7,10 +7,13 @@ Authors@R: c(person("Filip", "Stachura",
                     role = c("aut")),
             person("Dominik", "Krzemiński",
                     email = "dominik@appsilon.com",
-                    role = c("cre", "aut")),
+                    role = c("aut")),
             person("Krystian", "Igras",
                     email = "krystian@appsilon.com",
                     role = c("aut")),
+            person("Developers", "Appsilon",
+                    email = "dev+shinyrouter@appsilon.com",
+                    role = c("cre", "aut")),
              person(family = "Appsilon", role = c("cph"))
            )
 Description: It is a simple router for your Shiny apps.
