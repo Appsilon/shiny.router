@@ -150,6 +150,12 @@ create_router_callback <- function(root, routes) {
       log_msg("shiny.router main output. path: ", page_path)
       session$sendCustomMessage("switch-ui", page_path)
     })
+
+    shiny::observeEvent(session$userData$shiny.router.page(), {
+      page_path <- session$userData$shiny.router.page()$path
+      cleaned_hash <- cleanup_hashpath(page_path)
+      change_page(cleaned_hash, mode = "replace")
+    }, once = TRUE)
   }
 }
 
