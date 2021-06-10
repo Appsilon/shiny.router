@@ -118,6 +118,9 @@ create_router_callback <- function(root, routes) {
         new_query = session$clientData$url_search
         log_msg("New raw hash: ", new_hash)
         cleaned_hash = cleanup_hashpath(new_hash)
+        if (cleaned_hash == "#!/") {
+          cleaned_hash = cleanup_hashpath(root)
+        }
         log_msg("New cleaned hash: ", cleaned_hash)
         cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
         # Parse out the components of the hashpath
