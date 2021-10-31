@@ -12,7 +12,7 @@ Authors@R: c(person("Filip", "Stachura",
                     email = "krystian@appsilon.com",
                     role = c("aut")),
             person("Developers", "Appsilon",
-                    email = "dev+shinyrouter@appsilon.com",
+                    email = "support+opensource@appsilon.com",
                     role = c("cre", "aut")),
              person(family = "Appsilon", role = c("cph"))
            )

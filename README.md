@@ -130,4 +130,4 @@ Appsilon
 <img src="https://avatars0.githubusercontent.com/u/6096772" align="right" alt="" width="6%" />
 
 Appsilon is the **Full Service Certified RStudio Partner**. Learn more
-at [appsilon.com](https://appsilon.com). Get in touch `dev@appsilon.com`.
+at [appsilon.com](https://appsilon.com). Get in touch `support+opensource@appsilon.com`.
