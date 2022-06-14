@@ -40,10 +40,10 @@ page404 <- function(page = NULL, message404 = NULL){
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
   func_bootstrapLib <- 'shiny' %:::% 'bootstrapLib' # workaround about R CMD CRAN NOTE regarding :::
-  bootstrap_dependency <- renderDependencies(
+  bootstrap_dependency <- renderDependencies(lapply(
     resolveDependencies(list(func_bootstrapLib())),
-    srcType = "href"
-  )
+    shiny::createWebDependency
+  ))
   shiny::tagList(
     shiny::suppressDependencies("bootstrap"),
     shiny::singleton(shiny::div(id = "bootstrap_dependency", bootstrap_dependency)),
