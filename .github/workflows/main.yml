@@ -19,6 +19,7 @@ jobs:
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v1
@@ -55,7 +56,7 @@ jobs:
       - name: Install vctrs
         if: runner.os == 'macos'
         run: Rscript -e "remotes::install_cran('Rcpp')"
-  
+
       - name: Install dependencies
         run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')"
 
