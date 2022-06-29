@@ -1,7 +1,7 @@
 Package: shiny.router
 Type: Package
 Title: Basic Routing for Shiny Web Applications
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(person("Filip", "Stachura",
                     email = "filip@appsilon.com",
                     role = c("aut")),
@@ -14,7 +14,7 @@ Authors@R: c(person("Filip", "Stachura",
             person("Developers", "Appsilon",
                     email = "support+opensource@appsilon.com",
                     role = c("cre", "aut")),
-            person("Servet Ahmet", "Çizmeli", email = "ahmet.cizmeli@contractors.appsilon.com", role = c("ctb")),
+              person("Servet Ahmet", "Çizmeli", email = "ahmet.cizmeli@contractors.appsilon.com", role = c("ctb")),
             person(family = "Appsilon", role = c("cph"))
            )
 Description: It is a simple router for your Shiny apps.
