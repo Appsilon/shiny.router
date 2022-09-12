@@ -17,3 +17,4 @@ Boolean value indicating if path is defined.
 \description{
 Internal function that validates that path is defined in routes.
 }
+\keyword{internal}

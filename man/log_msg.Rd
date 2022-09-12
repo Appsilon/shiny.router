@@ -18,3 +18,4 @@ much worry.}
 Because this can print a lot, it's silent unless
 the shiny.router.debug option is set.
 }
+\keyword{internal}

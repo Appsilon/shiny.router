@@ -16,3 +16,4 @@ router javascript script.
 \description{
 Creates router UI
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ Router callback.
 Internal function creating a router callback function.
 One need to call router callback with Shiny input and output in server code.
 }
+\keyword{internal}
