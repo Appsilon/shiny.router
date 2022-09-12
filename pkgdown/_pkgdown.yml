@@ -1,10 +1,12 @@
-title: SHINY.ROUTER
+title: shiny.router
 template:
-  params:
-    bootswatch: yeti
+  bootstrap: 5
+  bootswatch: pulse
+  bslib:
+    pkgdown-nav-height: 100px
 
 navbar:
-  type: inverse
+  bg: primary
   left:
     - icon: fa-home
       href: index.html
@@ -12,10 +14,10 @@ navbar:
     - icon: fa-university
       text: "Tutorials"
       href: articles/index.html
-  right:
     - icon: fa-file-code-o
       text: "Reference"
       href: reference/index.html
+  right:
     - icon: fa-github fa-lg
       href: https://github.com/Appsilon/shiny.router
     - icon: fa-twitter fa-lg
@@ -43,3 +45,4 @@ reference:
   - '`get_page`'
   - '`is_page`'
   - '`page404`'
+  - '`PAGE_404_ROUTE`'
