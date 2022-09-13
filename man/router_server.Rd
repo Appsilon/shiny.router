@@ -12,3 +12,4 @@ router_server(router)
 \description{
 Create router pages server callback
 }
+\keyword{internal}

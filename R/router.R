@@ -8,6 +8,7 @@ ROUTER_UI_ID <- '_router_ui'
 #'
 #' @param ui Single page UI content created with proper html tags or tag list.
 #' @param path Single page path name. Attached to \code{data-path} attriubute.
+#' @keywords internal
 attach_attribs <- function(ui, path) {
   if ("shiny.tag" %in% class(ui)) {
     # make pages identification easier
@@ -30,6 +31,7 @@ attach_attribs <- function(ui, path) {
 #' @param ui Valid Shiny user interface.
 #' @param server Function that is called within the global server function if given
 #' @return list with ui and server fields
+#' @keywords internal
 callback_mapping <- function(path, ui, server = NA) {
   server <- if (is.function(server)) {
     if ("..." %in% names(formals(server))) {
@@ -54,6 +56,7 @@ callback_mapping <- function(path, ui, server = NA) {
 #' @param session The current Shiny Session
 #'
 #' @return Reactive hash value.
+#' @keywords internal
 get_url_hash <- function(session = shiny::getDefaultReactiveDomain()) {
   session$userData$shiny.router.url_hash()
 }
@@ -84,6 +87,7 @@ route <- function(path, ui, server = NA) {
 #' @param routes A routes (list).
 #'
 #' @return Router callback.
+#' @keywords internal
 create_router_callback <- function(root, routes) {
   function(input, output, session = shiny::getDefaultReactiveDomain(), ...) {
     # Making this a list inside a shiny::reactiveVal, instead of using a
@@ -159,6 +163,7 @@ create_router_callback <- function(root, routes) {
 #' Create router pages server callback
 #'
 #' @param router Router pages object. See \link{make_router}.
+#' @keywords internal
 router_server <- function(router) {
   create_router_callback(router$root, router$routes)
 }
@@ -169,6 +174,7 @@ router_server <- function(router) {
 #'
 #' @return list with shiny tags that adds "router-page-wrapper" div and embeds
 #' router javascript script.
+#' @keywords internal
 router_ui <- function(router) {
   shiny::addResourcePath(
     "shiny.router",

@@ -16,3 +16,4 @@ Covered UI types are Shiny/htmltools tags or tag lists and httml templates.
 In case of tag list (\code{tagList}) and html template (\code{htmlTemplate}) 'div' wrapper
 with 'router-hidden' class is added.
 }
+\keyword{internal}

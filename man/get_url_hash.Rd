@@ -15,3 +15,4 @@ Reactive hash value.
 \description{
 Internal function to get url hash with #!.
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ stripped link
 \description{
 Strips off the first 3 character, assuming that they are: "#!/".
 }
+\keyword{internal}

@@ -19,3 +19,4 @@ list with ui and server fields
 \description{
 Create a mapping between a UI element and a server callback.
 }
+\keyword{internal}

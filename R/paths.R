@@ -5,6 +5,7 @@
 #' @param routes A routes (list).
 #' @param path A path.
 #' @return Boolean value indicating if path is defined.
+#' @keywords internal
 valid_path <- function(routes, path) {
   (path %in% names(routes))
 }
@@ -13,6 +14,7 @@ valid_path <- function(routes, path) {
 #'
 #' @param hashpath character with hash path
 #' @return character with formatted hashpath
+#' @keywords internal
 cleanup_hashpath <- function(hashpath) {
   hashpath = hashpath[1]
   # Already correctly formatted.
@@ -38,6 +40,7 @@ cleanup_hashpath <- function(hashpath) {
 #'
 #' @param path character with link path
 #' @return stripped link
+#' @keywords internal
 extract_link_name <- function(path) {
   sub("#!/", "", cleanup_hashpath(path))
 }

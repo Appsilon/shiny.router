@@ -15,3 +15,4 @@ character with formatted hashpath
 \description{
 Formats a URL fragment into a hashpath starting with "#!/"
 }
+\keyword{internal}

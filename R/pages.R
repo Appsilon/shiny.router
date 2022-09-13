@@ -69,6 +69,7 @@ disable_bootstrap_on_bookmark <- function(bookmark) {
 #' @param name function name
 #'
 #' @return function
+#' @keywords internal
 `%:::%` <- function (pkg, name) {
   pkg <- as.character(substitute(pkg))
   name <- as.character(substitute(name))
