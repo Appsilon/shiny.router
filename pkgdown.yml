@@ -3,5 +3,8 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   basics: basics.html
-last_built: 2022-09-13T14:10Z
+last_built: 2022-09-13T14:18Z
+urls:
+  reference: https://appsilon.github.io/shiny.router/reference
+  article: https://appsilon.github.io/shiny.router/articles
 
