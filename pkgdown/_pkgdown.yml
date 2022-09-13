@@ -5,6 +5,8 @@ template:
   bslib:
     pkgdown-nav-height: 100px
 
+url: https://appsilon.github.io/shiny.router/
+
 navbar:
   bg: primary
   left:
