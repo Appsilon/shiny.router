@@ -1,10 +1,6 @@
-<a href = "https://appsilon.com/careers/" target="_blank"><img src="http://d2v95fjda94ghc.cloudfront.net/hiring.png" alt="We are hiring!"/></a>
+# shiny.router <a href="https://appsilon.github.io/shiny.router/"><img src="man/figures/shiny.router.png" align="right" alt="shiny.router logo" style="height: 140px;"></a>
 
-
-<img src="man/figures/shiny.router.png" align="right" alt="" width="150" />
-
-shiny.router
-============
+> _A minimalistic router for your Shiny apps._
 
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/Appsilon/shiny.router/workflows/R-CMD-check/badge.svg)
@@ -13,15 +9,13 @@ shiny.router
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/shiny.router)](https://CRAN.R-project.org/package=shiny.router)
 <!-- badges: end -->
 
-A minimalistic router for your [Shiny](https://shiny.rstudio.com/) apps.
-
 Now it's possible to recreate a state of your app, by providing a specific URL, like:
 
 ```r
-  make_router(
-    route("<your_app_url>/main",  mainPageShinyUI),
-    route("<your_app_url>/other", otherPageShinyUI)
-  )
+make_router(
+  route("<your_app_url>/main",  mainPageShinyUI),
+  route("<your_app_url>/other", otherPageShinyUI)
+)
 ```
 
 <!-- TODO We would like to have a nice graphic explaning routing mechanism -->
@@ -29,7 +23,7 @@ Now it's possible to recreate a state of your app, by providing a specific URL, 
 Basic tutorial article is available on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
 
 
-<h4><a href="https://legacy.appsilon.com/apps/router2" target="_blank">Live demo</a> </h4>
+<h4><a href="https://connect.appsilon.com/router/" target="_blank">Live demo</a> </h4>
 
 
 Source code
@@ -43,19 +37,19 @@ How to install?
 It's possible to install this library through CRAN
 
 ```r
-  install.packages("shiny.router")
+install.packages("shiny.router")
 ```
 
 The most recent version you can get from this repo using [remotes](https://github.com/r-lib/remotes).
 
 ```r
-  remotes::install_github("Appsilon/shiny.router")
+remotes::install_github("Appsilon/shiny.router")
 ```
 
 To install [previous version](https://github.com/Appsilon/shiny.router/blob/master/CHANGELOG.md) you can run:
 
 ```r
-  remotes::install_github("Appsilon/shiny.router", ref = "0.1.0")
+remotes::install_github("Appsilon/shiny.router", ref = "0.1.0")
 ```
 
 Example
@@ -94,10 +88,6 @@ If you want to contribute to this project please submit a regular PR, once you'r
 
 Reporting a bug is also helpful - please use github issues and describe your problem as detailed as possible.
 
-**Changes in documentation**
-
-Documentation is rendered with `pkgdown`. Just run `pkgdown::build_site()` after editing documentation or `README.md`.
-
 Troubleshooting
 ---------------
 
@@ -130,4 +120,8 @@ Appsilon
 <img src="https://avatars0.githubusercontent.com/u/6096772" align="right" alt="" width="6%" />
 
 Appsilon is the **Full Service Certified RStudio Partner**. Learn more
-at [appsilon.com](https://appsilon.com). Get in touch `support+opensource@appsilon.com`.
+at [appsilon.com](https://appsilon.com).
+
+Get in touch [opensource@appsilon.com](opensource@appsilon.com)
+
+<a href = "https://appsilon.com/careers/" target="_blank"><img src="http://d2v95fjda94ghc.cloudfront.net/hiring.png" alt="We are hiring!"/></a>
