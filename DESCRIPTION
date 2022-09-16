@@ -28,6 +28,7 @@ Imports:
     htmltools
 RoxygenNote: 7.2.1
 Suggests:
+    covr,
     lintr,
-    testthat,
-    covr
+    rcmdcheck,
+    testthat
