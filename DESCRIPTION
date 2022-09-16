@@ -27,6 +27,7 @@ Imports:
     shiny,
     htmltools
 RoxygenNote: 7.2.1
-Suggests: 
+Suggests:
+    lintr,
     testthat,
     covr
