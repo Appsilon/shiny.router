@@ -14,7 +14,8 @@ make_router(default, ..., page_404 = page404())
 \item{page_404}{Styling of page when wrong bookmark is open. See \link{page404}.}
 }
 \value{
-Shiny router callback that should be run in server code with Shiny input and output lists.
+Shiny router callback that should be run in server code with Shiny input and output
+  lists.
 }
 \description{
 Returned callback needs to be called within Shiny server code.

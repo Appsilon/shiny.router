@@ -37,8 +37,8 @@ test_that("test parse_url_path", {
 
 test_that("test valid_path", {
   expect_error(valid_path())
-  expect_true(valid_path(list(a="a", b="b"), "b"))
-  expect_false(valid_path(list(a="a", c="b"), "b"))
+  expect_true(valid_path(list(a = "a", b = "b"), "b"))
+  expect_false(valid_path(list(a = "a", c = "b"), "b"))
   expect_false(valid_path(list(), "b"))
 })
 
