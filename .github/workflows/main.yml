@@ -3,75 +3,51 @@ on: push
 name: R-CMD-check
 
 jobs:
-  R-CMD-check:
+  main:
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6'}
-        - { os: macOS-latest, r: '3.6'}
-        - { os: ubuntu-18.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/bionic/latest"}
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      CRAN: ${{ matrix.config.cran }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        - {os: macOS-latest,   r: 'release'}
+        - {os: windows-latest, r: 'release'}
+        - {os: ubuntu-22.04, r: 'devel'}
+        - {os: ubuntu-22.04, r: 'release'}
+        - {os: ubuntu-22.04, r: 'oldrel'}
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - name: Install R
+        uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
 
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Query dependencies
-        run: Rscript -e "install.packages('remotes')" -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
-
-      - name: Cache R packages
-        if: runner.os != 'Windows'
-        uses: actions/cache@v1
+      - name: Install R package dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
+          extra-packages: local::. # Necessary to avoid object usage linter errors.
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+      - name: R CMD check
+        if: always()
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          error-on: '"note"'
+
+      - name: Lint
+        if: always()
+        shell: Rscript {0}
         run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
-      - name: Install vctrs
-        if: runner.os == 'Windows'
-        run: Rscript -e "remotes::install_cran('vctrs')"
-
-      - name: Install vctrs
-        if: runner.os == 'macos'
-        run: Rscript -e "remotes::install_cran('Rcpp')"
-
-      - name: Install dependencies
-        run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')"
-
-      - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--as-cran'), error_on = 'error', check_dir = 'check')"
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@master
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
-
+          lints <- lintr::lint_package()
+          for (lint in lints) print(lint)
+          quit(status = length(lints) > 0)
       - name: Test coverage
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
+        if: matrix.config.os == 'ubuntu-22.04' && matrix.config.r == 'release'
         run: |
           Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
-
