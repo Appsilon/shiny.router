@@ -1,4 +1,4 @@
-ROUTER_UI_ID <- '_router_ui'
+ROUTER_UI_ID <- '_router_ui' #nolint
 
 #' Attach 'router-hidden' class to single page UI content
 #'
@@ -38,11 +38,11 @@ callback_mapping <- function(path, ui, server = NA) {
       server
     } else {
       # the package requires ellipsis (...) existing for each server callback
-      formals(server) <- append(formals(server), alist(... = ))
+      formals(server) <- append(formals(server), alist(... = )) #nolint
       server
     }
   } else {
-    function(input, output, session, ...) {}
+    function(input, output, session, ...) {} #nolint
   }
   out <- list()
   ui <- attach_attribs(ui, path)
@@ -100,8 +100,8 @@ create_router_callback <- function(root, routes) {
     ))
 
     # Watch and clean hash before changing page.
-    session$userData$shiny.router.url_hash = shiny::reactiveVal("#!/")
-    shiny::observeEvent(shiny::getUrlHash() ,{
+    session$userData$shiny.router.url_hash <- shiny::reactiveVal("#!/")
+    shiny::observeEvent(shiny::getUrlHash(), {
       session$userData$shiny.router.url_hash(cleanup_hashpath(shiny::getUrlHash()))
     })
 
@@ -117,16 +117,16 @@ create_router_callback <- function(root, routes) {
       eventExpr = c(get_url_hash(session), session$clientData$url_search),
       handlerExpr = {
         log_msg("hashchange observer triggered!")
-        new_hash = shiny::getUrlHash(session)
+        new_hash <- shiny::getUrlHash(session)
         log_msg("query not followed by hash extracted!")
-        new_query = session$clientData$url_search
+        new_query <- session$clientData$url_search
         log_msg("New raw hash: ", new_hash)
-        cleaned_hash = cleanup_hashpath(new_hash)
+        cleaned_hash <- cleanup_hashpath(new_hash)
         if (cleaned_hash == "#!/") {
-          cleaned_hash = cleanup_hashpath(root)
+          cleaned_hash <- cleanup_hashpath(root)
         }
         log_msg("New cleaned hash: ", cleaned_hash)
-        cleaned_url = sprintf("%s%s", new_query, cleaned_hash)
+        cleaned_url <- sprintf("%s%s", new_query, cleaned_hash)
         # Parse out the components of the hashpath
         parsed <- parse_url_path(cleaned_url)
         parsed$path <- ifelse(parsed$path == "", root, parsed$path)
@@ -206,7 +206,8 @@ router_ui <- function(router) {
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... All other routes defined with shiny.router::route function.
 #' @param page_404 Styling of page when wrong bookmark is open. See \link{page404}.
-#' @return Shiny router callback that should be run in server code with Shiny input and output lists.
+#' @return Shiny router callback that should be run in server code with Shiny input and output
+#'   lists.
 #'
 #' @examples
 #' \dontrun{
@@ -221,7 +222,7 @@ router_ui <- function(router) {
 make_router <- function(default, ..., page_404 = page404()) {
   routes <- c(default, ...)
   root <- names(default)[1]
-  if (! PAGE_404_ROUTE %in% names(routes) )
+  if (! PAGE_404_ROUTE %in% names(routes))
     routes <- c(routes, route(PAGE_404_ROUTE, page_404))
   router <- list(root = root, routes = routes)
   list(ui = router_ui(router), server = router_server(router))
@@ -253,7 +254,7 @@ get_page <- function(session = shiny::getDefaultReactiveDomain()) {
 #' router.
 #' @export
 is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
-  log_msg("Checking if page is: ", page);
+  log_msg("Checking if page is: ", page)
   get_page(session) == page
 }
 
@@ -272,7 +273,7 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' More in \code{shiny::updateQueryString}.
 #'
 #' @export
-change_page <- function(page, session = shiny::getDefaultReactiveDomain(), mode="push") {
+change_page <- function(page, session = shiny::getDefaultReactiveDomain(), mode = "push") {
   log_msg("Sending page change message to client: ", page, "With page change mode: ", mode)
   shiny::updateQueryString(cleanup_hashpath(page), mode, session)
 }

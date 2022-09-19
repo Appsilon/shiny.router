@@ -5,7 +5,7 @@
 #' This is default 404 page.
 #'
 #' @export
-PAGE_404_ROUTE <- "404"
+PAGE_404_ROUTE <- "404" #nolint
 
 #' 404 page
 #'
@@ -18,9 +18,9 @@ PAGE_404_ROUTE <- "404"
 #' @examples
 #' page404() # shiny::tags$div(h1("Not found"))
 #' page404(message404 = "ABC") # shiny::tags$div(h1("ABC"))
-page404 <- function(page = NULL, message404 = NULL){
+page404 <- function(page = NULL, message404 = NULL) {
   if (is.null(page)) {
-    if (is.null(message404)){
+    if (is.null(message404)) {
       return(shiny::div(shiny::h1("Not found")))
     } else {
       return(shiny::div(shiny::h1(message404)))
@@ -39,7 +39,8 @@ page404 <- function(page = NULL, message404 = NULL){
 #' @importFrom htmltools renderDependencies resolveDependencies
 #' @export
 disable_bootstrap_on_bookmark <- function(bookmark) {
-  func_bootstrapLib <- 'shiny' %:::% 'bootstrapLib' # workaround about R CMD CRAN NOTE regarding :::
+  # workaround about R CMD CRAN NOTE regarding :::
+  func_bootstrapLib <- 'shiny' %:::% 'bootstrapLib' #nolint
   bootstrap_dependency <- renderDependencies(lapply(
     resolveDependencies(list(func_bootstrapLib())),
     shiny::createWebDependency
@@ -70,7 +71,7 @@ disable_bootstrap_on_bookmark <- function(bookmark) {
 #'
 #' @return function
 #' @keywords internal
-`%:::%` <- function (pkg, name) {
+`%:::%` <- function(pkg, name) {
   pkg <- as.character(substitute(pkg))
   name <- as.character(substitute(name))
   get(name, envir = asNamespace(pkg), inherits = FALSE)

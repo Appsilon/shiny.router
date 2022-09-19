@@ -13,3 +13,4 @@ docs
 examples
 pkgdown
 vignettes
+.lintr

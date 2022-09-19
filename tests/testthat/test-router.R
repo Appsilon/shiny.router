@@ -4,7 +4,7 @@ context("router")
 
 test_that("test route without server", {
   ui <- shiny::div("a")
-  server <- function(input, output, session, ...){}
+  server <- function(input, output, session, ...) {} #nolint
   router_ui <- shiny::div("a", `data-path` = "aa", class = "router router-hidden ")
   rr <- route("aa", ui)
   expect_equal(rr$aa, list(ui = router_ui, server = server), check.environment = FALSE)
@@ -68,9 +68,8 @@ test_that("test getting clean url hash", {
 })
 
 test_that("make router attaches ellipsis to server callback", {
-  server <- function(input, output, session){}
-  server_router <- function(input, output, session, ...){}
+  server <- function(input, output, session) {} #nolint
+  server_router <- function(input, output, session, ...) {} #nolint
   rr <- route("aa", "hello", server)
   expect_equal(rr$aa$server, server_router)
 })
-

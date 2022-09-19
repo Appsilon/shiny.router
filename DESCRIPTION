@@ -27,6 +27,8 @@ Imports:
     shiny,
     htmltools
 RoxygenNote: 7.2.1
-Suggests: 
-    testthat,
-    covr
+Suggests:
+    covr,
+    lintr,
+    rcmdcheck,
+    testthat
