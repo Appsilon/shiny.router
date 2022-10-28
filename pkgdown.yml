@@ -1,9 +1,9 @@
-pandoc: 2.14.2
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   basics: basics.html
-last_built: 2022-09-19T07:34Z
+last_built: 2022-10-28T12:15Z
 urls:
   reference: https://appsilon.github.io/shiny.router/reference
   article: https://appsilon.github.io/shiny.router/articles
