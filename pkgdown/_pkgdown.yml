@@ -14,6 +14,7 @@ template:
         gtag('js', new Date());
         gtag('config', 'G-DVX9BJSBX4');
       </script>
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 url: https://appsilon.github.io/shiny.router/
 
@@ -35,12 +36,20 @@ navbar:
     - icon: fa-twitter fa-lg
       href: https://twitter.com/Appsilon
 
+home:
+  sidebar:
+    structure: [star, links, license, community, citation, authors, dev]
+    components:
+      star:
+        title: GitHub
+        text: |
+          <a class="github-button" href="https://github.com/appsilon/shiny.router" data-size="large" data-show-count="true" aria-label="Star appsilon/shiny.router on GitHub">Star</a>
+
 articles:
 - title: All tutorials
   desc: ~
   contents:
   - '`basics`'
-
 
 reference:
 - title: Main router functions
@@ -58,3 +67,9 @@ reference:
   - '`is_page`'
   - '`page404`'
   - '`PAGE_404_ROUTE`'
+
+footer:
+  structure:
+    left: developed
+  components:
+    developed: "Developed with :heart: by [Appsilon](https://appsilon.com)."
