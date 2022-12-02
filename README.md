@@ -20,17 +20,6 @@ make_router(
 
 <!-- TODO We would like to have a nice graphic explaning routing mechanism -->
 
-Basic tutorial article is available on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
-
-
-<h4><a href="https://connect.appsilon.com/router/" target="_blank">Live demo</a> </h4>
-
-
-Source code
------------
-
-This library source code can be found on [Appsilon's](https://appsilon.com) Github: https://github.com/Appsilon/shiny.router
-
 How to install?
 ---------------
 
@@ -46,16 +35,10 @@ The most recent version you can get from this repo using [remotes](https://githu
 remotes::install_github("Appsilon/shiny.router")
 ```
 
-To install [previous version](https://github.com/Appsilon/shiny.router/blob/master/CHANGELOG.md) you can run:
-
-```r
-remotes::install_github("Appsilon/shiny.router", ref = "0.1.0")
-```
-
-Example
+How to use it?
 -------
 
-Visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples. Here's the basic usage:
+Basic usage:
 
 ```r
 library(shiny)
@@ -81,17 +64,28 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
+Check [the tutorial](https://appsilon.github.io/shiny.router/docs/articles/basics.html) for more details on how to start using `shiny.router` or read the article on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
+
+Examples
+-------
+
+An application that showcases the `shiny.router` features can be found [here](https://connect.appsilon.com/appsidex/#!/):
+
+<a href="https://connect.appsilon.com/appsidex/#!/" target="_blank"><img src="man/figures/router_demo/feature-multipage.gif"></a>
+
+It was built using two other Appsilon Open Source packages:
+
+- [`rhino`](https://appsilon.github.io/rhino/) - an R package designed to help building high quality, enterprise-grade Shiny applications at speed.
+- [`shiny.fluent`](https://appsilon.github.io/shiny.fluent/) - Microsoft's Fluent UI for Shiny apps.
+
+You can also visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples.
+
 How to contribute?
 ------------------
 
 If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.
 
 Reporting a bug is also helpful - please use [GitHub issues](https://github.com/Appsilon/shiny.router/issues) and describe your problem as detailed as possible.
-
-Future enhacements
-------------------
-
-- customize loading full session or just visible part
 
 Appsilon
 ========
