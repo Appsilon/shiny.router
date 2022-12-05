@@ -21,12 +21,9 @@ url: https://appsilon.github.io/shiny.router/
 navbar:
   bg: primary
   left:
-    - icon: fa-home
-      href: index.html
-      text: "Start"
     - icon: fa-university
-      text: "Tutorials"
-      href: articles/index.html
+      text: "Tutorial"
+      href: articles/basics.html
     - icon: fa-file-code-o
       text: "Reference"
       href: reference/index.html
@@ -44,12 +41,6 @@ home:
         title: GitHub
         text: |
           <a class="github-button" href="https://github.com/appsilon/shiny.router" data-size="large" data-show-count="true" aria-label="Star appsilon/shiny.router on GitHub">Star</a>
-
-articles:
-- title: All tutorials
-  desc: ~
-  contents:
-  - '`basics`'
 
 reference:
 - title: Main router functions
