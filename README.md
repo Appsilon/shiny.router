@@ -64,7 +64,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
-Check [the tutorial](https://appsilon.github.io/shiny.router/docs/articles/basics.html) for more details on how to start using `shiny.router` or read the article on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
+Check [the tutorial](https://appsilon.github.io/shiny.router/articles/basics.html) for more details on how to start using `shiny.router` or read the article on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
 
 Examples
 -------
