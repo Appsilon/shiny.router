@@ -51,18 +51,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item">
-  <a class="nav-link" href="index.html">
-    <span class="fa fa-home"></span>
-     
-    Start
-  </a>
-</li>
 <li class="nav-item">
-  <a class="nav-link" href="articles/index.html">
+  <a class="nav-link" href="articles/basics.html">
     <span class="fa fa-university"></span>
      
-    Tutorials
+    Tutorial
   </a>
 </li>
 <li class="nav-item">
@@ -113,16 +106,6 @@
 <span>  <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"&lt;your_app_url&gt;/other"</span>, <span class="va">otherPageShinyUI</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <!-- TODO We would like to have a nice graphic explaning routing mechanism -->
-<p>Basic tutorial article is available on <a href="https://appsilon.com/shiny-router-package/" class="external-link">Appsilon’s blog</a>.</p>
-<h4 id="shinyrouter--1">
-<a href="https://connect.appsilon.com/router/" target="_blank" class="external-link">Live demo</a>
-<a class="anchor" aria-label="anchor" href="#shinyrouter--1"></a>
-</h4>
-<div class="section level2">
-<h2 id="source-code">Source code<a class="anchor" aria-label="anchor" href="#source-code"></a>
-</h2>
-<p>This library source code can be found on <a href="https://appsilon.com" class="external-link">Appsilon’s</a> Github: <a href="https://github.com/Appsilon/shiny.router" class="external-link uri">https://github.com/Appsilon/shiny.router</a></p>
-</div>
 <div class="section level2">
 <h2 id="how-to-install">How to install?<a class="anchor" aria-label="anchor" href="#how-to-install"></a>
 </h2>
@@ -132,15 +115,12 @@
 <p>The most recent version you can get from this repo using <a href="https://github.com/r-lib/remotes" class="external-link">remotes</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Appsilon/shiny.router"</span><span class="op">)</span></span></code></pre></div>
-<p>To install <a href="https://github.com/Appsilon/shiny.router/blob/master/CHANGELOG.md" class="external-link">previous version</a> you can run:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Appsilon/shiny.router"</span>, ref <span class="op">=</span> <span class="st">"0.1.0"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="how-to-use-it">How to use it?<a class="anchor" aria-label="anchor" href="#how-to-use-it"></a>
 </h2>
-<p>Visit <a href="https://github.com/Appsilon/shiny.router/tree/master/examples" class="external-link">examples</a> directory for some complete samples. Here’s the basic usage:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Basic usage:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">shiny.router</span><span class="op">)</span></span>
 <span></span>
@@ -152,7 +132,7 @@
 <span>  <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"other"</span>, <span class="va">other_page</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
+<span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"Router demo"</span>,</span>
 <span>  <span class="va">router</span><span class="op">$</span><span class="va">ui</span></span>
 <span><span class="op">)</span></span>
@@ -161,20 +141,28 @@
 <span>  <span class="va">router</span><span class="op">$</span><span class="fu">server</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
+<p>Check <a href="https://appsilon.github.io/shiny.router/docs/articles/basics.html">the tutorial</a> for more details on how to start using <code>shiny.router</code> or read the article on <a href="https://appsilon.com/shiny-router-package/" class="external-link">Appsilon’s blog</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>An application that showcases the <code>shiny.router</code> features can be found <a href="https://connect.appsilon.com/appsidex/#!/" class="external-link">here</a>:</p>
+<p><a href="https://connect.appsilon.com/appsidex/#!/" target="_blank" class="external-link"><img src="reference/figures/router_demo/feature-multipage.gif"></a></p>
+<p>It was built using two other Appsilon Open Source packages:</p>
+<ul>
+<li>
+<a href="https://appsilon.github.io/rhino/" class="external-link"><code>rhino</code></a> - an R package designed to help building high quality, enterprise-grade Shiny applications at speed.</li>
+<li>
+<a href="https://appsilon.github.io/shiny.fluent/" class="external-link"><code>shiny.fluent</code></a> - Microsoft’s Fluent UI for Shiny apps.</li>
+</ul>
+<p>You can also visit <a href="https://github.com/Appsilon/shiny.router/tree/master/examples" class="external-link">examples</a> directory for some complete samples.</p>
 </div>
 <div class="section level2">
 <h2 id="how-to-contribute">How to contribute?<a class="anchor" aria-label="anchor" href="#how-to-contribute"></a>
 </h2>
 <p>If you want to contribute to this project please submit a regular PR, once you’re done with new feature or bug fix.</p>
 <p>Reporting a bug is also helpful - please use <a href="https://github.com/Appsilon/shiny.router/issues" class="external-link">GitHub issues</a> and describe your problem as detailed as possible.</p>
-</div>
-<div class="section level2">
-<h2 id="future-enhacements">Future enhacements<a class="anchor" aria-label="anchor" href="#future-enhacements"></a>
-</h2>
-<ul>
-<li>customize loading full session or just visible part</li>
-</ul>
 </div>
 </div>
 <div class="section level1">
