@@ -40,7 +40,8 @@
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
 
-    
+    <a href="https://shiny.tools" class="external-link home"><i class="fa fa-lg fa-chevron-left"></i></a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -94,7 +95,7 @@
       <img src="" class="logo" alt=""><h1>Introduction to the routing in Shiny with shiny.router</h1>
                         <h4 data-toc-skip class="author">Appsilon</h4>
             
-            <h4 data-toc-skip class="date">2022-12-06</h4>
+            <h4 data-toc-skip class="date">2022-12-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Appsilon/shiny.router/blob/HEAD/vignettes/basics.Rmd" class="external-link"><code>vignettes/basics.Rmd</code></a></small>
       <div class="d-none name"><code>basics.Rmd</code></div>
@@ -117,15 +118,15 @@ the data from url parameters.</p>
 <p>Next, we create the content of our subpages: “home” and
 “another”.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">home_page</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">home_page</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/titlePanel.html" class="external-link">titlePanel</a></span><span class="op">(</span><span class="st">"Home page"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"This is the home page!"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"This is the home page!"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/htmlOutput.html" class="external-link">uiOutput</a></span><span class="op">(</span><span class="st">"power_of_input"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">another_page</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<span><span class="va">another_page</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/titlePanel.html" class="external-link">titlePanel</a></span><span class="op">(</span><span class="st">"Another page"</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"This is the another page!"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p</a></span><span class="op">(</span><span class="st">"This is the another page!"</span><span class="op">)</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we can create routing. We provide routing paths, a UI of the page
 and (optionally) server-side callback for each page (here:
@@ -139,8 +140,8 @@ and (optionally) server-side callback for each page (here:
 webapp:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">menu</span> <span class="op">&lt;-</span> <span class="va">tags</span><span class="op">$</span><span class="fu">ul</span><span class="op">(</span></span>
-<span>    <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">a</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">"item"</span>, href <span class="op">=</span> <span class="fu"><a href="../reference/route_link.html">route_link</a></span><span class="op">(</span><span class="st">"/"</span><span class="op">)</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/builder.html" class="external-link">a</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">"item"</span>, href <span class="op">=</span> <span class="fu"><a href="../reference/route_link.html">route_link</a></span><span class="op">(</span><span class="st">"another"</span><span class="op">)</span>, <span class="st">"Another page"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">a</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">"item"</span>, href <span class="op">=</span> <span class="fu"><a href="../reference/route_link.html">route_link</a></span><span class="op">(</span><span class="st">"/"</span><span class="op">)</span>, <span class="st">"Main"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="va">tags</span><span class="op">$</span><span class="fu">li</span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">a</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">"item"</span>, href <span class="op">=</span> <span class="fu"><a href="../reference/route_link.html">route_link</a></span><span class="op">(</span><span class="st">"another"</span><span class="op">)</span>, <span class="st">"Another page"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>Now, we create an output for our router in main UI of Shiny app. We
 also add <code>sliderInput</code> to test its functionality.</p>
@@ -173,7 +174,7 @@ like this:</p>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">power_of_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/renderUI.html" class="external-link">renderUI</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/HTML.html" class="external-link">HTML</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
 <span>      <span class="st">"I display input increased by &lt;code&gt;add&lt;/code&gt; GET parameter from app url and pass result to &lt;code&gt;output$power_of_input&lt;/code&gt;: "</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">int</span><span class="op">)</span> <span class="op">+</span> <span class="fu">component</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
