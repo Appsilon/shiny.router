@@ -15,6 +15,8 @@ template:
         gtag('config', 'G-DVX9BJSBX4');
       </script>
       <script async defer src="https://buttons.github.io/buttons.js"></script>
+    before_navbar: |
+      <a href="https://shiny.tools" class="home"><i class="fa fa-lg fa-chevron-left"></i></a>
 
 url: https://appsilon.github.io/shiny.router/
 
@@ -43,21 +45,21 @@ home:
           <a class="github-button" href="https://github.com/appsilon/shiny.router" data-size="large" data-show-count="true" aria-label="Star appsilon/shiny.router on GitHub">Star</a>
 
 reference:
-- title: Main router functions
-  contents:
-  - '`make_router`'
-  - '`route`'
-  - '`route_link`'
-  - '`get_query_param`'
-  - '`change_page`'
-  - '`parse_url_path`'
-- title: Auxiliary functions
-  contents:
-  - '`disable_bootstrap_on_bookmark`'
-  - '`get_page`'
-  - '`is_page`'
-  - '`page404`'
-  - '`PAGE_404_ROUTE`'
+  - title: Main router functions
+    contents:
+      - "`make_router`"
+      - "`route`"
+      - "`route_link`"
+      - "`get_query_param`"
+      - "`change_page`"
+      - "`parse_url_path`"
+  - title: Auxiliary functions
+    contents:
+      - "`disable_bootstrap_on_bookmark`"
+      - "`get_page`"
+      - "`is_page`"
+      - "`page404`"
+      - "`PAGE_404_ROUTE`"
 
 footer:
   structure:
