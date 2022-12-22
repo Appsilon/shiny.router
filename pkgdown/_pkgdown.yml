@@ -34,6 +34,8 @@ navbar:
       href: https://github.com/Appsilon/shiny.router
     - icon: fa-twitter fa-lg
       href: https://twitter.com/Appsilon
+    - icon: fab fa-mastodon fa-lg
+      href: https://fosstodon.org/@appsilon
 
 home:
   sidebar:
