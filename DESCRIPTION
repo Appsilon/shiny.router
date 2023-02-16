@@ -21,8 +21,9 @@ Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
 Imports:
-    shiny,
-    htmltools
+    htmltools,
+    glue,
+    shiny
 RoxygenNote: 7.2.3
 Suggests:
     covr,
