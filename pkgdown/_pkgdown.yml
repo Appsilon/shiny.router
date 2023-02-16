@@ -22,19 +22,30 @@ url: https://appsilon.github.io/shiny.router/
 
 navbar:
   bg: primary
-  left:
-    - icon: fa-university
-      text: "Tutorial"
-      href: articles/basics.html
-    - icon: fa-file-code-o
+  structure:
+    left: [home, tutorials, reference]
+    right: [search, github, twitter, mastodon]
+  components:
+    home:
+      icon: fa-home
+      text: "Start"
+      href: index.html
+    tutorials:
+      icon: fa-university
+      text: "Tutorials"
+      href: articles/index.html
+    reference:
+      icon: fa-file-code-o
       text: "Reference"
       href: reference/index.html
-  right:
-    - icon: fa-github fa-lg
+    github:
+      icon: fa-github fa-lg
       href: https://github.com/Appsilon/shiny.router
-    - icon: fa-twitter fa-lg
+    twitter:
+      icon: fa-twitter fa-lg
       href: https://twitter.com/Appsilon
-    - icon: fab fa-mastodon fa-lg
+    mastodon:
+      icon: fab fa-mastodon fa-lg
       href: https://fosstodon.org/@appsilon
 
 home:
@@ -49,6 +60,8 @@ home:
 reference:
   - title: Main router functions
     contents:
+      - "`router_ui`"
+      - "`router_server`"
       - "`make_router`"
       - "`route`"
       - "`route_link`"
