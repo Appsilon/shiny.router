@@ -4,12 +4,23 @@
 \alias{router_server}
 \title{Create router pages server callback}
 \usage{
-router_server(router)
+router_server(root_page = "/", env = parent.frame())
 }
 \arguments{
-\item{router}{Router pages object. See \link{make_router}.}
+\item{root_page}{Main page path.}
+
+\item{env}{Environment (only for advanced usage).}
+}
+\value{
+Router pages server callback.
 }
 \description{
-Create router pages server callback
+Server part of the router.
 }
-\keyword{internal}
+\examples{
+\dontrun{
+  server <- function(input, output, session) {
+    router_server(root_page = "/")
+  }
+}
+}
