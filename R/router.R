@@ -212,7 +212,7 @@ router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) 
 
   shiny::tagList(
     shiny::tags$script(
-      glue::glue("$(window).on('load', function() {{
+      glue::glue("$(document).on('shiny:connected', function() {{
         Shiny.setInputValue('{routes_input_id}', [{routes_names}]);
       }});")
     ),
