@@ -11,15 +11,20 @@ router_ui(default, ..., page_404 = page404(), env = parent.frame())
 
 \item{...}{All other routes defined with shiny.router::route function.}
 
-\item{page_404}{Styling of page when wrong bookmark is open. See \link{page404}.}
+\item{page_404}{Styling of page when invalid route is open. See \link{page404}.}
 
-\item{env}{Environment (only for advanced usage).}
+\item{env}{Environment (only for advanced usage), makes it possible to use shiny.router inside
+shiny modules.}
 }
 \value{
 Application UI wrapped in a router.
 }
 \description{
 Creates router UI in Shiny applications.
+}
+\details{
+If you are defining the router inside a shiny module,
+  we assume that the namespacing function defined in the UI is named as ns.
 }
 \examples{
 \dontrun{
