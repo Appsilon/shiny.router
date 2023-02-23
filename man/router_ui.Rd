@@ -24,7 +24,7 @@ Creates router UI in Shiny applications.
 }
 \details{
 If you are defining the router inside a shiny module,
-  we assume that the namespacing function defined in the UI is named as ns.
+  we assume that the namespacing function defined in the UI is named as \code{ns}.
 }
 \examples{
 \dontrun{

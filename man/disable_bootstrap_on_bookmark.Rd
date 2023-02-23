@@ -11,5 +11,5 @@ disable_bootstrap_on_bookmark(bookmark)
 }
 \description{
 This function dynamically removes bootstrap dependency when user opens specified bookmark.
-It should be inserted in head of bootrstrap page.
+It should be inserted in head of bootstrap page.
 }

@@ -47,6 +47,17 @@ jobs:
           lints <- lintr::lint_package()
           for (lint in lints) print(lint)
           quit(status = length(lints) > 0)
+
+      - name: Spell Check
+        if : always()
+        shell: Rscript {0}
+        run: |
+          spell_check <- spelling::spell_check_package(use_wordlist = TRUE)
+          if (nrow(spell_check) > 0) {
+            print(spell_check)
+          }
+          quit(status = nrow(spell_check) > 0)
+
       - name: Test coverage
         if: matrix.config.os == 'ubuntu-22.04' && matrix.config.r == 'release'
         run: |

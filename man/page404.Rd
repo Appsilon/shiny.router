@@ -7,7 +7,7 @@
 page404(page = NULL, message404 = NULL)
 }
 \arguments{
-\item{page}{shiny page style, eg. \code{shiny::tags$div(h1("Not found"))}}
+\item{page}{shiny page style, e.g. \code{shiny::tags$div(h1("Not found"))}}
 
 \item{message404}{message to display at the 404 website}
 }

@@ -11,7 +11,7 @@ router_ui_internal(router)
 }
 \value{
 list with shiny tags that adds "router-page-wrapper" div and embeds
-router javascript script.
+router JavaScript script.
 }
 \description{
 Creates router UI

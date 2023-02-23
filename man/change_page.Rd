@@ -17,8 +17,8 @@ More in \code{shiny::updateQueryString}.}
 }
 \description{
 Works by sending a message up to
-our reactive input binding on the clientside, which tells page.js to update
-the window URL accordingly, then tells clientside shiny that our reactive
+our reactive input binding on the client side, which tells page.js to update
+the window URL accordingly, then tells client side shiny that our reactive
 input binding has changed, then that comes back down to our router callback
 function and all other observers watching \code{get_page()} or similar.
 }

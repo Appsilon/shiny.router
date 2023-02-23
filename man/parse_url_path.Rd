@@ -19,7 +19,7 @@ list containing two objects: \itemize{
 Extract info about url path and parameters that follow \code{?} sign.
 }
 \details{
-\code{parse_url_path} allows parsing paramaters lists from url. See more in examples.
+\code{parse_url_path} allows parsing parameters lists from url. See more in examples.
 
 Note that having query string appear before \code{#!} may cause browser to refresh
 and thus reset Shiny session.
