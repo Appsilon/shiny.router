@@ -76,7 +76,10 @@ get_url_hash <- function(session = shiny::getDefaultReactiveDomain()) {
 #' @export
 route <- function(path, ui, server = NA) {
   if (!missing(server)) {
-    warning("`server` argument in `route` is deprecated.")
+    warning(
+      "`server` argument in `route` is deprecated.
+      It will not be used when `route` is called inside `router_ui`."
+    )
   }
 
   out <- list()
@@ -137,14 +140,14 @@ create_router_callback <- function(root, routes = NULL) {
         parsed <- parse_url_path(cleaned_url)
         parsed$path <- ifelse(parsed$path == "", root, parsed$path)
 
-        path_validation <- if (is.null(routes)) {
+        is_path_valid <- if (is.null(routes)) {
           log_msg("Valid paths:", input$routes)
           !is.null(input$routes) && !(parsed$path %in% c(input$routes, "404"))
         } else {
           !valid_path(routes, parsed$path)
         }
 
-        if (path_validation) {
+        if (is_path_valid) {
           log_msg("Invalid path sent to observer")
           # If it's not a recognized path, then go to default 404 page.
           change_page(PAGE_404_ROUTE, mode = "replace")
@@ -179,8 +182,12 @@ create_router_callback <- function(root, routes = NULL) {
 #'
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... All other routes defined with shiny.router::route function.
-#' @param page_404 Styling of page when wrong bookmark is open. See \link{page404}.
-#' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside shiny modules.
+#' @param page_404 Styling of page when invalid route is open. See \link{page404}.
+#' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside
+#'   shiny modules.
+#'
+#' @details If you are defining the router inside a shiny module,
+#'   we assume that the namespacing function defined in the UI is named as ns.
 #'
 #' @return Application UI wrapped in a router.
 #'
