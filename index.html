@@ -42,7 +42,7 @@
     
     <a class="navbar-brand me-2" href="index.html">shiny.router</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3.9000</small>
 
     <a href="https://shiny.tools" class="external-link home"><i class="fa fa-lg fa-chevron-left"></i></a>
 
@@ -52,11 +52,18 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Start
+  </a>
+</li>
 <li class="nav-item">
-  <a class="nav-link" href="articles/basics.html">
+  <a class="nav-link" href="articles/index.html">
     <span class="fa fa-university"></span>
      
-    Tutorial
+    Tutorials
   </a>
 </li>
 <li class="nav-item">
@@ -108,7 +115,7 @@
 
 <p>Now it’s possible to recreate a state of your app, by providing a specific URL, like:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/make_router.html">make_router</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/router_ui.html">router_ui</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"&lt;your_app_url&gt;/main"</span>,  <span class="va">mainPageShinyUI</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"&lt;your_app_url&gt;/other"</span>, <span class="va">otherPageShinyUI</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -134,22 +141,20 @@
 <span><span class="va">root_page</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h2</a></span><span class="op">(</span><span class="st">"Root page"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">other_page</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h3</a></span><span class="op">(</span><span class="st">"Other page"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">router</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/make_router.html">make_router</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"/"</span>, <span class="va">root_page</span><span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"other"</span>, <span class="va">other_page</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
 <span><span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span>
 <span>  title <span class="op">=</span> <span class="st">"Router demo"</span>,</span>
-<span>  <span class="va">router</span><span class="op">$</span><span class="va">ui</span></span>
+<span>  <span class="fu"><a href="reference/router_ui.html">router_ui</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"/"</span>, <span class="va">root_page</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="reference/route.html">route</a></span><span class="op">(</span><span class="st">"other"</span>, <span class="va">other_page</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">router</span><span class="op">$</span><span class="fu">server</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="reference/router_server.html">router_server</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></code></pre></div>
-<p>Check <a href="https://appsilon.github.io/shiny.router/articles/basics.html">the tutorial</a> for more details on how to start using <code>shiny.router</code> or read the article on <a href="https://appsilon.com/shiny-router-package/" class="external-link">Appsilon’s blog</a>.</p>
+<p>Check <a href="https://appsilon.github.io/shiny.router/articles/basics.html">the tutorial</a> for more details on how to start using <code>shiny.router</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -219,6 +224,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Ryszard Szymański <br><small class="roles"> Maintainer, author </small>  </li>
+<li>Jakub Nowicki <br><small class="roles"> Author </small>  </li>
 <li>Filip Stachura <br><small class="roles"> Author </small>  </li>
 <li>Dominik Krzemiński <br><small class="roles"> Author </small>  </li>
 <li>Krystian Igras <br><small class="roles"> Author </small>  </li>

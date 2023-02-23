@@ -13,6 +13,9 @@
     <loc>https://appsilon.github.io/shiny.router/articles/basics.html</loc>
   </url>
   <url>
+    <loc>https://appsilon.github.io/shiny.router/articles/basics_old.html</loc>
+  </url>
+  <url>
     <loc>https://appsilon.github.io/shiny.router/articles/index.html</loc>
   </url>
   <url>
@@ -91,7 +94,13 @@
     <loc>https://appsilon.github.io/shiny.router/reference/router_server.html</loc>
   </url>
   <url>
+    <loc>https://appsilon.github.io/shiny.router/reference/router_server_internal.html</loc>
+  </url>
+  <url>
     <loc>https://appsilon.github.io/shiny.router/reference/router_ui.html</loc>
+  </url>
+  <url>
+    <loc>https://appsilon.github.io/shiny.router/reference/router_ui_internal.html</loc>
   </url>
   <url>
     <loc>https://appsilon.github.io/shiny.router/reference/valid_path.html</loc>
