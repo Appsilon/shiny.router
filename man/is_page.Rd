@@ -11,7 +11,7 @@ is_page(page, session = shiny::getDefaultReactiveDomain(), ...)
 
 \item{session}{Shiny session}
 
-\item{...}{Other parameters are sent through to shiny::req()
+\item{...}{Other parameters are sent through to \code{shiny::req()}
 router.}
 }
 \description{

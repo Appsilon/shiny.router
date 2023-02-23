@@ -12,6 +12,6 @@
 \item{pkgname}{package name}
 }
 \description{
-On package load it updates .i18_config reading yaml file from config.
+On Load
 }
 \keyword{internal}

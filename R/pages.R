@@ -11,7 +11,7 @@ PAGE_404_ROUTE <- "404" #nolint
 #'
 #' The page which appear when path is wrong.
 #'
-#' @param page shiny page style, eg. \code{shiny::tags$div(h1("Not found"))}
+#' @param page shiny page style, e.g. \code{shiny::tags$div(h1("Not found"))}
 #' @param message404 message to display at the 404 website
 #'
 #' @export
@@ -33,7 +33,7 @@ page404 <- function(page = NULL, message404 = NULL) {
 #' Fix conflicts when some bookmark uses bootstrap
 #'
 #' This function dynamically removes bootstrap dependency when user opens specified bookmark.
-#' It should be inserted in head of bootrstrap page.
+#' It should be inserted in head of bootstrap page.
 #' @param bookmark Bookmark name on which bootstrap dependency should be suppressed.
 #'
 #' @importFrom htmltools renderDependencies resolveDependencies

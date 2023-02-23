@@ -2,12 +2,12 @@ ROUTER_UI_ID <- '_router_ui' #nolint
 
 #' Attach 'router-hidden' class to single page UI content
 #'
-#' @description Covered UI types are Shiny/htmltools tags or tag lists and httml templates.
+#' @description Covered UI types are Shiny/htmltools tags or tag lists and html templates.
 #' In case of tag list (\code{tagList}) and html template (\code{htmlTemplate}) 'div' wrapper
 #' with 'router-hidden' class is added.
 #'
 #' @param ui Single page UI content created with proper html tags or tag list.
-#' @param path Single page path name. Attached to \code{data-path} attriubute.
+#' @param path Single page path name. Attached to \code{data-path} attribute.
 #' @keywords internal
 attach_attribs <- function(ui, path) {
   if ("shiny.tag" %in% class(ui)) {
@@ -187,7 +187,7 @@ create_router_callback <- function(root, routes = NULL) {
 #'   shiny modules.
 #'
 #' @details If you are defining the router inside a shiny module,
-#'   we assume that the namespacing function defined in the UI is named as ns.
+#'   we assume that the namespacing function defined in the UI is named as \code{ns}.
 #'
 #' @return Application UI wrapped in a router.
 #'
@@ -261,7 +261,7 @@ router_server_internal <- function(router) {
 #' @param router Router pages object. See \link{make_router}.
 #'
 #' @return list with shiny tags that adds "router-page-wrapper" div and embeds
-#' router javascript script.
+#' router JavaScript script.
 #' @keywords internal
 router_ui_internal <- function(router) {
   shiny::addResourcePath(
@@ -343,7 +343,7 @@ get_page <- function(session = shiny::getDefaultReactiveDomain()) {
 #'
 #' @param page The page to display. Should match one of the paths sent to the
 #' @param session Shiny session
-#' @param ... Other parameters are sent through to shiny::req()
+#' @param ... Other parameters are sent through to \code{shiny::req()}
 #' router.
 #' @export
 is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
@@ -354,8 +354,8 @@ is_page <- function(page, session = shiny::getDefaultReactiveDomain(), ...) {
 #' Change the currently displayed page.
 #'
 #' Works by sending a message up to
-#' our reactive input binding on the clientside, which tells page.js to update
-#' the window URL accordingly, then tells clientside shiny that our reactive
+#' our reactive input binding on the client side, which tells page.js to update
+#' the window URL accordingly, then tells client side shiny that our reactive
 #' input binding has changed, then that comes back down to our router callback
 #' function and all other observers watching \code{get_page()} or similar.
 #'

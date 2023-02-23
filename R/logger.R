@@ -1,5 +1,5 @@
 #' Helper function to print out log messages into Shiny
-#' using cat() and stderr(), as described on
+#' using \code{cat()} and \code{stderr()}, as described on
 #' https://shiny.rstudio.com/articles/debugging.html
 #'
 #' Because this can print a lot, it's silent unless

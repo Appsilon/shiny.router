@@ -2,7 +2,7 @@
 % Please edit documentation in R/paths.R
 \name{cleanup_hashpath}
 \alias{cleanup_hashpath}
-\title{Formats a URL fragment into a hashpath starting with "#!/"}
+\title{Formats a URL fragment into a hash path starting with "#!/"}
 \usage{
 cleanup_hashpath(hashpath)
 }
@@ -10,9 +10,9 @@ cleanup_hashpath(hashpath)
 \item{hashpath}{character with hash path}
 }
 \value{
-character with formatted hashpath
+character with formatted hash path
 }
 \description{
-Formats a URL fragment into a hashpath starting with "#!/"
+Formats a URL fragment into a hash path starting with "#!/"
 }
 \keyword{internal}

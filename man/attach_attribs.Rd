@@ -9,10 +9,10 @@ attach_attribs(ui, path)
 \arguments{
 \item{ui}{Single page UI content created with proper html tags or tag list.}
 
-\item{path}{Single page path name. Attached to \code{data-path} attriubute.}
+\item{path}{Single page path name. Attached to \code{data-path} attribute.}
 }
 \description{
-Covered UI types are Shiny/htmltools tags or tag lists and httml templates.
+Covered UI types are Shiny/htmltools tags or tag lists and html templates.
 In case of tag list (\code{tagList}) and html template (\code{htmlTemplate}) 'div' wrapper
 with 'router-hidden' class is added.
 }
