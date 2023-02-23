@@ -1,10 +1,11 @@
 Package: shiny.router
 Type: Package
 Title: Basic Routing for Shiny Web Applications
-Version: 0.2.3
+Version: 0.2.3.9000
 Authors@R:
   c(
     person("Ryszard", "Szymański", email = "opensource+ryszard@appsilon.com", role = c("cre", "aut")),
+    person("Jakub", "Nowicki", email = "kuba@appsilon.com", role = c("aut")),
     person("Filip", "Stachura", email = "filip@appsilon.com", role = c("aut")),
     person("Dominik", "Krzemiński", email = "raymon92@gmail.com", role = c("aut")),
     person("Krystian", "Igras", email = "krystian8207@gmail.com", role = c("aut")),
@@ -20,9 +21,10 @@ Encoding: UTF-8
 LazyData: true
 License: MIT + file LICENSE
 Imports:
-    shiny,
-    htmltools
-RoxygenNote: 7.2.1
+    htmltools,
+    glue,
+    shiny
+RoxygenNote: 7.2.3
 Suggests:
     covr,
     lintr,

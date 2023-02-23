@@ -12,7 +12,7 @@
 Now it's possible to recreate a state of your app, by providing a specific URL, like:
 
 ```r
-make_router(
+router_ui(
   route("<your_app_url>/main",  mainPageShinyUI),
   route("<your_app_url>/other", otherPageShinyUI)
 )
@@ -47,24 +47,22 @@ library(shiny.router)
 root_page <- div(h2("Root page"))
 other_page <- div(h3("Other page"))
 
-router <- make_router(
-  route("/", root_page),
-  route("other", other_page)
-)
-
 ui <- fluidPage(
   title = "Router demo",
-  router$ui
+  router_ui(
+    route("/", root_page),
+    route("other", other_page)
+  )
 )
 
 server <- function(input, output, session) {
-  router$server(input, output, session)
+  router_server()
 }
 
 shinyApp(ui, server)
 ```
 
-Check [the tutorial](https://appsilon.github.io/shiny.router/articles/basics.html) for more details on how to start using `shiny.router` or read the article on [Appsilon's blog](https://appsilon.com/shiny-router-package/).
+Check [the tutorial](https://appsilon.github.io/shiny.router/articles/basics.html) for more details on how to start using `shiny.router`.
 
 Examples
 -------

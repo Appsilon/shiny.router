@@ -11,7 +11,7 @@ route(path, ui, server = NA)
 
 \item{ui}{Valid Shiny user interface.}
 
-\item{server}{Function that is called as callback on server side}
+\item{server}{Function that is called as callback on server side [deprecated]}
 }
 \value{
 A route configuration.
@@ -23,6 +23,6 @@ Create single route configuration.
 \dontrun{
 route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 
-route("/main", shiny::tags$div(h1("Main page"), p("Lorem ipsum.")))
+route("main", shiny::tags$div(h1("Main page"), p("Lorem ipsum.")))
 }
 }

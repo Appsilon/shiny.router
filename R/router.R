@@ -65,16 +65,23 @@ get_url_hash <- function(session = shiny::getDefaultReactiveDomain()) {
 #'
 #' @param path Website route.
 #' @param ui Valid Shiny user interface.
-#' @param server Function that is called as callback on server side
+#' @param server Function that is called as callback on server side [deprecated]
 #' @return A route configuration.
 #' @examples
 #' \dontrun{
 #' route("/", shiny::tags$div(shiny::tags$span("Hello world")))
 #'
-#' route("/main", shiny::tags$div(h1("Main page"), p("Lorem ipsum.")))
+#' route("main", shiny::tags$div(h1("Main page"), p("Lorem ipsum.")))
 #' }
 #' @export
 route <- function(path, ui, server = NA) {
+  if (!missing(server)) {
+    warning(
+      "`server` argument in `route` is deprecated.
+      It will not be used when `route` is called inside `router_ui`."
+    )
+  }
+
   out <- list()
   out[[path]] <- callback_mapping(path, ui, server)
   out
@@ -88,7 +95,7 @@ route <- function(path, ui, server = NA) {
 #'
 #' @return Router callback.
 #' @keywords internal
-create_router_callback <- function(root, routes) {
+create_router_callback <- function(root, routes = NULL) {
   function(input, output, session = shiny::getDefaultReactiveDomain(), ...) {
     # Making this a list inside a shiny::reactiveVal, instead of using a
     # shiny::reactiveValues, because it should change atomically.
@@ -105,7 +112,9 @@ create_router_callback <- function(root, routes) {
       session$userData$shiny.router.url_hash(cleanup_hashpath(shiny::getUrlHash()))
     })
 
-    lapply(routes, function(route) route$server(input, output, session, ...))
+    if (!is.null(routes)) {
+      lapply(routes, function(route) route$server(input, output, session, ...))
+    }
 
     # Watch for updates to the address bar's fragment (aka "hash"), and update
     # our router state if needed.
@@ -131,7 +140,14 @@ create_router_callback <- function(root, routes) {
         parsed <- parse_url_path(cleaned_url)
         parsed$path <- ifelse(parsed$path == "", root, parsed$path)
 
-        if (!valid_path(routes, parsed$path)) {
+        is_path_valid <- if (is.null(routes)) {
+          log_msg("Valid paths:", input$routes)
+          !is.null(input$routes) && !(parsed$path %in% c(input$routes, "404"))
+        } else {
+          !valid_path(routes, parsed$path)
+        }
+
+        if (is_path_valid) {
           log_msg("Invalid path sent to observer")
           # If it's not a recognized path, then go to default 404 page.
           change_page(PAGE_404_ROUTE, mode = "replace")
@@ -160,11 +176,83 @@ create_router_callback <- function(root, routes) {
   }
 }
 
+#' Create router UI
+#'
+#' Creates router UI in Shiny applications.
+#'
+#' @param default Main route to which all invalid routes should redirect.
+#' @param ... All other routes defined with shiny.router::route function.
+#' @param page_404 Styling of page when invalid route is open. See \link{page404}.
+#' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside
+#'   shiny modules.
+#'
+#' @details If you are defining the router inside a shiny module,
+#'   we assume that the namespacing function defined in the UI is named as ns.
+#'
+#' @return Application UI wrapped in a router.
+#'
+#' @examples
+#' \dontrun{
+#'   ui <- function() {
+#'     router_ui(
+#'       route("/", root_page(id = "root")),
+#'       route("/other", other_page(id = "other")),
+#'       page_404 = page404(
+#'         message404 = "Please check if you passed correct bookmark name!")
+#'     )
+#'   }
+#' }
+#' @export
+router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) {
+  routes <- c(default, ...)
+  root <- names(default)[1]
+  if (! PAGE_404_ROUTE %in% names(routes))
+    routes <- c(routes, route(PAGE_404_ROUTE, page_404))
+  router <- list(root = root, routes = routes)
+
+  routes_input_id <- "routes"
+  if (!is.null(env$ns)) {
+    routes_input_id <- env$ns(routes_input_id)
+  }
+
+  routes_names <- paste0("'", names(c(default, ...)), "'", collapse = ", ")
+
+  shiny::tagList(
+    shiny::tags$script(
+      glue::glue("$(document).on('shiny:connected', function() {{
+        Shiny.setInputValue('{routes_input_id}', [{routes_names}]);
+      }});")
+    ),
+    router_ui_internal(router)
+  )
+}
+
+#' Create router pages server callback
+#'
+#' Server part of the router.
+#'
+#' @param root_page Main page path.
+#' @param env Environment (only for advanced usage).
+#'
+#' @return Router pages server callback.
+#'
+#' @examples
+#' \dontrun{
+#'   server <- function(input, output, session) {
+#'     router_server(root_page = "/")
+#'   }
+#' }
+#' @export
+router_server <- function(root_page = "/", env = parent.frame()) {
+  router <- create_router_callback(root_page)
+  router(env$input, env$output, env$session)
+}
+
 #' Create router pages server callback
 #'
 #' @param router Router pages object. See \link{make_router}.
 #' @keywords internal
-router_server <- function(router) {
+router_server_internal <- function(router) {
   create_router_callback(router$root, router$routes)
 }
 
@@ -175,7 +263,7 @@ router_server <- function(router) {
 #' @return list with shiny tags that adds "router-page-wrapper" div and embeds
 #' router javascript script.
 #' @keywords internal
-router_ui <- function(router) {
+router_ui_internal <- function(router) {
   shiny::addResourcePath(
     "shiny.router",
     system.file("www", package = "shiny.router")
@@ -199,7 +287,7 @@ router_ui <- function(router) {
   )
 }
 
-#' Creates router.
+#' [Deprecated] Creates router.
 #'
 #' Returned callback needs to be called within Shiny server code.
 #'
@@ -220,12 +308,17 @@ router_ui <- function(router) {
 #' }
 #' @export
 make_router <- function(default, ..., page_404 = page404()) {
+  .Deprecated(
+    new = "router_ui",
+    msg = "make_router function is deprecated. Please use 'router_ui' instead."
+  )
+
   routes <- c(default, ...)
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes))
     routes <- c(routes, route(PAGE_404_ROUTE, page_404))
   router <- list(root = root, routes = routes)
-  list(ui = router_ui(router), server = router_server(router))
+  list(ui = router_ui_internal(router), server = router_server_internal(router))
 }
 
 #' Convenience function to retrieve just the "page" part of the input.

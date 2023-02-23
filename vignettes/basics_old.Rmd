@@ -1,11 +1,13 @@
 ---
-title: "Introduction to the routing in Shiny with shiny.router"
+title: "[Deprecated] Introduction to the routing in Shiny with shiny.router"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to the routing in Shiny with shiny.router}
+  %\VignetteIndexEntry{[Deprecated] Introduction to the routing in Shiny with shiny.router}
   %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
+
+__This tutorial is based on a deprecated API (`shiny.router`<=0.2.3). New version can be found [here](https://appsilon.github.io/shiny.router/articles/basics.html).__
 
 ```{r setup, include = FALSE, screenshot.force = FALSE}
 library(shiny)
@@ -14,8 +16,7 @@ library(shiny.router)
 
 In this tutorial we will walk you through the basics of routing with the `shiny.router` library.
 
-In a web application, routing is the process of using URLs to drive the user interface.
-Routing adds more possibilities and flexibility while building a complex and advanced web application, offering dividing app into separated sections.
+In a web application, routing is the process of using URLs to drive the user interface. Routing adds more possibilities and flexibility while building a complex and advanced web application, offering dividing app into separated sections.
 
 Let's build together a simple app that has two subpages and captures the data from url parameters.
 
@@ -41,13 +42,22 @@ another_page <- div(
 )
 ```
 
+Now we can create routing. We provide routing paths, a UI of the page and (optionally) server-side callback for each page (here: `NA`).
+
+```{r echo = T, include = T, eval = FALSE}
+router <- make_router(
+  route("/", home_page, NA),
+  route("another", another_page, NA)
+)
+```
+
 Optionally, we can create a menu to easier navigate on our webapp:
 
 ```{r echo = T, include = T, eval = FALSE}
 menu <- tags$ul(
-  tags$li(a(class = "item", href = route_link("/"), "Main")),
-  tags$li(a(class = "item", href = route_link("another"), "Another page")),
-)
+    tags$li(a(class = "item", href = route_link("/"), "Main")),
+    tags$li(a(class = "item", href = route_link("another"), "Another page")),
+  )
 ```
 
 Now, we create an output for our router in main UI of Shiny app. We also add `sliderInput` to test its
@@ -57,19 +67,16 @@ functionality.
 ui <- fluidPage(
   menu,
   tags$hr(),
-  router_ui(
-    route("/", home_page),
-    route("another", another_page)
-  ),
-  sliderInput("int", "Choose integer:", -10, 10, 1, 1),
+  router$ui,
+  shiny::sliderInput("int", "Choose integer:", -10, 10, 1, 1),
 )
 ```
 
-Then, we plug router into Shiny server (note: `router_server()` at the beginning).
+Then, we plug router into Shiny server (note: `router$server` at the beginning).
 
 ```{r echo = T, include = T, eval = FALSE}
 server <- function(input, output, session) {
-  router_server()
+  router$server(input, output, session)
 }
 ```
 
@@ -79,7 +86,7 @@ Our modified Server code may look like this:
 
 ```{r echo = T, include = T, eval = FALSE}
 server <- function(input, output, session) {
-  router_server()
+  router$server(input, output, session)
 
   component <- reactive({
     if (is.null(get_query_param()$add)) {

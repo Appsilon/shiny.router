@@ -2,7 +2,7 @@
 % Please edit documentation in R/router.R
 \name{make_router}
 \alias{make_router}
-\title{Creates router.}
+\title{[Deprecated] Creates router.}
 \usage{
 make_router(default, ..., page_404 = page404())
 }
