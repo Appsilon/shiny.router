@@ -29,4 +29,5 @@ Suggests:
     covr,
     lintr,
     rcmdcheck,
+    spelling,
     testthat
