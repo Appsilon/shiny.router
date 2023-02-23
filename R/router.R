@@ -180,7 +180,7 @@ create_router_callback <- function(root, routes = NULL) {
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... All other routes defined with shiny.router::route function.
 #' @param page_404 Styling of page when wrong bookmark is open. See \link{page404}.
-#' @param env Environment (only for advanced usage).
+#' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside shiny modules.
 #'
 #' @return Application UI wrapped in a router.
 #'
