@@ -11,7 +11,7 @@ vignette: >
 
 `rhino` is a `shiny` framework focused on building applications with
 the best software engineering practices in mind. This tutorial will show you
-how you can use `shiny.router` in a Rhino application.
+how you can use `shiny.router` in a Rhino app.
 
 You can read more about `rhino` on the [documentation page](https://appsilon.github.io/rhino/).
 
@@ -70,7 +70,7 @@ check [this guide](https://appsilon.github.io/rhino/articles/how-to/manage-r-dep
 
 ## Add content
 
-Next, we need to fill the application with content.
+Next, we need to fill the application with the content.
 
 In `app/logic` add two files, `chart_utils.R` and `data_transformation.R`:
 
@@ -224,7 +224,7 @@ You should see something like this:
 
 # Add router
 
-Now, let us move the table and the chart to separate pages using `shiny.router`.
+Next, let us move the table and the chart to separate pages using `shiny.router`.
 
 ## Install `shiny.router`
 
@@ -359,7 +359,7 @@ To check the chart, you need to change the URL and replace "table" with "chart":
 
 # Change pages from UI
 
-Using only the URL to change the view is not the best UX,
+Using only the URL to change the view does not seem to be the easiest way,
 so we need to add navigation. To avoid reinventing the wheel, we will utilize
 [Bootstrap](https://getbootstrap.com/docs/3.3/) CSS classes available in `shiny`.
 
@@ -429,7 +429,7 @@ A user can simply click the button in the navbar and it will open a table or cha
 
 The displayed page can be also changed from the server part of the application.
 To demonstrate that, we will add another page
-- an introduction with buttons that will move a user to either chart or a table.
+- an introduction with buttons that will move the user to either chart or table page.
 
 First, create `intro.R` file in `app/view` directory.
 We will start with adding a UI - two Bootstrap jumbotrons with some descriptions and
@@ -668,7 +668,7 @@ If the param is not set, it will display 10 rows.
 
 ## Update query parameter
 
-Now, we will implement the opposite feature - we will add a page size dropdown to the table
+Let's implement the opposite feature - we will add a page size dropdown to the table
 and update the query parameter according to its value.
 
 First, add the page size option to the table:
