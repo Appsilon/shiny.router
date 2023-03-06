@@ -30,8 +30,7 @@ More details on how to create a Rhino app can be found in the [Rhino tutorial](h
 
 # Add the basic content
 
-To speed things up, we will use a basic version of the Rhino application that
-you can build by following the [Rhino tutorial](https://appsilon.github.io/rhino/articles/tutorial/create-your-first-rhino-app.html).
+To speed things up, we will use a basic version of the Rhino application described in the [Rhino tutorial](https://appsilon.github.io/rhino/articles/tutorial/create-your-first-rhino-app.html).
 
 ## Add dependencies
 
