@@ -879,4 +879,4 @@ you should see something similar to this:
 
 ----
 
-__Congratulations! You have succesfully upgraded your Rhino application with routing!__
+__Congratulations! You have successfully upgraded your Rhino application with routing!__
