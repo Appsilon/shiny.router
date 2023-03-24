@@ -123,7 +123,7 @@ create_router_callback <- function(root, routes = NULL) {
       ignoreInit = FALSE,
       # Shiny uses the "onhashchange" browser method (via JQuery) to detect
       # changes to the hash
-      eventExpr = c(get_url_hash(session), session$clientData$url_search),
+      eventExpr = c(get_url_hash(session), session$clientData$url_search, input$routes),
       handlerExpr = {
         log_msg("hashchange observer triggered!")
         new_hash <- shiny::getUrlHash(session)
@@ -141,6 +141,7 @@ create_router_callback <- function(root, routes = NULL) {
         parsed$path <- ifelse(parsed$path == "", root, parsed$path)
 
         is_path_valid <- if (is.null(routes)) {
+          shiny::req(input$routes)
           log_msg("Valid paths:", input$routes)
           !is.null(input$routes) && !(parsed$path %in% c(input$routes, "404"))
         } else {
