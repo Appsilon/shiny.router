@@ -233,7 +233,7 @@ router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) 
     )
     names(args) <- NULL
   }
-  paths <- unlist(args, recursive = F)
+  paths <- unlist(args, recursive = FALSE)
   routes <- c(default, paths)
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes))
