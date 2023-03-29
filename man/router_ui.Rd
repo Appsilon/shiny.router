@@ -9,7 +9,9 @@ router_ui(default, ..., page_404 = page404(), env = parent.frame())
 \arguments{
 \item{default}{Main route to which all invalid routes should redirect.}
 
-\item{...}{All other routes defined with shiny.router::route function.}
+\item{...}{<[`dynamic-dots`][rlang::dyn-dots]>
+All other routes defined with shiny.router::route function.
+It's possible to pass routes in dynamic way with dynamic dots}
 
 \item{page_404}{Styling of page when invalid route is open. See \link{page404}.}
 
@@ -32,6 +34,22 @@ If you are defining the router inside a shiny module,
     router_ui(
       route("/", root_page(id = "root")),
       route("/other", other_page(id = "other")),
+      page_404 = page404(
+        message404 = "Please check if you passed correct bookmark name!")
+    )
+  }
+}
+\dontrun{
+  dynamic_routes <- list(
+    route("/other2", other_page(id = "other2")),
+    route("/other3", other_page(id = "other3"))
+  )
+
+  ui <- function() {
+    router_ui(
+      route("/", root_page(id = "root")),
+      route("/other", other_page(id = "other")),
+      !!!dynamic_routes,
       page_404 = page404(
         message404 = "Please check if you passed correct bookmark name!")
     )

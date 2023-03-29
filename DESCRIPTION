@@ -23,7 +23,8 @@ License: MIT + file LICENSE
 Imports:
     htmltools,
     glue,
-    shiny
+    shiny,
+    rlang
 RoxygenNote: 7.2.3
 Suggests:
     covr,
