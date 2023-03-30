@@ -183,8 +183,8 @@ create_router_callback <- function(root, routes = NULL) {
 #'
 #' @param default Main route to which all invalid routes should redirect.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
-#' All other routes defined with shiny.router::route function.
-#' It's possible to pass routes in dynamic way with dynamic dots
+#'   All other routes defined with shiny.router::route function.
+#'   It's possible to pass routes in dynamic way with dynamic dots
 #' @param page_404 Styling of page when invalid route is open. See \link{page404}.
 #' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside
 #'   shiny modules.
