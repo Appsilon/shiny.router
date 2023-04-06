@@ -182,9 +182,10 @@ create_router_callback <- function(root, routes = NULL) {
 #' Creates router UI in Shiny applications.
 #'
 #' @param default Main route to which all invalid routes should redirect.
-#' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
+#' @param ...
 #'   All other routes defined with shiny.router::route function.
-#'   It's possible to pass routes in dynamic way with dynamic dots
+#'   It's possible to pass routes in dynamic way with dynamic dots.
+#'   See \code{\link[rlang:dots_list]{dynamic-dots}} and example below
 #' @param page_404 Styling of page when invalid route is open. See \link{page404}.
 #' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside
 #'   shiny modules.
@@ -206,15 +207,17 @@ create_router_callback <- function(root, routes = NULL) {
 #'   }
 #' }
 #' \dontrun{
+#'   # create the list of routes
 #'   dynamic_routes <- list(
-#'     route("/other2", other_page(id = "other2")),
-#'     route("/other3", other_page(id = "other3"))
+#'     route("other2", other_page(id = "other2")),
+#'     route("other3", other_page(id = "other3"))
 #'   )
 #'
 #'   ui <- function() {
 #'     router_ui(
 #'       route("/", root_page(id = "root")),
-#'       route("/other", other_page(id = "other")),
+#'       route("other", other_page(id = "other")),
+#'       # then it's possible to inject a list of arguments into a function call using rlang::`!!!`
 #'       !!!dynamic_routes,
 #'       page_404 = page404(
 #'         message404 = "Please check if you passed correct bookmark name!")

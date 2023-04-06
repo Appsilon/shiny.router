@@ -47,8 +47,8 @@ test_that("test getting clean url hash", {
 
 test_that("test router_ui with dynamic dots", {
   default <- route("/", shiny::div("default"))
-  first <- route("/first", shiny::div("first"))
-  second <- route("/second", shiny::div("second"))
+  first <- route("first", shiny::div("first"))
+  second <- route("second", shiny::div("second"))
 
   router_ui_dynamic <- router_ui(default = default, !!!list(first, second))
   router_ui_static <- router_ui(default = default, first, second)
@@ -58,8 +58,8 @@ test_that("test router_ui with dynamic dots", {
 
 test_that("named args in dynamic dots are ignored", {
   default <- route("/", shiny::div("default"))
-  first <- route("/first", shiny::div("first"))
-  second <- route("/second", shiny::div("second"))
+  first <- route("first", shiny::div("first"))
+  second <- route("second", shiny::div("second"))
 
   expect_warning(
     router_ui(
