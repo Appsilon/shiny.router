@@ -1,7 +1,7 @@
 Package: shiny.router
 Type: Package
 Title: Basic Routing for Shiny Web Applications
-Version: 0.3.0.9000
+Version: 0.3.0.9001
 Authors@R:
   c(
     person("Ryszard", "Szymański", email = "opensource+ryszard@appsilon.com", role = c("cre", "aut")),
@@ -23,6 +23,7 @@ License: MIT + file LICENSE
 Imports:
     htmltools,
     glue,
+    rlang,
     shiny
 RoxygenNote: 7.2.3
 Suggests:

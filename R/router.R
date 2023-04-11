@@ -182,7 +182,10 @@ create_router_callback <- function(root, routes = NULL) {
 #' Creates router UI in Shiny applications.
 #'
 #' @param default Main route to which all invalid routes should redirect.
-#' @param ... All other routes defined with shiny.router::route function.
+#' @param ...
+#'   All other routes defined with shiny.router::route function.
+#'   It's possible to pass routes in dynamic way with dynamic dots.
+#'   See \code{\link[rlang:dots_list]{dynamic-dots}} and example below
 #' @param page_404 Styling of page when invalid route is open. See \link{page404}.
 #' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside
 #'   shiny modules.
@@ -197,7 +200,25 @@ create_router_callback <- function(root, routes = NULL) {
 #'   ui <- function() {
 #'     router_ui(
 #'       route("/", root_page(id = "root")),
-#'       route("/other", other_page(id = "other")),
+#'       route("other", other_page(id = "other")),
+#'       page_404 = page404(
+#'         message404 = "Please check if you passed correct bookmark name!")
+#'     )
+#'   }
+#' }
+#' \dontrun{
+#'   # create the list of routes
+#'   dynamic_routes <- list(
+#'     route("other2", other_page(id = "other2")),
+#'     route("other3", other_page(id = "other3"))
+#'   )
+#'
+#'   ui <- function() {
+#'     router_ui(
+#'       route("/", root_page(id = "root")),
+#'       route("other", other_page(id = "other")),
+#'       # then it's possible to inject a list of arguments into a function call using rlang::`!!!`
+#'       !!!dynamic_routes,
 #'       page_404 = page404(
 #'         message404 = "Please check if you passed correct bookmark name!")
 #'     )
@@ -205,7 +226,18 @@ create_router_callback <- function(root, routes = NULL) {
 #' }
 #' @export
 router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) {
-  routes <- c(default, ...)
+  args <- rlang::list2(...)
+  if (!is.null(names(args))) {
+    warning(
+      paste0(
+        "Named arguments in additional routes (dynamic dots) ",
+        "are not recommended and will be ignored."
+      )
+    )
+    names(args) <- NULL
+  }
+  paths <- unlist(args, recursive = FALSE)
+  routes <- c(default, paths)
   root <- names(default)[1]
   if (! PAGE_404_ROUTE %in% names(routes))
     routes <- c(routes, route(PAGE_404_ROUTE, page_404))
@@ -216,7 +248,7 @@ router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) 
     routes_input_id <- env$ns(routes_input_id)
   }
 
-  routes_names <- paste0("'", names(c(default, ...)), "'", collapse = ", ")
+  routes_names <- paste0("'", names(routes), "'", collapse = ", ")
 
   shiny::tagList(
     shiny::tags$script(
