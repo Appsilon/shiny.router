@@ -85,16 +85,15 @@ If you want to contribute to this project please submit a regular PR, once you'r
 
 Reporting a bug is also helpful - please use [GitHub issues](https://github.com/Appsilon/shiny.router/issues) and describe your problem as detailed as possible.
 
-Appsilon
-========
+## Appsilon
 
 <img src="https://avatars0.githubusercontent.com/u/6096772" align="right" alt="" width="6%" />
 
-Appsilon is a **Posit (formerly RStudio) Full Service Certified Partner**. Learn more
-at [appsilon.com](https://appsilon.com).
+Appsilon is a **Posit (formerly RStudio) Full Service Certified Partner**.<br/>
+Learn more at [appsilon.com](https://appsilon.com).
 
 Get in touch [opensource@appsilon.com](mailto:opensource@appsilon.com)
 
-Check our [Open Source tools](https://shiny.tools).
+Explore the [Rhinoverse](https://rhinoverse.dev) - a family of R packages built around [Rhino](https://appsilon.github.io/rhino/)!
 
-<a href = "https://appsilon.com/careers/" target="_blank"><img src="http://d2v95fjda94ghc.cloudfront.net/hiring.png" alt="We are hiring!"/></a>
+<a href = "https://appsilon.com/careers/" target="_blank"><img src="https://raw.githubusercontent.com/Appsilon/website-cdn/gh-pages/WeAreHiring1.png" alt="We are hiring!"/></a>
