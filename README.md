@@ -20,8 +20,7 @@ router_ui(
 
 <!-- TODO We would like to have a nice graphic explaning routing mechanism -->
 
-How to install?
----------------
+## How to install?
 
 It's possible to install this library through CRAN
 
@@ -35,8 +34,7 @@ The most recent version you can get from this repo using [remotes](https://githu
 remotes::install_github("Appsilon/shiny.router")
 ```
 
-How to use it?
--------
+## How to use it?
 
 Basic usage:
 
@@ -64,8 +62,7 @@ shinyApp(ui, server)
 
 Check [the tutorial](https://appsilon.github.io/shiny.router/articles/basics.html) for more details on how to start using `shiny.router`.
 
-Examples
--------
+## Examples
 
 An application that showcases the `shiny.router` features can be found [here](https://connect.appsilon.com/appsidex/#!/):
 
@@ -78,23 +75,21 @@ It was built using two other Appsilon Open Source packages:
 
 You can also visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples.
 
-How to contribute?
-------------------
+## How to contribute?
 
 If you want to contribute to this project please submit a regular PR, once you're done with new feature or bug fix.
 
 Reporting a bug is also helpful - please use [GitHub issues](https://github.com/Appsilon/shiny.router/issues) and describe your problem as detailed as possible.
 
-Appsilon
-========
+## Appsilon
 
 <img src="https://avatars0.githubusercontent.com/u/6096772" align="right" alt="" width="6%" />
 
-Appsilon is a **Posit (formerly RStudio) Full Service Certified Partner**. Learn more
-at [appsilon.com](https://appsilon.com).
+Appsilon is a **Posit (formerly RStudio) Full Service Certified Partner**.<br/>
+Learn more at [appsilon.com](https://appsilon.com).
 
 Get in touch [opensource@appsilon.com](mailto:opensource@appsilon.com)
 
-Check our [Open Source tools](https://shiny.tools).
+Explore the [Rhinoverse](https://rhinoverse.dev) - a family of R packages built around [Rhino](https://appsilon.github.io/rhino/)!
 
-<a href = "https://appsilon.com/careers/" target="_blank"><img src="http://d2v95fjda94ghc.cloudfront.net/hiring.png" alt="We are hiring!"/></a>
+<a href = "https://appsilon.com/careers/" target="_blank"><img src="https://raw.githubusercontent.com/Appsilon/website-cdn/gh-pages/WeAreHiring1.png" alt="We are hiring!"/></a>
