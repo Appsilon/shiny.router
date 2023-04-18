@@ -33,7 +33,7 @@ If you are defining the router inside a shiny module,
   ui <- function() {
     router_ui(
       route("/", root_page(id = "root")),
-      route("/other", other_page(id = "other")),
+      route("other", other_page(id = "other")),
       page_404 = page404(
         message404 = "Please check if you passed correct bookmark name!")
     )
