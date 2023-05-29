@@ -4,7 +4,7 @@
 
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/Appsilon/shiny.router/workflows/R-CMD-check/badge.svg)
-[![codecov](https://codecov.io/gh/Appsilon/shiny.router/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Appsilon/shiny.router)
+[![codecov](https://codecov.io/gh/Appsilon/shiny.router/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Appsilon/shiny.router)
 [![cranlogs](https://cranlogs.r-pkg.org/badges/shiny.router)](https://CRAN.R-project.org/package=shiny.router)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/shiny.router)](https://CRAN.R-project.org/package=shiny.router)
 <!-- badges: end -->
