@@ -41,7 +41,15 @@ navbar:
     tutorials:
       icon: fa-university
       text: "Tutorials"
-      href: articles/index.html
+      menu:
+        - text: Introduction to the routing in Shiny with shiny.router
+          href: articles/basics.html
+        - text: shiny.router in Rhino applications
+          href: articles/rhino.html
+        - text: -------
+        - text: Deprecated
+        - text: "[shiny.router <= v0.2.3] Introduction to the routing in Shiny with shiny.router"
+          href: articles/basics_old.html
     reference:
       icon: fa-file-code-o
       text: "Reference"
