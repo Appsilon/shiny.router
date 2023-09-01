@@ -1,6 +1,6 @@
 # shiny.router 0.3.1
 
-- `example()` and `example2()` lorem ipsum
+- `example()` and `example2()`
 
 # shiny.router 0.3.0
 
@@ -8,7 +8,7 @@ Sample of no changes
 
 # shiny.router 0.2.3
 
-- todo
+- to do
 
 # shiny.router 0.2.1
 
