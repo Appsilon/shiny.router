@@ -1,30 +1,29 @@
-# data.validator (development version)
+# shiny.router (development version)
 
 - New tutorials menu
 
-# data.validator 0.3.1 (Latest)
+# shiny.router 0.3.1 (Latest)
 
 - Added Rhino tutorial
-- Added 2nd Google Analytics tag
+- Added second Google Analytics tag
 - Fix 404 page not working when a non-valid page is opened as the first page
 - Change dots `...` argument in `router_ui()` to allow dynamically passed arguments
 
-# data.validator 0.3.0
+# shiny.router 0.3.0
 
 - Add Google Analytics tag
-- Update readme
 - Add a new demo
 - Add Back to shiny.tools button
 - Introduce new API for Rhino compatibility
 
-# data.validator 0.2.3
+# shiny.router 0.2.3
 
 - Resolve `shiny::bootstrapLib()` before rendering
 - Fix displaying main page bookmark on app start
 - Fix `disable_bootstrap_on_bookmark()` errors with development version of Shiny
 - Apply `shiny::createWebDependency()` before `renderDependencies()`
 
-# data.validator 0.2.1
+# shiny.router 0.2.1
 
 - Semantic example works when hosted in sub directory
 - Width fix for small screens (mobile)
@@ -33,7 +32,7 @@
 - Let the page start showing any of the routed URLs, rather than forcing a start on the "default" one
 - Convenience functions to check which page is currently loaded (in order to avoid performing intermediary calculations for pages that won't be displayed.)
 - Removing the `shinyjs` dependency, because its license has changed to AGPL
-- Change the `page.js` settings so that it uses `hashbang` URLs (aka "escaped fragment"), and disabled the full page click-handler, because that wouldn't work correctly with the Shiny DT package
+- Change the `page.js` settings so that it uses `hashbang` URLs (aka "escaped fragment"), and disabled the full page click-handler, because that wouldn't work correctly with the Shiny `DT` package
 - Allow passing GET parameters on the main page
 - Allow lists in GET
 - Switches to 404 when bad address given
@@ -53,6 +52,6 @@
 - Remember page state
 - New version of router
 
-# data.validator 0.1.0
+# shiny.router 0.1.0
 
 - First release
