@@ -1,7 +1,9 @@
+AGPL
+Analytics
 Appsilon
 CMD
-Rhinoverse
 RStudio
+Rhinoverse
 UI
 appsilon
 codecov
@@ -9,6 +11,7 @@ config
 cranlogs
 dropdown
 dyn
+hashbang
 htmltools
 http
 https
@@ -27,7 +30,3 @@ subpages
 ui
 webapp
 www
-AGPL
-Analytics
-hashbang
-
