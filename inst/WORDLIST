@@ -1,11 +1,8 @@
 AGPL
 Analytics
 Appsilon
-CMD
-RStudio
-Rhinoverse
-UI
 appsilon
+CMD
 codecov
 config
 cranlogs
@@ -24,9 +21,12 @@ navbar
 param
 params
 repo
+Rhinoverse
 rlang
+RStudio
 rstudio
 subpages
+UI
 ui
 webapp
 www
