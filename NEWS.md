@@ -1,56 +1,61 @@
 # shiny.router (development version)
 
-- New tutorials menu
+- Added a new tutorials menu
 
 # shiny.router 0.3.1 (Latest)
 
 - Added Rhino tutorial
-- Added second Google Analytics tag
-- Fix 404 page not working when a non-valid page is opened as the first page
-- Change dots `...` argument in `router_ui()` to allow dynamically passed arguments
+- Added cross-domain Google Analytics tag
+- Fixed the issue where the 404 page was not working when a non-valid page is opened as the first page
+- Changed the dots (`...`) argument in `router_ui()` to allow dynamically passed arguments
 
 # shiny.router 0.3.0
 
-- Add Google Analytics tag
-- Add a new demo
-- Add Back to shiny.tools button
-- Introduce new API for Rhino compatibility
+- Added Google Analytics tag
+- Added a new demo
+- Added a "Back to shiny.tools" button
+- Added a new API that is compatible with Rhino
 
 # shiny.router 0.2.3
 
-- Resolve `shiny::bootstrapLib()` before rendering
-- Fix displaying main page bookmark on app start
-- Fix `disable_bootstrap_on_bookmark()` errors with development version of Shiny
-- Apply `shiny::createWebDependency()` before `renderDependencies()`
+- Resolved `shiny::bootstrapLib()` before rendering
+- Fixed the issue displaying the main page bookmark on app start
+- Fixed `disable_bootstrap_on_bookmark()` errors with the development version of Shiny
+- Applied `shiny::createWebDependency()` before `renderDependencies()`
 
 # shiny.router 0.2.1
 
-- Semantic example works when hosted in sub directory
-- Width fix for small screens (mobile)
-- Let R code change the current page
-- Let R code read query parameters from the page URL
-- Let the page start showing any of the routed URLs, rather than forcing a start on the "default" one
-- Convenience functions to check which page is currently loaded (in order to avoid performing intermediary calculations for pages that won't be displayed.)
-- Removing the `shinyjs` dependency, because its license has changed to AGPL
-- Change the `page.js` settings so that it uses `hashbang` URLs (aka "escaped fragment"), and disabled the full page click-handler, because that wouldn't work correctly with the Shiny `DT` package
-- Allow passing GET parameters on the main page
-- Allow lists in GET
-- Switches to 404 when bad address given
-- Change URL hash extracting to be compatible with IE
-- Fix file structure
-- Hash and query order change
-- Fix `escape_path()`
-- Servers side callbacks
-- Allow main page hash other than "/"
-- Possibility to suppress bootstrap on some bookmarks
-- Allow passing content for page404
-- Allow passing common value for each server callback
-- Use relative path when creating router link
-- Fix issue when root page running twice
-- Add support for URLs with query strings proceeding hashbang
-- Stop re-rendering the whole page every time URL is changed
-- Remember page state
-- New version of router
+- Added the possibility to suppress bootstrap on some bookmarks
+- Allowed passing content for page404
+- Allowed passing a common value for each server callback
+- Used relative paths when creating router links
+- Fixed the issue when the root page was running twice
+- Added support for URLs with query strings preceding hashbang
+- Stopped re-rendering the whole page every time the URL was changed
+- Remembered page state
+- Introduced a new version of the router
+
+# shiny.router 0.2.0
+
+- Semantic example now works when hosted in a subdirectory
+- Fixed width for small screens (mobile)
+- Allowed R code to change the current page
+- Allowed R code to read query parameters from the page URL
+- Allowed the page to start showing any of the routed URLs, rather than forcing a start on the "default" one
+- Added convenience functions to check which page is currently loaded (in order to avoid performing intermediary calculations for pages that won't be displayed)
+- Removed the `shinyjs` dependency due to changes in its license to AGPL
+- Changed the `page.js` settings so that it uses `hashbang` URLs (aka "escaped fragment") and disabled the full page click-handler, as it wouldn't work correctly with the Shiny `DT` package
+- Allowed passing GET parameters on the main page
+- Allowed lists in GET parameters
+- Switched to a 404 error page when a bad address is given
+- Changed the URL hash extracting method to be compatible with IE
+- Fixed the `escape_path()` function
+- Added server-side callbacks
+- Allowed the main page hash other than "/"
+- Changed the core of the router from `page.js` to `updateQueryString`
+- Added a debugging function `log_msg`
+- Made it possible to catch GET parameters
+- Changed the way of link declaration (by route_link)
 
 # shiny.router 0.1.0
 
