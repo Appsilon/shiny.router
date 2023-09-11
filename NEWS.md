@@ -7,8 +7,8 @@
 
 - Added a new API that is compatible with Rhino
 - `router_ui` and `router_server` replaced `make_router`
-- `router_ui` should be applied inside the UI function (not outside, like `make_router`) and thanks to that, can utilize ns if used in a Rhino app
-- `router_server` adds all required server components (mostly observeEvents) to the server part of the application
+- `router_ui` should be applied inside the UI function (not outside, like `make_router`) and thanks to that, can utilize `ns()` if used in a Rhino app
+- `router_server` adds all required server components (mostly `observeEvents`) to the server part of the application
 - Marked `make_router` as deprecated, it is not removed
 
 # shiny.router 0.2.3
