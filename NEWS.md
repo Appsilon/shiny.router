@@ -10,7 +10,7 @@
 # shiny.router 0.2.3
 
 - Fixed error with `shiny.router::disable_bootstrap_on_bookmark()` when used with development version of shiny by applying `shiny::createWebDependency()` before `renderDependencies()`.
-- Fixed the issue displaying the main page bookmark on app start. Fixed issue of hash path not updated when opening default page. Added update of hash path to be run once after default router page is being set-up.
+- Fixed the issue displaying the main page bookmark on app start. Added update of hash path to be run once after default router page is being set-up.
 
 # shiny.router 0.2.2
 
