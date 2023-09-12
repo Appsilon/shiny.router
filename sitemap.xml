@@ -4,9 +4,6 @@
     <loc>https://appsilon.github.io/shiny.router/404.html</loc>
   </url>
   <url>
-    <loc>https://appsilon.github.io/shiny.router/CHANGELOG.html</loc>
-  </url>
-  <url>
     <loc>https://appsilon.github.io/shiny.router/LICENSE-text.html</loc>
   </url>
   <url>
@@ -26,6 +23,9 @@
   </url>
   <url>
     <loc>https://appsilon.github.io/shiny.router/index.html</loc>
+  </url>
+  <url>
+    <loc>https://appsilon.github.io/shiny.router/news/index.html</loc>
   </url>
   <url>
     <loc>https://appsilon.github.io/shiny.router/pull_request_template.html</loc>
