@@ -1,6 +1,6 @@
 # shiny.router 0.3.1
 
-- Changed the dots (`...`) argument in `router_ui()` to allow dynamically passing of arguments.
+- Changed the dots (`...`) argument in `router_ui()` to allow dynamically passing of arguments. Now, its possible to pass routes in dynamic way with dynamic dots (`...`).
 - Fixed the issue where the 404 page was not working when a user opens a non-valid link without going to a valid one first.
 
 # shiny.router 0.3.0
