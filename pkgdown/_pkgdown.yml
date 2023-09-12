@@ -31,7 +31,7 @@ url: https://appsilon.github.io/shiny.router/
 navbar:
   bg: primary
   structure:
-    left: [home, tutorials, reference]
+    left: [home, tutorials, reference, news]
     right: [search, github, twitter, mastodon]
   components:
     home:
@@ -54,6 +54,10 @@ navbar:
       icon: fa-file-code-o
       text: "Reference"
       href: reference/index.html
+    news:
+      icon: fa-newspaper-o
+      text: "Changelog"
+      href: news/index.html
     github:
       icon: fa-github fa-lg
       href: https://github.com/Appsilon/shiny.router

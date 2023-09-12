@@ -9,6 +9,7 @@ config
 cranlogs
 dropdown
 dyn
+hashbang
 htmltools
 http
 https
