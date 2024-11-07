@@ -73,7 +73,7 @@ It was built using two other Appsilon Open Source packages:
 - [`rhino`](https://appsilon.github.io/rhino/) - an R package designed to help building high quality, enterprise-grade Shiny applications at speed.
 - [`shiny.fluent`](https://appsilon.github.io/shiny.fluent/) - Microsoft's Fluent UI for Shiny apps.
 
-You can also visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples.
+You can also visit [examples](https://github.com/Appsilon/shiny.router/tree/master/examples) directory for some complete samples. This package has also experimental support for Shiny for Python, you can find examples both for R and Python.
 
 ## How to contribute?
 
