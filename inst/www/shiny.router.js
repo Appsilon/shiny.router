@@ -42,12 +42,22 @@ window.shinyrouter = function() {
 }();
 
 var switchUI = function(message) {
+  // In Shiny for R message can be string and path is send as string.
+  // In Shiny for Python meesage has to be an object. Path is send as field.
+  const path = typeof message === "string" ? message : message?.path; 
+
   var routes = $("#router-page-wrapper").find(".router");
   var active_route = routes.filter(function() {
-    return $(this).data("path") == message;
+    return $(this).data("path") == path;
   });
   routes.addClass('router-hidden');
   active_route.removeClass('router-hidden');
 };
 
 Shiny.addCustomMessageHandler("switch-ui", switchUI);
+
+$(window).on("hashchange", function (e) {
+  Shiny.setInputValue("_clientdata_url_hash", window.location.hash);
+  return;
+  e;
+});

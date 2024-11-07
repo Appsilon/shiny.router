@@ -4,3 +4,6 @@
 .RData
 .Ruserdata
 /docs/
+.pyc
+__pycache__/
+*.egg-info
