@@ -1,6 +1,7 @@
 from shiny import ui, reactive
 from htmltools import HTMLDependency
 from pathlib import PurePath
+from urllib.parse import urlparse, parse_qs
 
 log_msg = print
 PAGE_404_ROUTE = "404"
@@ -36,15 +37,22 @@ def create_router_callback(root, routes=None):
             query = None,
             unparsed = root
         ))
+
         @reactive.effect
         @reactive.event(input._clientdata_url_hash)
         def _():
             requested_path = input._clientdata_url_hash()
-            clean_path = requested_path[3:] if requested_path.startswith("#!/") else requested_path 
-            # TODO: Below simplifies and is incorrect:
+            parsed_url = urlparse(requested_path)
+            fragment_path = urlparse(parsed_url.fragment)
+            clean_path = fragment_path.path.lstrip("!").lstrip("/")
+            query_params = parse_qs(fragment_path.query)
+
+            print("Path:", clean_path)
+            print("Query Parameters:", query_params)
+
             input.shiny_router_page.set(dict(
-                path = clean_path if clean_path else root,
-                query = None,
+                path = clean_path,
+                query = query_params,
                 unparsed = requested_path, 
             ))
 
@@ -109,7 +117,7 @@ def router_ui_internal(router):
     pkg_dependency = HTMLDependency("shiny_router", "0.0.1",
         source={
             "package": "shiny_router",
-            "subdir": str(PurePath(__file__).parent.parent.parent / "inst" / "www"),
+            "subdir": str(PurePath(__file__).parent / "www"),
         },
         script={"src": js_file, "type": "module"},
         stylesheet={"href": css_file}
