@@ -43,7 +43,7 @@ def create_router_callback(root, routes=None):
             clean_path = requested_path[3:] if requested_path.startswith("#!/") else requested_path 
             # TODO: Below simplifies and is incorrect:
             input.shiny_router_page.set(dict(
-                path = clean_path,
+                path = clean_path if clean_path else root,
                 query = None,
                 unparsed = requested_path, 
             ))
@@ -52,8 +52,6 @@ def create_router_callback(root, routes=None):
         @reactive.event(input.shiny_router_page)
         async def _():
             page_path = input.shiny_router_page()
-            print("shiny router page changed")
-            print(page_path)
             log_msg("shiny.router main output. path: ", page_path["path"])
             await session.send_custom_message("switch-ui", page_path)
         
