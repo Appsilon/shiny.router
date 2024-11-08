@@ -1,4 +1,1 @@
-from .router import route_link, router_ui, route, router_server
-
-def hello() -> str:
-    return "Hello from shiny_router!"
+from .router import route_link, router_ui, route, router_server, get_query_param

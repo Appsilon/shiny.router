@@ -1,5 +1,5 @@
-from shiny import App, ui
-from shiny_router import  route_link, router_ui, route, router_server
+from shiny import App, ui, render, reactive
+from shiny_router import route_link, router_ui, route, router_server, get_query_param
 
 tags = ui.tags
 
@@ -25,6 +25,7 @@ third_page = tags.div(menu, tags.h3("Third Page"))
 
 # Make output for our router in main UI of Shiny app.
 app_ui = ui.page_fluid(
+  ui.output_ui("param"),
   router_ui(
     route("/", root_page),
     route("other", other_page),
@@ -35,5 +36,15 @@ app_ui = ui.page_fluid(
 # Plug router into Shiny server.
 def server(input, output, session):
   router_server(input, output, session)
+
+  @render.ui
+  def param():
+    query = get_query_param(session = session)
+    id = get_query_param("id", session = session)
+    return ui.TagList(
+      ui.p("No query" if not query else str(query)),
+      ui.p("No id" if not id else str(id)),
+    )
+
 
 app = App(app_ui, server)

@@ -1,10 +1,21 @@
-from shiny import ui, reactive
+from shiny import ui, reactive, session
 from htmltools import HTMLDependency
 from pathlib import PurePath
 from urllib.parse import urlparse, parse_qs
 
 log_msg = print
 PAGE_404_ROUTE = "404"
+
+def get_query_param(field = None, session = session.get_current_session()):
+    page_details = session.input.shiny_router_page()
+
+    if field:
+        if field in page_details["query"]:
+            return page_details["query"][field][0]
+        else:
+            return None
+
+    return page_details["query"]
 
 def page404(page=None, message404=None):
     if page is None:
@@ -34,7 +45,7 @@ def create_router_callback(root, routes=None):
 
         input.shiny_router_page = reactive.value(dict(
             path = root,
-            query = None,
+            query = {},
             unparsed = root
         ))
 
