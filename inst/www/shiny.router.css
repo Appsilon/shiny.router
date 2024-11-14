@@ -9,3 +9,7 @@
 .router-hidden * {
   visibility: inherit;
 }
+
+div.router-hidden:where(.shiny-html-output):has(>*) {
+  display: inherit;
+}

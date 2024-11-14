@@ -53,9 +53,12 @@ def create_router_callback(root, routes=None):
         @reactive.event(input._clientdata_url_hash)
         def _():
             requested_path = input._clientdata_url_hash()
+            log_msg("requested path" + requested_path)
             parsed_url = urlparse(requested_path)
             fragment_path = urlparse(parsed_url.fragment)
             clean_path = fragment_path.path.lstrip("!").lstrip("/")
+            if clean_path == "":
+                clean_path = root
             query_params = parse_qs(fragment_path.query)
 
             print("Path:", clean_path)
@@ -111,14 +114,6 @@ def route(path, ui, server=None):
     if server is not None:
         print("Warning: 'server' argument in 'route' is deprecated.")
     return {"path": path, "logic": callback_mapping(path, ui, server)}
-
-def router_ui(default, *args, page_404=None):
-    routes = {**default, **{arg: callback_mapping(arg, ui) for arg, ui in args}}
-    root = list(default.keys())[0]
-    if '404' not in routes:
-        routes['404'] = route('404', page_404)
-    return {'root': root, 'routes': routes}
-
 
 def router_ui_internal(router):
     # Define paths to JavaScript and CSS files
