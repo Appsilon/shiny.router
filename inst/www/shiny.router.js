@@ -41,7 +41,7 @@ window.shinyrouter = function() {
     };
 }();
 
-var switchUI = function(message) {
+const switchUI = function(message) {
   // In Shiny for R message can be string and path is send as string.
   // In Shiny for Python meesage has to be an object. Path is send as field.
   const path = typeof message === "string" ? message : message?.path; 
@@ -56,8 +56,10 @@ var switchUI = function(message) {
 
 Shiny.addCustomMessageHandler("switch-ui", switchUI);
 
-$(window).on("hashchange", function (e) {
-  Shiny.setInputValue("_clientdata_url_hash", window.location.hash);
-  return;
-  e;
-});
+const change_url = function(message) {
+  // In Shiny for Python meesage has to be an object. Path is send as field.
+  const url = message.url; 
+  window.location.hash = url;
+}
+
+Shiny.addCustomMessageHandler("_shiny_router_change_url", change_url);

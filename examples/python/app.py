@@ -21,7 +21,7 @@ def page(title, content):
 # Both sample pages.
 root_page = page("Home page", "Welcome on sample routing page!")
 other_page = page("Some other page", "Lorem ipsum dolor sit amet.")
-third_page = tags.div(menu, tags.h3("Third Page"))
+third_page = tags.div(menu, tags.h3("Third Page"), ui.input_action_button(id = "click", label = "Click me"))
 
 # Make output for our router in main UI of Shiny app.
 app_ui = ui.page_fluid(
@@ -45,6 +45,11 @@ def server(input, output, session):
       ui.p("No query" if not query else str(query)),
       ui.p("No id" if not id else str(id)),
     )
+
+  @reactive.effect
+  async def redirect():
+    input.click()
+    # await session.send_custom_message("_shiny_router_change_url", {"url": "elo"})
 
 
 app = App(app_ui, server)
