@@ -48,8 +48,9 @@ def server(input, output, session):
 
   @reactive.effect
   async def redirect():
-    input.click()
-    # await session.send_custom_message("_shiny_router_change_url", {"url": "elo"})
+    counter = input.click()
+    if counter:
+      await session.send_custom_message("_shiny_router_change_url", {"url": "elo"})
 
 
 app = App(app_ui, server)
