@@ -1,6 +1,6 @@
 # development version
 
-- Fixed an issue where plots and cards were not fillable when using `shiny.router` with `bslib::page_fillable`. A `fill` argument was added to `router_ui` to control whether fill classes are added.
+- Fixed an issue where plots and cards were not `fillable` when using `shiny.router` with `bslib::page_fillable`. A `fill` argument was added to `router_ui` to control whether fill classes are added.
 - Fixed errors in tests by ensuring `js_file` and `css_file` are defined within the `router_ui` function scope.
 
 # shiny.router 0.3.1
