@@ -187,6 +187,7 @@ create_router_callback <- function(root, routes = NULL) {
 #'   It's possible to pass routes in dynamic way with dynamic dots.
 #'   See \code{\link[rlang:dots_list]{dynamic-dots}} and example below
 #' @param page_404 Styling of page when invalid route is open. See \link{page404}.
+#' @param fill Whether to fill the container. Defaults to TRUE.
 #' @param env Environment (only for advanced usage), makes it possible to use shiny.router inside
 #'   shiny modules.
 #'
@@ -225,7 +226,7 @@ create_router_callback <- function(root, routes = NULL) {
 #'   }
 #' }
 #' @export
-router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) {
+router_ui <- function(default, ..., page_404 = page404(), fill = TRUE, env = parent.frame()) {
   args <- rlang::list2(...)
   if (!is.null(names(args))) {
     warning(
@@ -250,13 +251,45 @@ router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) 
 
   routes_names <- paste0("'", names(routes), "'", collapse = ", ")
 
+  fill_class <- if (isTRUE(fill)) {
+    "html-fill-item html-fill-container"
+  } else {
+    ""
+  }
+
+  shiny::addResourcePath(
+    "shiny.router",
+    system.file("www", package = "shiny.router")
+  )
+  js_file <- file.path("shiny.router", "shiny.router.js")
+  css_file <- file.path("shiny.router", "shiny.router.css")
+
   shiny::tagList(
     shiny::tags$script(
       glue::glue("$(document).on('shiny:connected', function() {{
         Shiny.setInputValue('{routes_input_id}', [{routes_names}]);
       }});")
     ),
-    router_ui_internal(router)
+    shiny::tags$div(
+      id = "router-page-wrapper",
+      class = fill_class,
+      lapply(router$routes, function(route) {
+        shiny::tagList(
+          shiny::div(
+            class = fill_class,
+            route$ui
+          )
+        )
+      })
+    ),
+    shiny::singleton(
+      shiny::withTags(
+        shiny::tags$head(
+          shiny::tags$script(type = "text/javascript", src = js_file),
+          shiny::tags$link(rel = "stylesheet", href = css_file)
+        )
+      )
+    )
   )
 }
 
