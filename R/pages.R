@@ -21,12 +21,12 @@ PAGE_404_ROUTE <- "404" #nolint
 page404 <- function(page = NULL, message404 = NULL) {
   if (is.null(page)) {
     if (is.null(message404)) {
-      return(shiny::div(shiny::h1("Not found")))
+      shiny::div(shiny::h1("Not found"))
     } else {
-      return(shiny::div(shiny::h1(message404)))
+      shiny::div(shiny::h1(message404))
     }
   } else {
-    return(page)
+    page
   }
 }
 

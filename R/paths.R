@@ -141,11 +141,9 @@ get_query_param <- function(field = NULL, session = shiny::getDefaultReactiveDom
     return(NULL)
   }
   if (missing(field)) {
-    return(
-      # Return a list of all the query params
-      session$userData$shiny.router.page()$query
-    )
+    # Return a list of all the query params
+    session$userData$shiny.router.page()$query
   } else {
-    return(session$userData$shiny.router.page()$query[[field]])
+    session$userData$shiny.router.page()$query[[field]]
   }
 }
