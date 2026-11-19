@@ -4,7 +4,13 @@
 \alias{router_ui}
 \title{Create router UI}
 \usage{
-router_ui(default, ..., page_404 = page404(), env = parent.frame())
+router_ui(
+  default,
+  ...,
+  page_404 = page404(),
+  fill = TRUE,
+  env = parent.frame()
+)
 }
 \arguments{
 \item{default}{Main route to which all invalid routes should redirect.}
@@ -14,6 +20,8 @@ It's possible to pass routes in dynamic way with dynamic dots.
 See \code{\link[rlang:dots_list]{dynamic-dots}} and example below}
 
 \item{page_404}{Styling of page when invalid route is open. See \link{page404}.}
+
+\item{fill}{Whether to fill the container. Defaults to TRUE.}
 
 \item{env}{Environment (only for advanced usage), makes it possible to use shiny.router inside
 shiny modules.}
