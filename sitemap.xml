@@ -1,111 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/404.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/articles/basics.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/articles/basics_old.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/articles/rhino.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/index.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/pull_request_template.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/PAGE_404_ROUTE.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/attach_attribs.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/callback_mapping.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/change_page.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/cleanup_hashpath.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/create_router_callback.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/disable_bootstrap_on_bookmark.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/dot-onAttach.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/extract_link_name.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/get_page.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/get_query_param.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/get_url_hash.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/grapes-colon-colon-colon-grapes.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/is_page.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/log_msg.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/make_router.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/page404.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/parse_url_path.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/route.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/route_link.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/router_server.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/router_server_internal.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/router_ui.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/router_ui_internal.html</loc>
-  </url>
-  <url>
-    <loc>https://appsilon.github.io/shiny.router/reference/valid_path.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://appsilon.github.io/shiny.router/404.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/LICENSE-text.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/articles/basics.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/articles/basics_old.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/articles/index.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/articles/rhino.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/authors.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/index.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/news/index.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/PAGE_404_ROUTE.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/attach_attribs.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/callback_mapping.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/change_page.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/cleanup_hashpath.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/create_router_callback.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/disable_bootstrap_on_bookmark.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/dot-onAttach.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/extract_link_name.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/get_page.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/get_query_param.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/get_url_hash.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/grapes-colon-colon-colon-grapes.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/index.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/is_page.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/log_msg.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/make_router.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/page404.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/parse_url_path.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/route.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/route_link.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/router_server.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/router_server_internal.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/router_ui.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/router_ui_internal.html</loc></url>
+<url><loc>https://appsilon.github.io/shiny.router/reference/valid_path.html</loc></url>
 </urlset>
+

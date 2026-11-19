@@ -1,0 +1,151 @@
+# shiny.router [![shiny.router logo](reference/figures/shiny.router.png)](https://appsilon.github.io/shiny.router/)
+
+> *A minimalistic router for your Shiny apps.*
+
+Now it’s possible to recreate a state of your app, by providing a
+specific URL, like:
+
+``` r
+
+router_ui(
+  route("<your_app_url>/main",  mainPageShinyUI),
+  route("<your_app_url>/other", otherPageShinyUI)
+)
+```
+
+## How to install?
+
+It’s possible to install this library through CRAN
+
+``` r
+
+install.packages("shiny.router")
+```
+
+The most recent version you can get from this repo using
+[remotes](https://github.com/r-lib/remotes).
+
+``` r
+
+remotes::install_github("Appsilon/shiny.router")
+```
+
+## How to use it?
+
+Basic usage:
+
+``` r
+
+library(shiny)
+library(shiny.router)
+
+root_page <- div(h2("Root page"))
+other_page <- div(h3("Other page"))
+
+ui <- fluidPage(
+  title = "Router demo",
+  router_ui(
+    route("/", root_page),
+    route("other", other_page)
+  )
+)
+
+server <- function(input, output, session) {
+  router_server()
+}
+
+shinyApp(ui, server)
+```
+
+Check [the
+tutorial](https://appsilon.github.io/shiny.router/articles/basics.html)
+for more details on how to start using `shiny.router`.
+
+## Examples
+
+An application that showcases the `shiny.router` features can be found
+[here](https://connect.appsilon.com/appsidex/#!/):
+
+[![](reference/figures/router_demo/feature-multipage.gif)](https://connect.appsilon.com/appsidex/#!/)
+
+It was built using two other Appsilon Open Source packages:
+
+- [`rhino`](https://appsilon.github.io/rhino/) - an R package designed
+  to help building high quality, enterprise-grade Shiny applications at
+  speed.
+- [`shiny.fluent`](https://appsilon.github.io/shiny.fluent/) -
+  Microsoft’s Fluent UI for Shiny apps.
+
+You can also visit
+[examples](https://github.com/Appsilon/shiny.router/tree/master/examples)
+directory for some complete samples.
+
+## How to contribute?
+
+If you want to contribute to this project please submit a regular PR,
+once you’re done with new feature or bug fix.
+
+Reporting a bug is also helpful - please use [GitHub
+issues](https://github.com/Appsilon/shiny.router/issues) and describe
+your problem as detailed as possible.
+
+## Appsilon
+
+![](https://avatars0.githubusercontent.com/u/6096772)
+
+Appsilon is a **Posit (formerly RStudio) Full Service Certified
+Partner**.  
+Learn more at [appsilon.com](https://appsilon.com).
+
+Get in touch <opensource@appsilon.com>
+
+Explore the [Rhinoverse](https://rhinoverse.dev) - a family of R
+packages built around [Rhino](https://appsilon.github.io/rhino/)!
+
+[![We are
+hiring!](https://raw.githubusercontent.com/Appsilon/website-cdn/gh-pages/WeAreHiring1.png)](https://appsilon.com/careers/)
+
+# Package index
+
+## Main router functions
+
+- [`router_ui()`](https://appsilon.github.io/shiny.router/reference/router_ui.md)
+  : Create router UI
+- [`router_server()`](https://appsilon.github.io/shiny.router/reference/router_server.md)
+  : Create router pages server callback
+- [`make_router()`](https://appsilon.github.io/shiny.router/reference/make_router.md)
+  : \[Deprecated\] Creates router.
+- [`route()`](https://appsilon.github.io/shiny.router/reference/route.md)
+  : Create single route configuration.
+- [`route_link()`](https://appsilon.github.io/shiny.router/reference/route_link.md)
+  : Route link
+- [`get_query_param()`](https://appsilon.github.io/shiny.router/reference/get_query_param.md)
+  : Get Query Parameters
+- [`change_page()`](https://appsilon.github.io/shiny.router/reference/change_page.md)
+  : Change the currently displayed page.
+- [`parse_url_path()`](https://appsilon.github.io/shiny.router/reference/parse_url_path.md)
+  : Parse url and build GET parameters list
+
+## Auxiliary functions
+
+- [`disable_bootstrap_on_bookmark()`](https://appsilon.github.io/shiny.router/reference/disable_bootstrap_on_bookmark.md)
+  : Fix conflicts when some bookmark uses bootstrap
+- [`get_page()`](https://appsilon.github.io/shiny.router/reference/get_page.md)
+  : Convenience function to retrieve just the "page" part of the input.
+- [`is_page()`](https://appsilon.github.io/shiny.router/reference/is_page.md)
+  : Is page
+- [`page404()`](https://appsilon.github.io/shiny.router/reference/page404.md)
+  : 404 page
+- [`PAGE_404_ROUTE`](https://appsilon.github.io/shiny.router/reference/PAGE_404_ROUTE.md)
+  : Default 404 page
+
+# Articles
+
+### All vignettes
+
+- [\[Deprecated\] Introduction to the routing in Shiny with
+  shiny.router](https://appsilon.github.io/shiny.router/articles/basics_old.md):
+- [Introduction to the routing in Shiny with
+  shiny.router](https://appsilon.github.io/shiny.router/articles/basics.md):
+- [Tutorial: shiny.router in Rhino
+  applications](https://appsilon.github.io/shiny.router/articles/rhino.md):
