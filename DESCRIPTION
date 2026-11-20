@@ -32,3 +32,4 @@ Suggests:
     rcmdcheck,
     spelling,
     testthat
+Config/Needs/e2e: shiny.semantic
