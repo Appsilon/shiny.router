@@ -89,3 +89,43 @@ test_that("named args in dynamic dots are ignored", {
     fixed = TRUE
   )
 })
+
+# A mock Shiny session whose browser has the given URL hash. updateQueryString() changes the hash
+# like the browser does (shiny.router.js reports hashes changed in "replace" mode too). Pages shown
+# via the "switch-ui" message are collected in `shown`.
+mock_router_session <- function(url_hash) {
+  session <- shiny::MockShinySession$new()
+  session$clientData <- shiny::reactiveValues(url_hash = url_hash, url_search = "")
+  session$updateQueryString <- function(query_string, mode = "replace") {
+    session$clientData$url_hash <- query_string
+  }
+  shown <- character()
+  session$sendCustomMessage <- function(type, message) shown <<- c(shown, message)
+  session$setInputs(routes = c("/", "other", PAGE_404_ROUTE))
+  router <- create_router_callback("/")
+  shiny::withReactiveDomain(session, router(session$input, session$output, session))
+  session$flushReact()
+  list(session = session, shown = function() shown)
+}
+
+test_that("a hash without the #!/ prefix is rewritten and its page is shown", {
+  for (url_hash in c("#other", "#!other", "#/other")) {
+    mock <- mock_router_session(url_hash)
+    expect_equal(shiny::isolate(mock$session$clientData$url_hash), "#!/other")
+    expect_equal(shiny::isolate(get_page(mock$session)), "other")
+    expect_equal(utils::tail(mock$shown(), 1), "other")
+  }
+})
+
+test_that("opening the app without a hash shows the root page once", {
+  mock <- mock_router_session("")
+  expect_equal(shiny::isolate(mock$session$clientData$url_hash), "#!/")
+  expect_equal(shiny::isolate(get_page(mock$session)), "/")
+  expect_equal(mock$shown(), "/")
+})
+
+test_that("an unknown path is rewritten to the 404 page", {
+  mock <- mock_router_session("#!/missing")
+  expect_equal(shiny::isolate(mock$session$clientData$url_hash), "#!/404")
+  expect_equal(shiny::isolate(get_page(mock$session)), PAGE_404_ROUTE)
+})
