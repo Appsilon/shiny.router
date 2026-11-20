@@ -155,6 +155,19 @@ create_router_callback <- function(root, routes = NULL) {
         } else if (new_hash != cleaned_hash) {
           log_msg("Cleaning up hashpath in URL...")
           change_page(cleaned_hash, mode = "replace")
+          # This observer watches the cleaned hash, which the rewrite doesn't change ("#other" and
+          # "#!/other" both clean to "#!/other"), so it won't run again: show the page now.
+          # Skip it when the page is unchanged (e.g. the root page on app start), so get_page()
+          # doesn't fire twice.
+          current_page <- session$userData$shiny.router.page()
+          if (!identical(current_page$path, parsed$path) ||
+                !identical(current_page$query, parsed$query)) {
+            session$userData$shiny.router.page(list(
+              path = parsed$path,
+              query = parsed$query,
+              unparsed = cleaned_hash
+            ))
+          }
         } else {
           log_msg("Path recognized!")
           # If it's a recognized path, then update the display to match.
