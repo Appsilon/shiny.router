@@ -14,3 +14,4 @@ examples
 pkgdown
 vignettes
 .lintr
+^tests/e2e$
