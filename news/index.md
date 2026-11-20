@@ -1,5 +1,11 @@
 # Changelog
 
+## shiny.router (development version)
+
+- Fixed opening a URL whose hash lacks the `#!/` prefix (e.g. `#other`,
+  `#!other` or `#/other`): the URL was rewritten to `#!/other`, but the
+  app stayed on the root page.
+
 ## shiny.router 0.3.1
 
 CRAN release: 2023-04-18
