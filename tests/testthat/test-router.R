@@ -99,13 +99,14 @@ mock_router_session <- function(url_hash) {
   session$updateQueryString <- function(query_string, mode = "replace") {
     session$clientData$url_hash <- query_string
   }
-  shown <- character()
-  session$sendCustomMessage <- function(type, message) shown <<- c(shown, message)
+  shown <- new.env()
+  shown$pages <- character()
+  session$sendCustomMessage <- function(type, message) shown$pages <- c(shown$pages, message)
   session$setInputs(routes = c("/", "other", PAGE_404_ROUTE))
   router <- create_router_callback("/")
   shiny::withReactiveDomain(session, router(session$input, session$output, session))
   session$flushReact()
-  list(session = session, shown = function() shown)
+  list(session = session, shown = function() shown$pages)
 }
 
 test_that("a hash without the #!/ prefix is rewritten and its page is shown", {
