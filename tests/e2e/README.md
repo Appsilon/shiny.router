@@ -27,7 +27,7 @@ To run against another Shiny version, install it into a separate library and put
 `R_LIBS=/path/to/shiny-1.7.5.1-lib npm test`.
 
 `.github/workflows/e2e.yml` calls the package's reusable workflow, which runs the tests with Shiny 1.7.5.1 and
-with the latest release. If tests fail, download the `e2e-shiny-<version>` artifact: it holds the HTML report
+with the latest Shiny on Posit Package Manager (which can lag a new CRAN release for a short time). If tests fail, download the `e2e-shiny-<version>` artifact: it holds the HTML report
 and, per failed test, the trace and `app.log`.
 
 ## Layout
