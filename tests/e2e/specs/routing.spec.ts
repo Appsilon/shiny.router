@@ -1,4 +1,4 @@
-import { expect, test } from '../harness';
+import { expect, test } from '@appsilon/shiny-playwright';
 
 test.use({ app: 'routing' });
 
