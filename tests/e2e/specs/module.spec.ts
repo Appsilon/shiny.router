@@ -1,4 +1,4 @@
-import { expect, test } from '../harness';
+import { expect, test } from '@appsilon/shiny-playwright';
 
 // The router lives in a module with the id "nav", so its elements and outputs have the "nav-" prefix.
 test.use({ app: 'module' });

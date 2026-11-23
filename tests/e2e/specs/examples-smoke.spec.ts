@@ -1,6 +1,4 @@
-import path from 'node:path';
-import { expect, test } from '../harness';
-import { PKG_ROOT } from '../harness/paths';
+import { expect, test } from '@appsilon/shiny-playwright';
 
 // Every Shiny example in examples/ must start, show its root page ("Home page" in all of them) and render without
 // errors.
@@ -17,7 +15,7 @@ const EXAMPLES = [
 
 for (const example of EXAMPLES) {
   test.describe(`examples/${example}`, () => {
-    test.use({ app: path.join(PKG_ROOT, 'examples', example) });
+    test.use({ app: `examples/${example}` });
 
     test('starts and shows the root page without errors', async ({ page, shiny }) => {
       await shiny.goto();
