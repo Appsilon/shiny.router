@@ -20,8 +20,8 @@ permissions:
   contents: read
 
 jobs:
-  # The checks are "e2e / e2e (Shiny latest)" and "e2e / e2e (Shiny 1.7.5.1)".
+  # The checks are "e2e / Shiny latest" and "e2e / Shiny 1.7.5.1".
   e2e:
-    uses: Appsilon/shiny.playwright/.github/workflows/e2e.yml@v0.1.0
+    uses: Appsilon/shiny.playwright/.github/workflows/e2e.yml@v0.2.0
     with:
       shiny-oldest: '1.7.5.1'
