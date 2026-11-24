@@ -182,7 +182,9 @@ create_router_callback <- function(root, routes = NULL) {
       }
     )
 
-    shiny::observeEvent(session$userData$shiny.router.page(), {
+    # Also runs when the routes arrive, so routes rendered after the page was set (router_ui() in
+    # renderUI()) still show it.
+    shiny::observeEvent(list(session$userData$shiny.router.page(), input$routes), {
       page_path <- session$userData$shiny.router.page()$path
       log_msg("shiny.router main output. path: ", page_path)
       session$sendCustomMessage("switch-ui", page_path)
@@ -265,9 +267,19 @@ router_ui <- function(default, ..., page_404 = page404(), env = parent.frame()) 
 
   shiny::tagList(
     shiny::tags$script(
-      glue::glue("$(document).on('shiny:connected', function() {{
-        Shiny.setInputValue('{routes_input_id}', [{routes_names}]);
-      }});")
+      # When router_ui() is rendered from the server (e.g. in renderUI()), Shiny is already
+      # connected, so set the routes right away. "event" priority sends them even when unchanged,
+      # so the server shows the current page in the newly rendered routes.
+      glue::glue("(function() {{
+        var setRoutes = function() {{
+          Shiny.setInputValue('{routes_input_id}', [{routes_names}], {{priority: 'event'}});
+        }};
+        if (Shiny.shinyapp ? Shiny.shinyapp.isConnected() : false) {{
+          setRoutes();
+        }} else {{
+          $(document).on('shiny:connected', setRoutes);
+        }}
+      }})();")
     ),
     router_ui_internal(router)
   )
