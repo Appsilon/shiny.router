@@ -1,5 +1,6 @@
 # shiny.router (development version)
 
+- Fixed `router_ui()` rendered from the server (e.g. in `renderUI()`): no page was shown and links did nothing. Rendering it from the server lets each session get only the routes it may see (#79).
 - Fixed opening a URL whose hash lacks the `#!/` prefix (e.g. `#other`, `#!other` or `#/other`): the URL was rewritten to `#!/other`, but the app stayed on the root page.
 
 # shiny.router 0.3.1
